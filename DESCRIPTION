@@ -1,6 +1,6 @@
 Package: jsonlite
-Version: 0.9.0
-Title: Convert R objects to JSON and vice versa
+Version: 0.9.1
+Title: A smarter JSON encoder/decoder for R
 License: Apache License (== 2.0)
 NeedsCompilation: yes
 Depends: methods
@@ -18,6 +18,6 @@ Description: This package is a fork of the RJSONIO package by Duncan Temple
     unit tests to make sure that all edge cases are encoded and decoded
     consistently for use with dynamic data in systems and applications.
 Suggests: testthat, knitr, reshape2, httr
-Packaged: 2013-12-02 17:58:25 UTC; jeroen
+Packaged: 2013-12-12 00:56:53 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2013-12-03 08:23:02
+Date/Publication: 2013-12-12 08:03:47

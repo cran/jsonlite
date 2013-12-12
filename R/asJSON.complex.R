@@ -1,33 +1,24 @@
-setMethod("asJSON", "complex",
-	function(x, digits=5, container=TRUE, complex=c("string", "list"), na="string", ...) {
-		#validate
-		complex <- match.arg(complex);
-    
-    #empty vector
-		if(!length(x)) return("[]");
-		
-		if(complex == "string"){
-			mystring <- prettyNum(x=x, digits=digits);
-      if(na == "null"){
-        mystring[is.na(x)] <- NA;        
-      } 
-      
-			if(!container){
-				mystring <- as.scalar(mystring);
-			}
-			return(asJSON(mystring, na="null", ...));
-		} else {
-			mylist <- list(real=Re(x), imaginary=Im(x));
-			
-			#this is a bit of a hack
-			#if container is false, this is length 1 vector
-			#so we have to actually apply this so the real and imaginary elements of the list
-			if(!container){
-				mylist <- lapply(mylist, as.scalar);
-			}
-			
-			#return
-			return(asJSON(mylist, na=na, ...));
-		}
-	}
-);
+setMethod("asJSON", "complex", function(x, digits = 5, collapse = TRUE, complex = c("string", 
+  "list"), na = c("string", "null", "NA"), oldna = NULL, ...) {
+  
+  # validate
+  na <- match.arg(na);
+  complex <- match.arg(complex)
+  
+  #turn into strings
+  if (complex == "string") {
+    #default NA is "NA"
+    mystring <- prettyNum(x = x, digits = digits)
+    if (any(missings <- which(!is.finite(x)))){
+      if (na %in% c("null", "NA")) {
+        mystring[missings] <- NA_character_;
+      }
+    }
+    asJSON(mystring, collapse = collapse, na = na, ...)
+  } else {
+    if(na == "NA"){
+      na <- oldna;
+    }
+    asJSON(list(real = Re(x), imaginary = Im(x)), na = na, ...)
+  }
+}) 

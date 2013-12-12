@@ -1,65 +1,96 @@
-setMethod("asJSON", "data.frame",
-  function(x, na=c("default", "null", "string"), container=TRUE, dataframe=c("rows", "columns"), raw, ...) {
-    #Note: just as in asJSON.list we take the container argument to prevent it form being passed down through ...
-    #This is needed in the rare case that a dataframe contains new dataframes, and hence as.scalar is inappropriate
-    #
-    #check how we want to encode
-    dataframe <- match.arg(dataframe);
-    na <- match.arg(na);
-    
-    #coerse pairlist if needed
-    if(is.pairlist(x)){
-      x <- as.vector(x, mode="list");
-    }
-    
-    if(dataframe == "columns"){
-      return(asJSON(as.list(x), na=na, container=container, dataframe="columns", raw="hex", ...));
-    }
+setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), 
+  collapse = TRUE, dataframe = c("rows", "columns"), complex = "string", oldna=NULL, ...) {
 
-    #if we have no rows, just return: []
-    if(nrow(x) == 0){
-      return(asJSON(list(), ...));
-    }
-    
-    #Convert POSIXlt to POSIXct before we start messing with lists
-    posvars = which(as.logical(vapply(x, is, integer(1), "POSIXlt")));
-    for(i in posvars){
-      x[[i]] <- as.POSIXct(x[[i]]);
-    }
-    
-    #Check for row names
-    if(!isTRUE(all(grepl("[0-9]+", row.names(x))))){
-      x <- cbind(data.frame("$row" = row.names(x), check.names=FALSE), x);
-    }
-    
-    #Get a list of rows.
-    #This is the computationally expensive part.
-    out <- list();
-    for(i in 1:nrow(x)){
-      out[[i]] <- x[i, ,drop=FALSE];
-    }
-
-    #don't explicitly encode missing values in records (just drop them)
-    if(na == "default"){
-      out <- lapply(out, function(record) {
-        na_values <- vapply(record, function(z){isTRUE(is.na(z))}, logical(1));
-        return(as.list(record[1, !na_values, drop=FALSE]));
-      });
-    }
-
-    #add scalar too all elements to prevent [] containers.
-    out <- lapply(out, lapply, as.scalar);
-    
-    #we assume a dataframe with one row
-    if(!isTRUE(container)){
-      if(length(out) == 1){
-        out <- out[[1]];
-      } else {
-        warning("As.scalar used for dataframe with more than one row.")
-      }
-    }    
-    
-    #pass on to asJSON.list
-    return(asJSON(out, raw="hex", na=na, ...));
+  # Validate some args
+  dataframe <- match.arg(dataframe)
+  
+  # Coerse pairlist if needed
+  if (is.pairlist(x)) {
+    x <- as.vector(x, mode = "list")
   }
-);
+  
+  # Colum based is same as list based
+  if (dataframe == "columns") {
+    return(asJSON(as.list(x), na = na, collapse = collapse, dataframe = dataframe, complex=complex, ...))
+  }
+
+  # Determine "oldna". This is needed when the data frame contains a list column
+  if(missing(na) || !length(na) || identical(na, "NA")){
+    oldna <- NULL
+  } else {
+    oldna <- na;
+  }
+  
+  # Set default for row based, don't do it earlier because it will affect 'oldna' or dataframe="columns"
+  na <- match.arg(na)
+  
+  # no records
+  if (!nrow(x)) {
+    return(asJSON(list(), collapse=collapse))
+  }
+  
+  # Convert POSIXlt to POSIXct before we start messing with lists
+  posvars <- which(as.logical(vapply(x, is, integer(1), "POSIXlt")))
+  for (i in posvars) {
+    x[[i]] <- as.POSIXct(x[[i]])
+  }
+  
+  # Convert raw vectors
+  rawvars <- which(as.logical(vapply(x, is.raw, integer(1))))
+  for (i in rawvars) {
+    x[[i]] <- as.character.hexmode(x[[i]])
+  }  
+  
+  # Turn complex vectors into data frames
+  if(complex == "list"){
+    complxvars <- which(as.logical(vapply(x, is.complex, integer(1))))
+    for (i in complxvars) {
+      x[[i]] <- data.frame(real=Re(x[[i]]), imaginary=Im(x[[i]]))
+    }
+  }
+  
+  # Check for row names
+  if (!isTRUE(all(grepl("[0-9]+", row.names(x))))) {
+    x <- cbind(data.frame(`$row` = row.names(x), check.names = FALSE), x)
+  }
+  
+  #create a matrix of json elements
+  dfnames <- deparse_vector(names(x))
+  out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na, oldna = oldna, ...)
+  
+  # This would be another way of doing the missing values
+  # This does not require the individual classes to support na="NA"
+  #if(identical(na, "NA")){
+  #  namatrix <- vapply(x, is.na, logical(nrow(x)))
+  #  out[namatrix] <- NA;
+  #}
+  
+  #this is a workaround for vapply simplifying into a vector for n=1 (not for n=0 surprisingly)
+  if(!is.matrix(out)){
+    out <- t(out)
+  }
+  
+  #turn the matrix into json records
+  if(na == "NA") {
+    tmp <- apply(out, 1, function(z){
+      missings <- is.na(z);
+      if(any(missings)){
+        paste("{", paste(dfnames[!missings], z[!missings], sep = " : ", collapse = ", "), "}")
+      } else {
+        paste("{", paste(dfnames, z, sep = " : ", collapse = ", "), "}")
+      }
+    });
+  } else {
+    #tiny speed up because we don't have to check for NA 
+    tmp <- apply(out, 1, function(z){
+      paste("{", paste(dfnames, z, sep = " : ", collapse = ", "), "}")
+    });    
+  }
+  
+  #collapse
+  if(isTRUE(collapse)){
+    collapse(tmp)
+  } else {
+    tmp
+  }
+}) 
