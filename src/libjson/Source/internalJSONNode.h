@@ -1,6 +1,7 @@
 #ifndef INTERNAL_JSONNODE_H
 #define INTERNAL_JSONNODE_H
 
+#include <stdio.h>
 #include "JSONDebug.h"
 #include "JSONChildren.h"
 #include "JSONMemory.h"
@@ -60,13 +61,6 @@ class JSONNode;  //forward declaration
     #define initializeComment(x)
 #endif
 
-#ifndef JSON_UNIT_TEST
-    #define incAllocCount() (void)0
-    #define decAllocCount() (void)0
-    #define incinternalAllocCount() (void)0
-    #define decinternalAllocCount() (void)0
-#endif
-
 #ifdef JSON_LESS_MEMORY
     #define CHILDREN _value.Children
     #define DELETE_CHILDREN()\
@@ -87,6 +81,7 @@ class JSONNode;  //forward declaration
 
 class internalJSONNode {
 public:
+	//LIBJSON_OBJECT(internalJSONNode);
     internalJSONNode(char mytype = JSON_NULL) json_nothrow json_hot;
     #ifdef JSON_READ_PRIORITY
 	   internalJSONNode(const json_string & unparsed) json_nothrow json_hot;
@@ -193,10 +188,6 @@ public:
     #ifdef JSON_MUTEX_CALLBACKS
 	   void _set_mutex(void * mutex, bool unset = true) json_nothrow json_cold;
 	   void _unset_mutex(void) json_nothrow json_cold;
-    #endif
-    #ifdef JSON_UNIT_TEST
-	   static void incinternalAllocCount(void) json_nothrow;
-	   static void decinternalAllocCount(void) json_nothrow;
     #endif
 
     #ifdef JSON_WRITE_PRIORITY
@@ -307,7 +298,7 @@ inline internalJSONNode::internalJSONNode(char mytype) json_nothrow : _type(myty
     initializeComment(json_global(EMPTY_JSON_STRING))
     initializeChildren((_type == JSON_NODE || _type == JSON_ARRAY) ? jsonChildren::newChildren() : 0){
 
-    incinternalAllocCount();
+    LIBJSON_CTOR;
 
     #ifdef JSON_LESS_MEMORY
 	   //if not less memory, its in the initialization list

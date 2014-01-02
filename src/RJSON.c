@@ -125,7 +125,7 @@ R_json_parse_character(SEXP r_input, SEXP maxChar, struct JSON_parser_struct *pa
     len = INTEGER(maxChar)[1];
 
     if(TYPEOF(r_input) == RAWSXP)
-	input = RAW(r_input);
+	input = (char*) RAW(r_input);
     else if(TYPEOF(r_input) == INTSXP) {
 	ivals = INTEGER(r_input);
     } else

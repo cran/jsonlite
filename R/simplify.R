@@ -1,5 +1,5 @@
 simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplifyMatrix = TRUE, 
-  homoList = TRUE, flatten = FALSE) {
+  homoList = TRUE, flatten = FALSE, columnmajor = FALSE) {
   if (is.list(x)) {
     if (!length(x)) {
       # In case of fromJSON('[]') returning a list is most neutral.  Because the user
@@ -25,13 +25,33 @@ simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplif
     
     # apply recursively
     out <- lapply(x, sys.function(0), simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame, 
-      simplifyMatrix = simplifyMatrix)
+      simplifyMatrix = simplifyMatrix, columnmajor = columnmajor)
     
     # test for matrix. Note that we have to take another look at x (before null2na on
     # its elements) to differentiate between matrix and vector
-    if (isTRUE(simplifyMatrix) && isTRUE(simplifyVector) && is.matrixlist(out) && 
-      all(unlist(vapply(x, is.scalarlist, logical(1))))) {
-      return(do.call(rbind, out))
+    if (isTRUE(simplifyMatrix) && isTRUE(simplifyVector) && is.matrixlist(out) && all(unlist(vapply(x, is.scalarlist, logical(1))))) {
+      if(isTRUE(columnmajor)){
+        return(do.call(cbind, out))        
+      } else {
+        #this is currently the default        
+        return(do.call(rbind, out))        
+      }
+    }
+    
+    # Simplify higher arrays
+    if (isTRUE(simplifyMatrix) && is.arraylist(out)){
+      if(isTRUE(columnmajor)){
+        return(array(
+          data = do.call(cbind, out),
+          dim = c(dim(out[[1]]), length(out))
+        ));        
+      } else {
+        #this is currently the default
+        return(array(
+          data = do.call(rbind, lapply(out, as.vector)), 
+          dim = c(length(out), dim(out[[1]]))
+        ));
+      }
     }
     
     # try to enfoce homoList on unnamed lists
@@ -90,8 +110,24 @@ is.recordlist <- function(x) {
 }
 
 is.matrixlist <- function(x) {
-  isTRUE(is.list(x) && length(x) && is.null(names(x)) && all(unlist(vapply(x, function(y) {
-    is.atomic(y)
-  }, logical(1)))) && (length(unique(unlist(vapply(x, length, integer(1))))) == 
-    1) && (length(unique(unlist(vapply(x, mode, character(1))))) == 1))
+  isTRUE(is.list(x) 
+    && length(x) 
+    && is.null(names(x)) 
+    && all(vapply(x, is.atomic, logical(1))) 
+    && all.identical(vapply(x, length, integer(1))) 
+    #&& all.identical(vapply(x, mode, character(1))) #this fails for: [ [ 1, 2 ], [ "NA", "NA" ] ]
+  );
 } 
+
+is.arraylist <- function(x) {
+  isTRUE(is.list(x)
+    && length(x)
+    && is.null(names(x))
+    && all(vapply(x, is.array, logical(1)))
+    && all.identical(vapply(x, function(y){paste(dim(y), collapse="-")}, character(1)))
+  );
+}
+
+all.identical <- function(x){
+  length(unique(x)) == 1
+}
