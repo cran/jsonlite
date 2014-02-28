@@ -1,23 +1,25 @@
 Package: jsonlite
-Version: 0.9.3
+Version: 0.9.4
+Date: 2014-02-28
 Title: A smarter JSON encoder/decoder for R
-License: Apache License (== 2.0)
+License: Apache License 2.0
 NeedsCompilation: yes
 Depends: methods
-Author: Jeroen Ooms, Duncan Temple Lang
-URL: http://github.com/jeroenooms/jsonlite#readme
+Author: Jeroen Ooms, Duncan Temple Lang, Jonathan Wallace
+URL: http://github.com/jeroenooms/jsonlite#readme,
+        https://www.opencpu.org/posts/jsonlite-a-smarter-json-encoder/
 BugReports: http://github.com/jeroenooms/jsonlite/issues
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 VignetteBuilder: knitr
 Description: This package is a fork of the RJSONIO package by Duncan Temple
-    Lang. It builds on the parser from RJSONIO, but implements a different
-    mapping between R objects and JSON strings. The C code in this package is
-    mostly from Temple Lang, the R code has been rewritten from scratch. In
-    addition to drop-in replacements for fromJSON and toJSON, the package has
-    functions to serialize objects. Furthermore, the package contains a lot of
-    unit tests to make sure that all edge cases are encoded and decoded
-    consistently for use with dynamic data in systems and applications.
+    Lang. It builds on the same libjson c++ parser, but implements a smarter
+    mapping between R objects and JSON strings. The package vignette describes
+    the behavior in great detail. In addition to drop-in replacements for
+    fromJSON and toJSON, the package has functions to serialize objects. The
+    package also contains many unit tests to make verify that all edge cases
+    are encoded and decoded consistently for use with dynamic data in systems
+    and applications.
 Suggests: testthat, knitr, reshape2, httr
-Packaged: 2014-01-02 07:46:45 UTC; ripley
+Packaged: 2014-03-01 01:46:30 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2014-01-02 08:51:48
+Date/Publication: 2014-03-01 06:56:29

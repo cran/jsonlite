@@ -1,18 +1,24 @@
-\name{prettify}
+\name{prettify, minify}
+\alias{minify}
 \alias{prettify}
-\title{Prettify JSON}
+\alias{prettify, minify}
+\title{Prettify or minify a \code{JSON} string}
 \usage{
-  prettify(txt)
+prettify(txt)
+
+minify(txt)
 }
 \arguments{
   \item{txt}{JSON string}
 }
 \description{
-  Add proper whitespace and indentation to a JSON string.
+Prettify adds indentation to a \code{JSON} string; minify
+removes all indentation/whitespace.
 }
 \examples{
-myjson <- toJSON(cars, pretty=FALSE)
-myprettyjson <- prettify(myjson)
-cat(myprettyjson)
+myjson <- toJSON(cars)
+cat(myjson)
+cat(prettify(myjson))
+cat(minify(myjson))
 }
 

@@ -10,6 +10,13 @@ toJSON <- function(...){
 }
 
 
+## ------------------------------------------------------------------------
+txt <- '[12, 3, 7]'
+x <- fromJSON(txt)
+is(x)
+print(x)
+
+
 ## ----eval=FALSE----------------------------------------------------------
 ## library(testthat)
 ## test_package("jsonlite")
@@ -235,9 +242,19 @@ cat(toJSON(x, pretty=TRUE))
 ## citibike <- fromJSON("http://citibikenyc.com/stations/json")
 
 
+## ----eval=FALSE----------------------------------------------------------
+## res <- fromJSON("http://api.angel.co/1/tags/59/startups")
+## res$startups
+
+
+## ----eval=FALSE----------------------------------------------------------
+## races <- fromJSON('http://ergast.com/api/f1/2012/1/results.json')
+## races$RaceTable$Races$MRData$Results[[1]]$Driver
+
+
 ## ----eval=FALSE, tidy=FALSE----------------------------------------------
 ## #register key at http://sunlightfoundation.com/api/accounts/register/
-## key <- "&apikey=6e021ea1c1264a658e259708076f04a1"
+## key <- "&apikey=39c83d5a4acc42be993ee637e2e4ba3d"
 ## 
 ## #some queries
 ## drones <- fromJSON(paste0("http://openstates.org/api/v1/bills/?q=drone", key))
@@ -250,25 +267,31 @@ cat(toJSON(x, pretty=TRUE))
 ## #Register keys at http://developer.nytimes.com/docs/reference/keys
 ## 
 ## #search for articles
-## article_key = "&api-key=12b3ff5decbd664d4d9edbd4ad450e54:8:68414090"
+## article_key = "&api-key=c2fede7bd9aea57c898f538e5ec0a1ee:6:68700045"
 ## url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=obamacare+socialism"
 ## articles <- fromJSON(paste0(url, article_key))
 ## 
 ## #search for best sellers
-## bestseller_key = "&api-key=c900c6eae827adb52a373a976c4dcd33:16:68414090"
+## bestseller_key = "&api-key=5e260a86a6301f55546c83a47d139b0d:3:68700045"
 ## url = "http://api.nytimes.com/svc/books/v2/lists/overview.json?published_date=2013-01-01"
 ## bestsellers <- fromJSON(paste0(url, bestseller_key))
 ## 
 ## #movie reviews
-## movie_key = "&api-key=a2bf433b68cc54d04a5b5d9fd44a66d6:8:68414090"
+## movie_key = "&api-key=5a3daaeee6bbc6b9df16284bc575e5ba:0:68700045"
 ## url = "http://api.nytimes.com/svc/movies/v2/reviews/dvd-picks.json?order=by-date"
 ## reviews <- fromJSON(paste0(url, movie_key))
 
 
+## ----eval=FALSE----------------------------------------------------------
+## key <- "f6dv6cas5vw7arn5b9d7mdm3"
+## res <- fromJSON(paste0("http://api.crunchbase.com/v/1/search.js?query=R&api_key=",key))
+## str(res$results)
+
+
 ## ----tidy=FALSE, eval=FALSE----------------------------------------------
 ## #Create your own appication key at https://dev.twitter.com/apps
-## consumer_key = "1XxSHU2XTchttIJapwwCQ";
-## consumer_secret = "TWFqJK66La96OgF12aWJn3kxq2fE6iNDTKrdzVeukg";
+## consumer_key = "EZRy5JzOH2QQmVAe9B4j2w";
+## consumer_secret = "OIDC4MdfZJ82nbwpZfoUO4WOLTYjoRhpHRAWj6JMec";
 ## 
 ## #basic auth
 ## library(httr)

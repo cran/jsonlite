@@ -1,6 +1,4 @@
-#' Stringify R objects to JSON and vice versa
-#' 
-#' These functions are used to convert R objects into JSON and back. The \code{\link{toJSON}} and \code{\link{fromJSON}}
+#' These functions are used to convert R objects into JSON and vice versa. The \code{\link{toJSON}} and \code{\link{fromJSON}}
 #' functions use a class based encoding schema which follows conventions outlines in the vignette of this 
 #' package. They implement a consitent and practical mapping between JSON structures and the standard data 
 #' structures in R. 
@@ -10,11 +8,11 @@
 #' between R objects and JSON strings. The \code{\link{serializeJSON}} and \code{\link{unserializeJSON}} functions use an 
 #' alternative system to convert between R objects and JSON, which supports more classes but is much more verbose.
 # 
-#' @export fromJSON
-#' @export toJSON
-#' @useDynLib jsonlite
-#' @name toJSON
-#' @aliases fromJSON
+#' @rdname fromJSON
+#' @title Convert R objects to/from \code{JSON}
+#' @name toJSON, fromJSON
+#' @aliases fromJSON toJSON 
+#' @export fromJSON toJSON
 #' @param x the object to be encoded
 #' @param dataframe how to encode data.frame objects: must be one of 'row' or 'column'
 #' @param matrix should matrices and higher dimensional arrays be encoded in row-major or column-major.
@@ -32,10 +30,10 @@
 #' @param simplifyMatrix coerse JSON arrays containing vectors of equal length and mode into matrix or array.
 #' @param ... arguments passed on to class specific \code{print} methods
 #' @note All encoded objects should pass the validation at www.jsonlint.org
+#' @useDynLib jsonlite
 #' @references
 #' \url{http://www.jsonlint.org}
 #' @author Jeroen Ooms \email{jeroen.ooms@@stat.ucla.edu}
-#' @rdname toJSON
 #' @examples #stringify some data
 #' jsoncars <- toJSON(mtcars, pretty=TRUE)
 #' cat(jsoncars)

@@ -1,26 +1,17 @@
-#' Add class 'scalar' to an object
-#'
-#' Function simply adds class 'scalar' to the object and returns it.
-#' Objects of class 'scalar' of length 1 will be encoded as a json primitive instead of an array.
-#' 
-#' @param obj the R object to classified as scalar.
-#' @return The same R object
-#' @author Jeroen Ooms \email{jeroen.ooms@@stat.ucla.edu}
-#' @examples toJSON(list(foo=123));
-#' toJSON(list(foo=as.scalar(123)));
 as.scalar <- function(obj) {
   # Lists can never be a scalar (this can arise if a dataframe contains a column
   # with lists)
-  if (is.data.frame(obj) || is.matrix(obj)) {
-    if (nrow(obj) > 1) {
-      warning("as.scalar was applied to dataframe with more than 1 row.")
+  if(length(dim(obj)) > 1){
+    if(!identical(nrow(obj), 1L)){
+      warning("Tried to use as.scalar on an array or dataframe with ", nrow(obj), " rows.", call.=FALSE)
       return(obj)
     }
-  } else {
-    if (length(obj) > 1) {
-      warning("as.scalar was applied to an object of length > 1.")
-      return(obj)
-    }
+  } else if(!identical(length(obj), 1L)) {
+    warning("Tried to use as.scalar on an object of length ", length(obj), call.=FALSE)
+    return(obj)
+  } else if(is.namedlist(obj)){
+    warning("Tried to use as.scalar on a named list.", call.=FALSE)
+    return(obj)
   }
   
   class(obj) <- c("scalar", class(obj))
