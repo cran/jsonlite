@@ -35,6 +35,7 @@
 #' @param null how to encode NULL values within a list: must be one of 'null' or 'list'
 #' @param na how to print NA values: must be one of 'null' or 'string'. Defaults are class specific
 #' @param auto_unbox automatically \code{\link{unbox}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link{unbox}} function to unbox individual elements.
+#'   An exception is that objects of class \code{AsIs} (i.e. wrapped in \code{I()}) are not automatically unboxed. This is a way to mark single values as length-1 arrays.
 #' @param digits max number of decimal digits to print for numeric values. Use \code{I()} to specify significant digits.
 #' @param force unclass/skip objects of classes with no defined JSON mapping
 #' @param pretty adds indentation whitespace to JSON output. Can be TRUE/FALSE or a number specifying the number of spaces to indent. See \code{\link{prettify}}
@@ -76,24 +77,20 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
   simplifyMatrix = simplifyVector, flatten = FALSE, ...) {
 
   # check type
-  if (!is.character(txt)) {
-    stop("Argument 'txt' must be a JSON string, URL or path to existing file.")
+  if (!is.character(txt) && !is(txt, "connection")) {
+    stop("Argument 'txt' must be a JSON string, URL or file.")
   }
 
   # overload for URL or path
-  if (length(txt) == 1 && nchar(txt, type="bytes") < 1000) {
+  if (is.character(txt) && length(txt) == 1 && nchar(txt, type="bytes") < 1000) {
     if (grepl("^https?://", txt, useBytes=TRUE)) {
-      loadpkg("httr")
-      txt <- raw_to_json(download_raw(txt))
+      loadpkg("curl")
+      txt <- curl::curl(txt)
     } else if (file.exists(txt)) {
       # With files we can never know for sure the encoding. Lets try UTF8 first.
-      txt <- raw_to_json(readBin(txt, raw(), file.info(txt)$size));
+      # txt <- raw_to_json(readBin(txt, raw(), file.info(txt)$size));
+      txt <- file(txt)
     }
-  }
-
-  # collapse
-  if (length(txt) > 1) {
-    txt <- paste(txt, collapse = "\n")
   }
 
   # call the actual function (with deprecated arguments)
@@ -102,7 +99,7 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
 }
 
 fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
-  simplifyMatrix = simplifyVector, flatten = FALSE, unicode = TRUE, validate = TRUE, ...){
+  simplifyMatrix = simplifyVector, flatten = FALSE, unicode = TRUE, validate = TRUE, bigint_as_char = FALSE, ...){
 
   if(!missing(unicode)){
     message("Argument unicode has been deprecated. YAJL always parses unicode.")
@@ -113,7 +110,7 @@ fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simp
   }
 
   # parse
-  obj <- parseJSON(txt)
+  obj <- parseJSON(txt, bigint_as_char)
 
   # post processing
   if (any(isTRUE(simplifyVector), isTRUE(simplifyDataFrame), isTRUE(simplifyMatrix))) {

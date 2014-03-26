@@ -201,12 +201,6 @@ hr {
 </head>
 
 <body>
-<!--
-\usepackage[utf8]{inputenc}
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Fetching JSON data from REST APIs}
--->
-
 <h1>Fetching JSON data from REST APIs with jsonlite</h1>
 
 <p>This section lists some examples of public HTTP APIs that publish data in JSON format. These are great to get a sense of the complex structures that are encountered in real world JSON data. All services are free, but some require registration/authentication. Each example returns lots of data, therefore not all output is printed in this document.</p>
@@ -227,36 +221,36 @@ gg_issues &lt;- fromJSON(&quot;https://api.github.com/repos/hadley/ggplot2/issue
 paste(format(gg_issues$user$login), &quot;:&quot;, gg_issues$title)
 </code></pre>
 
-<pre><code> [1] &quot;Henrik-P      : &#39;guides&#39; documentation, possible improvement in last example&quot;                                    
- [2] &quot;richierocks   : scatterplots of categorical variables cause &#39;row names were found from a short variable&#39; warning&quot;
- [3] &quot;lselzer       : created fortify.glm&quot;                                                                             
- [4] &quot;petrbouchal   : scale_colour_manual fails when elements of named matrix are passed to values&quot;                    
- [5] &quot;smirarab      : stat_ecdf plots extra points&quot;                                                                    
- [6] &quot;dorvak        : Suggestion: Geom replace infix operator&quot;                                                         
- [7] &quot;rpruim        : documentation of fun.data (in stat_summary) incorrect?&quot;                                          
- [8] &quot;ttuggle       : Memory overflow with scale_x_discrete()&quot;                                                         
- [9] &quot;pengyu        : Added ..Name to each prototype so that str.proto() can show the names correctly&quot;                 
-[10] &quot;pharaveej     : ggplot - geom_step error&quot;                                                                        
-[11] &quot;noamross      : New theme option to put panel/grid on top of data&quot;                                               
-[12] &quot;krlmlr        : geom_boxplot with continuous x and without group aesthetics&quot;                                     
-[13] &quot;lccanon       : rqss in stat_quantile ignore the quantile with large number of values&quot;                           
-[14] &quot;bergsmat      : Geom not exported?&quot;                                                                              
-[15] &quot;iagomosqueira : size in geom_point using variable with all but 1 as NAs&quot;                                         
-[16] &quot;xsaintmleux   : allow ggplot_build to return an additional value: the processed data as ...&quot;                     
-[17] &quot;mkcor         : Edit warning message to reflect intuitive use&quot;                                                   
-[18] &quot;tsibley       : Rebased and redocumented version of PR #744&quot;                                                     
-[19] &quot;BrianDiggs    : sqrt_trans, scale limit expansion, and missing breaks&quot;                                           
-[20] &quot;marvel64      : Documentation for geom_boxplot&quot;                                                                  
-[21] &quot;blaquans      : Would it be possible to add notes to a ggplot graph ?&quot;                                           
-[22] &quot;jiho          : New theme_void(), completely empty&quot;                                                              
-[23] &quot;veraanadi     : Add new function geom_curve&quot;                                                                     
-[24] &quot;lionelgit     : Facet titles&quot;                                                                                    
-[25] &quot;kent37        : Error in stat_density example text&quot;                                                              
-[26] &quot;tonytonov     : geom_violin throws error on data with zero variance&quot;                                             
-[27] &quot;cboettig      : scales=\&quot;free\&quot; on facet_grid no longer has any effect on `y` axis within rows&quot;                  
-[28] &quot;baptiste      : check.class argument to ggsave&quot;                                                                  
-[29] &quot;lionelgit     : Coord expand&quot;                                                                                    
-[30] &quot;croach        : Fix for bad URL in qplot docs&quot;                                                                   
+<pre><code> [1] &quot;bakerwm         : error with facet_grid(), but it&#39;s OK for facet_wrap().&quot;                                     
+ [2] &quot;seaaan          : Fixed two typos in documentation&quot;                                                           
+ [3] &quot;naught101       : Inconsistent facet labeller behaviour when using characters to facet&quot;                       
+ [4] &quot;beanumber       : Lyndon Johnson&#39;s name is misspelled in \&quot;presidential\&quot;&quot;                                    
+ [5] &quot;wnstnsmth       : Width of error bars is calculated by the number of groups and not by the `width` argument. &quot;
+ [6] &quot;richierocks     : Facetting fails with \&quot;undefined columns selected\&quot; error for non-standard variable names&quot;  
+ [7] &quot;raidsteel       : stat_contour fill - 2 issues&quot;                                                               
+ [8] &quot;ddiez           : ggplot2 requires X11 in OSX causes R to crash when closing it&quot;                              
+ [9] &quot;PeterNSteinmetz : Order of arguments in documentation of geom_vline&quot;                                          
+[10] &quot;Tungurahua      : mapping slot is empty when aes(x,y) is declared in geom_polygon()&quot;                          
+[11] &quot;angeloklin      : OHLC and Themes&quot;                                                                            
+[12] &quot;ghaarsma        : stat_bin() does not seem to work for integer data&quot;                                          
+[13] &quot;marvel64        : x axis labels wrong using facet_grid&quot;                                                       
+[14] &quot;chappers        : Fixed typo in help file for scale-continuous.R&quot;                                             
+[15] &quot;lbergelson      : ggplot2 installation fails on R 3.0.2&quot;                                                      
+[16] &quot;Blahah          : typo in annotate docs&quot;                                                                      
+[17] &quot;trufanov-nok    : Typo in diamonds.Rd&quot;                                                                        
+[18] &quot;ajschumacher    : typo: \&quot;funciton\&quot; to \&quot;function\&quot;&quot;                                                         
+[19] &quot;elbamos         : vline not working as annotation&quot;                                                            
+[20] &quot;zachcp          : Documentation: link in coord_map is incorrect&quot;                                              
+[21] &quot;beamgau         : adds flip.legend option for boxplot&quot;                                                        
+[22] &quot;stevencb        : geom_vline requires converting to numeric when intercept is a POSIXct&quot;                      
+[23] &quot;DarioS          : cut_number Doesn&#39;t Work With Duplicated Values&quot;                                             
+[24] &quot;schloerke       : options(OutDec= \&quot;,\&quot;) and aes_string()&quot;                                                    
+[25] &quot;thomasp85       : Custom geom with custom grob not working&quot;                                                   
+[26] &quot;alex23lemm      : Update stat_summary fun.data documentation&quot;                                                 
+[27] &quot;jonadler        : ggplotGrob sometimes plots blank objects&quot;                                                   
+[28] &quot;gaborcsardi     : Need to explicitly import density() from stats?&quot;                                            
+[29] &quot;Robinlovelace   : Buffer for text option&quot;                                                                     
+[30] &quot;annoporci       : labs() does not process argument NULL&quot;                                                      
 </code></pre>
 
 <h2>CitiBike NYC</h2>
@@ -340,17 +334,17 @@ nrow(filings)
 <pre><code class="r">filings[1:10, c(&quot;organization.sub_name&quot;, &quot;organization.city&quot;, &quot;totrevenue&quot;)]
 </code></pre>
 
-<pre><code>               organization.sub_name organization.city totrevenue
-1  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  4.015e+10
-2  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  3.779e+10
-3        KAISER FOUNDATION HOSPITALS          PORTLAND  1.854e+10
-4        KAISER FOUNDATION HOSPITALS          PORTLAND  1.798e+10
-5    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  1.045e+10
-6    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  9.637e+09
-7                     DIGNITY HEALTH           PHOENIX  9.212e+09
-8   THRIVENT FINANCIAL FOR LUTHERANS       MINNEAPOLIS  8.507e+09
-9                         UPMC GROUP        PITTSBURGH  7.698e+09
-10      CLEVELAND CLINIC FOUNDATION          CLEVELAND  7.011e+09
+<pre><code>               organization.sub_name organization.city  totrevenue
+1  KAISER FOUNDATION HEALTH PLAN INC           OAKLAND 40148558254
+2  KAISER FOUNDATION HEALTH PLAN INC           OAKLAND 37786011714
+3        KAISER FOUNDATION HOSPITALS           OAKLAND 18543043972
+4        KAISER FOUNDATION HOSPITALS           OAKLAND 17980030355
+5    PARTNERS HEALTHCARE SYSTEM INC        CHARLESTOWN 10452560305
+6    PARTNERS HEALTHCARE SYSTEM INC        CHARLESTOWN  9636630380
+7                     DIGNITY HEALTH     SAN FRANCISCO  9484767832
+8                     DIGNITY HEALTH     SAN FRANCISCO  9211708211
+9   THRIVENT FINANCIAL FOR LUTHERANS       MINNEAPOLIS  8507178655
+10                        UPMC GROUP        PITTSBURGH  8298512589
 </code></pre>
 
 <h2>New York Times</h2>
@@ -410,12 +404,12 @@ colnames(reviews)
 <pre><code class="r">reviews[1:5, c(&quot;display_title&quot;, &quot;byline&quot;, &quot;mpaa_rating&quot;)]
 </code></pre>
 
-<pre><code>                   display_title              byline mpaa_rating
-1                        Boyhood      Manohla Dargis           R
-2 Dawn of the Planet of the Apes         A. O. Scott       PG-13
-3                The Empty Hours Jeannette Catsoulis        &lt;NA&gt;
-4                      Gabrielle      Stephen Holden           R
-5                       Wrinkles Jeannette Catsoulis          NR
+<pre><code>     display_title              byline mpaa_rating
+1 Valley of Saints      Stephen Holden        &lt;NA&gt;
+2            Selma         A. O. Scott       PG-13
+3   Into the Woods      Stephen Holden          PG
+4  Song of the Sea Jeannette Catsoulis          PG
+5         Top Five      Manohla Dargis           R
 </code></pre>
 
 <h2>CrunchBase</h2>
@@ -439,12 +433,18 @@ drone_bills$title &lt;- substring(drone_bills$title, 1, 40)
 print(drone_bills[1:5, c(&quot;title&quot;, &quot;state&quot;, &quot;chamber&quot;, &quot;type&quot;)])
 </code></pre>
 
-<pre><code>                                     title state chamber type
-1 &quot;An Act relating to a prohibition on the    ak   upper bill
-2            DRONE SURVEIL-LAW ENFORCEMENT    il   upper bill
-3 Sets forth certain standards to be follo    nj   upper bill
-4  Unmanned aerial vehicle regulation act.    ks   lower bill
-5 Prohibiting the use of drones by law enf    ks   lower bill
+<pre><code>                                     title state chamber
+1 Allowing the filing of a special allegat    wa   upper
+2 Relating to: criminal procedure and prov    wi   upper
+3 FREEDOM FROM UNWARRANTED SURVEILLANCE AC    nm   upper
+4 REQUESTING THE STATE DEPARTMENT OF TRANS    hi   lower
+5 REQUESTING THE STATE DEPARTMENT OF TRANS    hi   lower
+                   type
+1                  bill
+2                  bill
+3                  bill
+4 concurrent resolution
+5            resolution
 </code></pre>
 
 <pre><code class="r">#Congress mentioning &quot;constitution&quot;
@@ -454,13 +454,13 @@ wordcount$day &lt;- as.Date(wordcount$day)
 summary(wordcount)
 </code></pre>
 
-<pre><code>     count             day               raw_count     
- Min.   :   1.0   Min.   :1996-01-02   Min.   :   1.0  
- 1st Qu.:   3.0   1st Qu.:2000-10-26   1st Qu.:   3.0  
- Median :   8.0   Median :2005-07-16   Median :   8.0  
- Mean   :  25.1   Mean   :2005-06-01   Mean   :  25.1  
- 3rd Qu.:  21.0   3rd Qu.:2009-11-28   3rd Qu.:  21.0  
- Max.   :1835.0   Max.   :2014-08-05   Max.   :1835.0  
+<pre><code>     count              day               raw_count      
+ Min.   :   1.00   Min.   :1996-01-02   Min.   :   1.00  
+ 1st Qu.:   3.00   1st Qu.:2000-12-05   1st Qu.:   3.00  
+ Median :   8.00   Median :2005-10-04   Median :   8.00  
+ Mean   :  25.41   Mean   :2005-08-04   Mean   :  25.41  
+ 3rd Qu.:  21.00   3rd Qu.:2010-03-03   3rd Qu.:  21.00  
+ Max.   :1835.00   Max.   :2015-03-24   Max.   :1835.00  
 </code></pre>
 
 <pre><code class="r">#Local legislators
@@ -470,8 +470,8 @@ subset(legislators$results, select=c(&quot;last_name&quot;, &quot;chamber&quot;,
 </code></pre>
 
 <pre><code>  last_name chamber term_start      twitter_id
-1    Lummis   house 2013-01-03   CynthiaLummis
-2      Enzi  senate 2009-01-06     SenatorEnzi
+1    Lummis   house 2015-01-06   CynthiaLummis
+2      Enzi  senate 2015-01-06     SenatorEnzi
 3  Barrasso  senate 2013-01-03 SenJohnBarrasso
 </code></pre>
 
@@ -506,16 +506,16 @@ tweets &lt;- fromJSON(json)
 substring(tweets$text, 1, 100)
 </code></pre>
 
-<pre><code> [1] &quot;LAST CHANCE TO REGISTER FOR EARL (15-17 September, London) http://t.co/7ZT7cKGP8N #rstats&quot;
- [2] &quot;Looking For Life http://t.co/luFwXnyF78 #rstats&quot;                                          
- [3] &quot;Adding the SPSS MEAN.n Function to R http://t.co/gTw60cxWEd #rstats&quot;                      
- [4] &quot;Brazilian Presidential Election http://t.co/G08Tu63YFn #rstats&quot;                           
- [5] &quot;Hortonworks Seminar Series: The Modern Data Architecture http://t.co/M4A1S3SRMy #rstats&quot;  
- [6] &quot;Introducing simmer: Discrete Event Simulation for R http://t.co/vBImwcKP3F #rstats&quot;       
- [7] &quot;Notifications from R http://t.co/KaQqzFKd6F #rstats&quot;                                      
- [8] &quot;rNOMADS 2.0.2 released http://t.co/Bcy2D1QBgk #rstats&quot;                                    
- [9] &quot;New R job: Senior Operations Research Consultant http://t.co/Fimizb8mwg #rstats #jobs&quot;    
-[10] &quot;httr 0.5 http://t.co/hGWvZxrhdu #rstats&quot;                                                  
+<pre><code> [1] &quot;How to Make a Histogram with ggvis in R http://t.co/ebV3FUCIqU #rstats&quot;                              
+ [2] &quot;Short R tutorial: Scraping Javascript Generated Data with R http://t.co/ph9JXVef6E #rstats&quot;          
+ [3] &quot;A Speed Comparison Between Flexible Linear Regression Alternatives in R http://t.co/EQEKxcJaNm #rsta&quot;
+ [4] &quot;2015-02 New Zealand’s Climate Data in R – An Introduction to clifro http://t.co/Q147czEoYt #rstats&quot;  
+ [5] &quot;R Package &#39;smbinning&#39;: Optimal Binning for Scoring Modeling http://t.co/a0Yj5WvcNN #rstats&quot;          
+ [6] &quot;Spliting a Node in a Tree http://t.co/aEwdNsy2gG #rstats&quot;                                            
+ [7] &quot;Hash Table Performance in R: Part I http://t.co/BeQC5OYMAr #rstats&quot;                                  
+ [8] &quot;Bio7 2.0 for Windows 32 bit Release http://t.co/KyisKYN4uf #rstats&quot;                                  
+ [9] &quot;Welcome http://t.co/r17LZOvA71 #rstats&quot;                                                              
+[10] &quot;Accelerating the Random Forest Algorithm, I:  the Algorithm http://t.co/mKhZgVaFoS #rstats&quot;          
 </code></pre>
 
 </body>

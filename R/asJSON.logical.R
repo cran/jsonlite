@@ -1,4 +1,12 @@
-setMethod("asJSON", "logical", function(x, collapse = TRUE, na = c("null", "string", "NA"), auto_unbox = FALSE, ...) {
+setMethod("asJSON", "logical", function(x, collapse = TRUE, na = c("null", "string", "NA"),
+  auto_unbox = FALSE, keep_vec_names = FALSE, ...) {
+
+  # shiny legacy exception
+  if(isTRUE(keep_vec_names) && length(names(x))){
+    warn_keep_vec_names()
+    return(asJSON(as.list(x), collapse = collapse, na = na, auto_unbox = TRUE, ...))
+  }
+
   # validate arg
   na <- match.arg(na)
 
