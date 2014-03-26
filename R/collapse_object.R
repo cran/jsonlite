@@ -1,16 +1,13 @@
-collapse_object_r <- function(names, values){
-  stopifnot(length(names) == length(values))
-  missings <- is.na(values);
-  if(any(missings)){
-    paste0("{", paste(names[!missings], values[!missings], sep = ":", collapse = ","), "}")
+#' @useDynLib jsonlite C_collapse_object C_collapse_object_pretty
+collapse_object <- function(x, y, indent = 0L) {
+  if(is.na(indent)){
+    .Call(C_collapse_object, x, y)
   } else {
-    paste0("{", paste(names, values, sep = ":", collapse = ","), "}")
+    .Call(C_collapse_object_pretty, x, y, indent)
   }
 }
 
-#' @useDynLib jsonlite C_collapse_object
-collapse_object_c <- function(x, y) {
-  .Call(C_collapse_object, x, y)
+#' @useDynLib jsonlite C_row_collapse_object
+row_collapse_object <- function(x, m, indent = NA_integer_){
+  .Call(C_row_collapse_object, x, m, indent = indent)
 }
-
-collapse_object <- collapse_object_c;

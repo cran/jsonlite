@@ -1,9 +1,8 @@
 ---
-title: "The curl package: a modern R interface to libcurl"
-date: "2015-03-25"
+title: "Combining pages of JSON data with jsonlite"
+date: "2015-04-10"
 output:
-  html_document:
-    toc: yes
+  html_document
 vignette: >
   %\VignetteIndexEntry{Combining pages of JSON data with jsonlite}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +13,6 @@ vignette: >
 
 
 
-
-# Combining pages of JSON data with jsonlite
 
 The [jsonlite](http://cran.r-project.org/web/packages/jsonlite/index.html) package is a `JSON` parser/generator for R which is optimized for pipelines and web APIs. It is used by the OpenCPU system and many other packages to get data in and out of R using the `JSON` format.
 

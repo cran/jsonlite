@@ -1,13 +1,14 @@
 ---
 Title: "Getting started with JSON and jsonlite"
+date: "`r Sys.Date()`"
 output:
-  html_document:
-    theme: flatly
+  html_document
+vignette: >
+  %\VignetteIndexEntry{Getting started with JSON and jsonlite}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
-<!--
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteIndexEntry{Getting started with JSON and jsonlite}
--->
+
 
 ```{r echo=FALSE}
 library(knitr)

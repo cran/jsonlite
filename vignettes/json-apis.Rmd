@@ -1,9 +1,8 @@
 ---
-title: "The curl package: a modern R interface to libcurl"
-date: "2015-03-25"
+title: "Fetching JSON data from REST APIs"
+date: "2015-04-10"
 output:
-  html_document:
-    toc: yes
+  html_document
 vignette: >
   %\VignetteIndexEntry{Fetching JSON data from REST APIs}
   %\VignetteEngine{knitr::rmarkdown}
@@ -11,8 +10,6 @@ vignette: >
 ---
 
 
-
-# Fetching JSON data from REST APIs with jsonlite
 
 This section lists some examples of public HTTP APIs that publish data in JSON format. These are great to get a sense of the complex structures that are encountered in real world JSON data. All services are free, but some require registration/authentication. Each example returns lots of data, therefore not all output is printed in this document.
 
@@ -37,36 +34,36 @@ paste(format(gg_issues$user$login), ":", gg_issues$title)
 ```
 
 ```
- [1] "bakerwm         : error with facet_grid(), but it's OK for facet_wrap()."                                     
- [2] "seaaan          : Fixed two typos in documentation"                                                           
- [3] "naught101       : Inconsistent facet labeller behaviour when using characters to facet"                       
- [4] "beanumber       : Lyndon Johnson's name is misspelled in \"presidential\""                                    
- [5] "wnstnsmth       : Width of error bars is calculated by the number of groups and not by the `width` argument. "
- [6] "richierocks     : Facetting fails with \"undefined columns selected\" error for non-standard variable names"  
- [7] "raidsteel       : stat_contour fill - 2 issues"                                                               
- [8] "ddiez           : ggplot2 requires X11 in OSX causes R to crash when closing it"                              
- [9] "PeterNSteinmetz : Order of arguments in documentation of geom_vline"                                          
-[10] "Tungurahua      : mapping slot is empty when aes(x,y) is declared in geom_polygon()"                          
-[11] "angeloklin      : OHLC and Themes"                                                                            
-[12] "ghaarsma        : stat_bin() does not seem to work for integer data"                                          
-[13] "marvel64        : x axis labels wrong using facet_grid"                                                       
-[14] "chappers        : Fixed typo in help file for scale-continuous.R"                                             
-[15] "lbergelson      : ggplot2 installation fails on R 3.0.2"                                                      
-[16] "Blahah          : typo in annotate docs"                                                                      
-[17] "trufanov-nok    : Typo in diamonds.Rd"                                                                        
-[18] "ajschumacher    : typo: \"funciton\" to \"function\""                                                         
-[19] "elbamos         : vline not working as annotation"                                                            
-[20] "zachcp          : Documentation: link in coord_map is incorrect"                                              
-[21] "beamgau         : adds flip.legend option for boxplot"                                                        
-[22] "stevencb        : geom_vline requires converting to numeric when intercept is a POSIXct"                      
-[23] "DarioS          : cut_number Doesn't Work With Duplicated Values"                                             
-[24] "schloerke       : options(OutDec= \",\") and aes_string()"                                                    
-[25] "thomasp85       : Custom geom with custom grob not working"                                                   
-[26] "alex23lemm      : Update stat_summary fun.data documentation"                                                 
-[27] "jonadler        : ggplotGrob sometimes plots blank objects"                                                   
-[28] "gaborcsardi     : Need to explicitly import density() from stats?"                                            
-[29] "Robinlovelace   : Buffer for text option"                                                                     
-[30] "annoporci       : labs() does not process argument NULL"                                                      
+ [1] "gilleschapron   : Density + histogram in count : how to use variable binwidth"                                
+ [2] "joranE          : Documentation tweaks"                                                                       
+ [3] "jergosh         : Histograms for multiple distributions in one plot"                                          
+ [4] "sachsmc         : stat_km and geom_km for Kaplan-Meier Survival curves"                                       
+ [5] "richardbeare    : error bar with stacked barplot"                                                             
+ [6] "krlmlr          : Create correct legend for continuous color even if there is only one color"                 
+ [7] "jiho            : Improvements to scale_*_distiller"                                                          
+ [8] "ackman678       : facet strings in facet_wrap?"                                                               
+ [9] "bakerwm         : error with facet_grid(), but it's OK for facet_wrap()."                                     
+[10] "seaaan          : Fixed two typos in documentation"                                                           
+[11] "naught101       : Inconsistent facet labeller behaviour when using characters to facet"                       
+[12] "beanumber       : Lyndon Johnson's name is misspelled in \"presidential\""                                    
+[13] "grssnbchr       : Width of error bars is calculated by the number of groups and not by the `width` argument. "
+[14] "richierocks     : Facetting fails with \"undefined columns selected\" error for non-standard variable names"  
+[15] "raidsteel       : stat_contour fill - 2 issues"                                                               
+[16] "ddiez           : ggplot2 requires X11 in OSX causes R to crash when closing it"                              
+[17] "PeterNSteinmetz : Order of arguments in documentation of geom_vline"                                          
+[18] "Tungurahua      : mapping slot is empty when aes(x,y) is declared in geom_polygon()"                          
+[19] "angeloklin      : OHLC and Themes"                                                                            
+[20] "ghaarsma        : stat_bin() does not seem to work for integer data"                                          
+[21] "marvel64        : x axis labels wrong using facet_grid"                                                       
+[22] "chappers        : Fixed typo in help file for scale-continuous.R"                                             
+[23] "lbergelson      : ggplot2 installation fails on R 3.0.2"                                                      
+[24] "Blahah          : typo in annotate docs"                                                                      
+[25] "trufanov-nok    : Typo in diamonds.Rd"                                                                        
+[26] "ajschumacher    : typo: \"funciton\" to \"function\""                                                         
+[27] "elbamos         : vline not working as annotation"                                                            
+[28] "zachcp          : Documentation: link in coord_map is incorrect"                                              
+[29] "beamgau         : adds flip.legend option for boxplot"                                                        
+[30] "stevencb        : geom_vline requires converting to numeric when intercept is a POSIXct"                      
 ```
 
 ## CitiBike NYC
@@ -97,7 +94,7 @@ nrow(stations)
 ```
 
 ```
-[1] 332
+[1] 327
 ```
 
 ## Ergast
@@ -247,12 +244,12 @@ reviews[1:5, c("display_title", "byline", "mpaa_rating")]
 ```
 
 ```
-     display_title              byline mpaa_rating
-1 Valley of Saints      Stephen Holden        <NA>
-2            Selma         A. O. Scott       PG-13
-3   Into the Woods      Stephen Holden          PG
-4  Song of the Sea Jeannette Catsoulis          PG
-5         Top Five      Manohla Dargis           R
+           display_title         byline mpaa_rating
+1 Rebels of the Neon God    A. O. Scott        <NA>
+2       Valley of Saints Stephen Holden        <NA>
+3    A Most Violent Year    A. O. Scott           R
+4                  Selma    A. O. Scott       PG-13
+5         Into the Woods Stephen Holden          PG
 ```
 
 ## CrunchBase
@@ -281,18 +278,12 @@ print(drone_bills[1:5, c("title", "state", "chamber", "type")])
 ```
 
 ```
-                                     title state chamber
-1 Allowing the filing of a special allegat    wa   upper
-2 Relating to: criminal procedure and prov    wi   upper
-3 FREEDOM FROM UNWARRANTED SURVEILLANCE AC    nm   upper
-4 REQUESTING THE STATE DEPARTMENT OF TRANS    hi   lower
-5 REQUESTING THE STATE DEPARTMENT OF TRANS    hi   lower
-                   type
-1                  bill
-2                  bill
-3                  bill
-4 concurrent resolution
-5            resolution
+                                     title state chamber       type
+1            CONGRATS - HARRISBURG MID SCH    il   lower resolution
+2 Allowing the filing of a special allegat    wa   upper       bill
+3                  Surveillance by a Drone    fl   lower       bill
+4                  Surveillance by a Drone    fl   upper       bill
+5                       Drone Surveillance    fl   upper       bill
 ```
 
 ```r
@@ -307,10 +298,10 @@ summary(wordcount)
      count              day               raw_count      
  Min.   :   1.00   Min.   :1996-01-02   Min.   :   1.00  
  1st Qu.:   3.00   1st Qu.:2000-12-05   1st Qu.:   3.00  
- Median :   8.00   Median :2005-10-04   Median :   8.00  
- Mean   :  25.41   Mean   :2005-08-04   Mean   :  25.41  
- 3rd Qu.:  21.00   3rd Qu.:2010-03-03   3rd Qu.:  21.00  
- Max.   :1835.00   Max.   :2015-03-24   Max.   :1835.00  
+ Median :   8.00   Median :2005-10-05   Median :   8.00  
+ Mean   :  25.41   Mean   :2005-08-07   Mean   :  25.41  
+ 3rd Qu.:  21.00   3rd Qu.:2010-03-06   3rd Qu.:  21.00  
+ Max.   :1835.00   Max.   :2015-03-26   Max.   :1835.00  
 ```
 
 ```r
@@ -361,15 +352,15 @@ substring(tweets$text, 1, 100)
 ```
 
 ```
- [1] "How to Make a Histogram with ggvis in R http://t.co/ebV3FUCIqU #rstats"                              
- [2] "Short R tutorial: Scraping Javascript Generated Data with R http://t.co/ph9JXVef6E #rstats"          
- [3] "A Speed Comparison Between Flexible Linear Regression Alternatives in R http://t.co/EQEKxcJaNm #rsta"
- [4] "2015-02 New Zealand’s Climate Data in R – An Introduction to clifro http://t.co/Q147czEoYt #rstats"  
- [5] "R Package 'smbinning': Optimal Binning for Scoring Modeling http://t.co/a0Yj5WvcNN #rstats"          
- [6] "Spliting a Node in a Tree http://t.co/aEwdNsy2gG #rstats"                                            
- [7] "Hash Table Performance in R: Part I http://t.co/BeQC5OYMAr #rstats"                                  
- [8] "Bio7 2.0 for Windows 32 bit Release http://t.co/KyisKYN4uf #rstats"                                  
- [9] "Welcome http://t.co/r17LZOvA71 #rstats"                                                              
-[10] "Accelerating the Random Forest Algorithm, I:  the Algorithm http://t.co/mKhZgVaFoS #rstats"          
+ [1] "Classification with Categorical Variables (the fuzzy side) http://t.co/iDUcvkIYqf #rstats"
+ [2] "Visualising a Classification in High Dimension, part 2 http://t.co/SvaT9Yqktq #rstats"    
+ [3] "sparklines for R http://t.co/Adfh6seDJQ #rstats"                                          
+ [4] "Plotly: Here's What You Can Do, One Year In http://t.co/2cC2AmB9CQ #rstats"               
+ [5] "Recreating the vaccination heatmaps in R http://t.co/tIUIwTixkJ #rstats"                  
+ [6] "Feeling the FPP love http://t.co/tuR6CykZ9G #rstats"                                      
+ [7] "readr 0.1.0 http://t.co/83BjkHMErx #rstats"                                               
+ [8] "What can be in an R data.frame column? http://t.co/2QSvSdDyrt #rstats"                    
+ [9] "Where are the R users? http://t.co/OZDVWyInl3 #rstats"                                    
+[10] "A small neuroimage interactive plotter http://t.co/rGH24hGfJ7 #rstats"                    
 ```
 

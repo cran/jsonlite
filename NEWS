@@ -1,3 +1,9 @@
+0.9.16
+ - Performance optimizations in asJSON.data.frame by avoiding apply()
+ - Prettifying is now done by default in R (thanks to Yihui Xie)
+ - Add json_verbatim option to insert verbatim json
+ - Improve verbose output of streaming functions
+
 0.9.15
  - Replaced RCurl dependency with the new curl package.
  - Added push parser for more efficient parsing from connection interfaces (e.g. files or urls).
