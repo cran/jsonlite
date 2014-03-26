@@ -1,3 +1,9 @@
+0.9.5
+ - Never raise error in toJSON when force=true
+ - Fix typo in line 2 of JSONDefs/GNU_C.h (GUN -> GNU)
+ - Run unit tests during R CMD check
+ - Update vignette
+
 0.9.4
  - Added minify function
  - Added singleton function

@@ -156,7 +156,7 @@ cat(toJSON(iris[1:2,], pretty=TRUE))
 
 
 ## ------------------------------------------------------------------------
-cat(toJSON(list(list(Species="Foo", Width=21))))
+cat(toJSON(list(list(Species="Foo", Width=21)), pretty=TRUE))
 
 
 ## ------------------------------------------------------------------------
@@ -206,18 +206,6 @@ cat(toJSON(x))
 
 
 ## ------------------------------------------------------------------------
-x <- list()
-
-#first its numberic
-x$test <- 5:2
-cat(toJSON(x))
-
-#and then its a list
-x$test <- list(bar=TRUE)
-cat(toJSON(x))
-
-
-## ------------------------------------------------------------------------
 #conceptually homogenous array
 x <- data.frame(name=c("Jay", "Mary", NA, NA), gender=c("M", NA, NA, "F"))
 cat(toJSON(x, pretty=TRUE))
@@ -252,17 +240,6 @@ cat(toJSON(x, pretty=TRUE))
 ## races$RaceTable$Races$MRData$Results[[1]]$Driver
 
 
-## ----eval=FALSE, tidy=FALSE----------------------------------------------
-## #register key at http://sunlightfoundation.com/api/accounts/register/
-## key <- "&apikey=39c83d5a4acc42be993ee637e2e4ba3d"
-## 
-## #some queries
-## drones <- fromJSON(paste0("http://openstates.org/api/v1/bills/?q=drone", key))
-## word <- fromJSON(paste0("http://capitolwords.org/api/1/dates.json?phrase=obamacare", key))
-## legislators <- fromJSON(paste0("http://congress.api.sunlightfoundation.com/",
-##   "legislators/locate?latitude=42.96&longitude=-108.09", key))
-
-
 ## ----eval=FALSE----------------------------------------------------------
 ## #Register keys at http://developer.nytimes.com/docs/reference/keys
 ## 
@@ -282,10 +259,21 @@ cat(toJSON(x, pretty=TRUE))
 ## reviews <- fromJSON(paste0(url, movie_key))
 
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE, tidy=FALSE----------------------------------------------
 ## key <- "f6dv6cas5vw7arn5b9d7mdm3"
-## res <- fromJSON(paste0("http://api.crunchbase.com/v/1/search.js?query=R&api_key=",key))
+## res <- fromJSON(paste0("http://api.crunchbase.com/v/1/search.js?query=R&api_key=", key))
 ## str(res$results)
+
+
+## ----eval=FALSE, tidy=FALSE----------------------------------------------
+## #register key at http://sunlightfoundation.com/api/accounts/register/
+## key <- "&apikey=39c83d5a4acc42be993ee637e2e4ba3d"
+## 
+## #some queries
+## drones <- fromJSON(paste0("http://openstates.org/api/v1/bills/?q=drone", key))
+## word <- fromJSON(paste0("http://capitolwords.org/api/1/dates.json?phrase=obamacare", key))
+## legislators <- fromJSON(paste0("http://congress.api.sunlightfoundation.com/",
+##   "legislators/locate?latitude=42.96&longitude=-108.09", key))
 
 
 ## ----tidy=FALSE, eval=FALSE----------------------------------------------
@@ -312,5 +300,11 @@ cat(toJSON(x, pretty=TRUE))
 ## url = "https://api.twitter.com/1.1/statuses/user_timeline.json?count=10&screen_name=UCLA"
 ## call1 <- GET(url, config(httpheader = c("Authorization" = token)))
 ## obj1 <- fromJSON(rawToChar(call1$content))
+
+
+## ----eval=FALSE----------------------------------------------------------
+## mydata <- airquality[1:2,]
+## y <- reshape2::melt(data = mydata, id = c("Month", "Day"))
+## cat(toJSON(y))
 
 
