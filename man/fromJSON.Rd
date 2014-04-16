@@ -5,14 +5,14 @@
 \title{Convert R objects to/from \code{JSON}}
 \usage{
 fromJSON(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
-  simplifyMatrix = simplifyVector, ...)
+  simplifyMatrix = simplifyVector, flatten = FALSE, ...)
 
 toJSON(x, dataframe = c("rows", "columns"), matrix = c("rowmajor",
   "columnmajor"), Date = c("ISO8601", "epoch"), POSIXt = c("string",
   "ISO8601", "epoch", "mongo"), factor = c("string", "integer"),
   complex = c("string", "list"), raw = c("base64", "hex", "mongo"),
   na = c("null", "string"), auto_unbox = FALSE, digits = 2,
-  pretty = FALSE, ...)
+  pretty = FALSE, force = FALSE, ...)
 }
 \arguments{
   \item{x}{the object to be encoded}
@@ -47,6 +47,9 @@ toJSON(x, dataframe = c("rows", "columns"), matrix = c("rowmajor",
   \item{na}{how to print NA values. One of 'null' or
   'string'. Defaults are class specific}
 
+  \item{force}{unclass/skip objects of classes with no
+  defined json mapping}
+
   \item{pretty}{adds indentation whitespace to JSON output.
   See \code{\link{prettify}}}
 
@@ -60,6 +63,9 @@ toJSON(x, dataframe = c("rows", "columns"), matrix = c("rowmajor",
 
   \item{simplifyMatrix}{coerse JSON arrays containing
   vectors of equal length and mode into matrix or array.}
+
+  \item{flatten}{flatten nested data frames into a single
+  non-nested data frame}
 
   \item{...}{arguments passed on to class specific
   \code{print} methods}

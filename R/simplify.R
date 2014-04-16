@@ -1,5 +1,5 @@
 simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplifyMatrix = TRUE, 
-  homoList = TRUE, flatten = FALSE, columnmajor = FALSE) {
+  simplifyDate = simplifyVector, homoList = TRUE, flatten = FALSE, columnmajor = FALSE) {
   if (is.list(x)) {
     if (!length(x)) {
       # In case of fromJSON('[]') returning a list is most neutral.  Because the user
@@ -11,6 +11,9 @@ simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplif
     # list can be a dataframe recordlist
     if (isTRUE(simplifyDataFrame) && is.recordlist(x)) {
       mydf <- simplifyDataFrame(x, flatten = flatten)
+      if(isTRUE(simplifyDate) && is.data.frame(mydf) && is.datelist(mydf)){
+        return(structure(mydf[["$date"]]/1000, class=c("POSIXct", "POSIXt")))
+      }
       if ("$row" %in% names(mydf)) {
         row.names(mydf) <- mydf[["$row"]]
         mydf["$row"] <- NULL
@@ -24,8 +27,14 @@ simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplif
     }
     
     # apply recursively
-    out <- lapply(x, sys.function(0), simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame, 
+    out <- lapply(x, simplify, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame, 
       simplifyMatrix = simplifyMatrix, columnmajor = columnmajor)
+    
+    # fix for mongo style dates turning into scalars *after* simplifying
+    # only happens when simplifyDataframe=FALSE
+    if(isTRUE(simplifyVector) && is.scalarlist(out) && all(vapply(out, is, logical(1), "POSIXt"))){
+      return(structure(null2na(out), class=c("POSIXct", "POSIXt")))
+    }
     
     # test for matrix. Note that we have to take another look at x (before null2na on
     # its elements) to differentiate between matrix and vector
@@ -79,6 +88,11 @@ simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplif
       }
     }
     
+    # convert date object
+    if( isTRUE(simplifyDate) && is.datelist(out) ){
+      return(structure(out[["$date"]]/1000, class=c("POSIXct", "POSIXt")))
+    }
+    
     # return object
     return(out)
   } else {
@@ -97,10 +111,14 @@ is.namedlist <- function(x) {
   isTRUE(is.list(x) && !is.null(names(x)))
 }
 
+is.unnamedlist <- function(x) {
+  isTRUE(is.list(x) && is.null(names(x)))
+}
+
 is.recordlist <- function(x) {
   # recordlist is an array with only objects or NULL NULL appears when this is a
   # nested data frame, but some records do not contain this data frame at all.
-  if (!isTRUE(is.list(x) && length(x))) {
+  if (!isTRUE(is.unnamedlist(x) && length(x))) {
     return(FALSE)
   }
   if (!any(namedlists <- vapply(x, is.namedlist, logical(1)))) {
@@ -125,6 +143,13 @@ is.arraylist <- function(x) {
     && is.null(names(x))
     && all(vapply(x, is.array, logical(1)))
     && all.identical(vapply(x, function(y){paste(dim(y), collapse="-")}, character(1)))
+  );
+}
+
+is.datelist <- function(x){
+  isTRUE(is.list(x)
+     && identical(names(x), "$date")
+     && is.numeric(x[["$date"]])
   );
 }
 
