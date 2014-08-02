@@ -18,28 +18,24 @@ test_that("test that non ascii characters are ok", {
     );
     
     lapply(objects, function(x){
-      myjson <- toJSON(x);
+      myjson <- toJSON(x, pretty=TRUE);
       expect_that(validate(myjson), is_true());
-      expect_that(fromJSON(myjson), equals(x));
+      expect_that(fromJSON(myjson, unicode = TRUE), equals(x));
       
       #prettify needs to parse + output
       prettyjson <- prettify(myjson);
       expect_that(validate(prettyjson), is_true());
-      expect_that(fromJSON(prettyjson), equals(x));      
+      expect_that(fromJSON(prettyjson, unicode = TRUE), equals(x));      
     });
+    
+    #Test escaped unicode characters 
+    expect_that(fromJSON('["Z\\u00FCrich"]', unicode = TRUE), equals("Zürich"));
+    expect_that(fromJSON(prettify('["Z\\u00FCrich"]'), unicode = TRUE), equals("Zürich"));
+    
+    expect_that(length(unique(fromJSON('["Z\\u00FCrich", "Zürich"]', unicode = TRUE))), equals(1L))
+    expect_that(fromJSON('["\\u586B"]', unicode = TRUE), equals("填"));
+    expect_that(fromJSON(prettify('["\\u586B"]'), unicode = TRUE), equals("填"));
   } else {
     cat("skip")
   }
-});
-
-
-#Test unicode escape notation
-test_that("escaped unicode gets parsed OK", {
-  #disabled until fixed
-  #expect_that(fromJSON('["Z\\u00FCrich"]'), equals("Zürich"));
-  #expect_that(fromJSON('["Z\\xFCrich"]'), equals("Zürich"));
-  #expect_that(length(unique(fromJSON('["Z\\u00FCrich", "Zürich"]'))), equals(1L))
-  
-  #This certainly doesn't work because we need to enable #define JSON_UNICODE but R doesnt support this very well.
-  #expect_that(fromJSON('["\\u586B"]'), equals("填"));
 });

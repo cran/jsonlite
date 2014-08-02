@@ -381,7 +381,18 @@ void JSONWorker::SpecialChar(const json_char * & pos, const json_char * const en
 		  #ifdef JSON_UNICODE
 			 UTF(pos, res, end);
 		  #else
-			 res += UTF8(pos, end);
+       //JEROEN: disable unicode parsing because creates invalid multibyte characters
+       //We use unescape_unicode in R as a workaround
+			 //res += UTF8(pos, end);
+       res += JSON_TEXT('<');
+       res += JSON_TEXT('U');
+       res += JSON_TEXT('+');
+       res += JSON_TEXT(*++pos);
+       res += JSON_TEXT(*++pos);
+       res += JSON_TEXT(*++pos);
+       res += JSON_TEXT(*++pos);
+       res += JSON_TEXT('>');
+       //END JEROEN
 		  #endif
 		  break;
 	   #ifndef JSON_STRICT

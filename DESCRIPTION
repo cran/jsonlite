@@ -1,6 +1,6 @@
 Package: jsonlite
-Version: 0.9.9
-Date: 2014-07-22
+Version: 0.9.10
+Date: 2014-08-02
 Title: A smarter JSON encoder/decoder for R
 License: Apache License 2.0
 NeedsCompilation: yes
@@ -14,13 +14,14 @@ Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 VignetteBuilder: knitr
 Description: This package is a fork of the RJSONIO package by Duncan Temple
     Lang. It builds on the same libjson c++ parser, but implements a smarter
-    mapping between JSON data and R classes. The vignette describes
+    mapping between JSON data and R classes. This is particularly useful when
+    working with JSON data from pipelines and web APIs. The vignettes describe
     the behavior in great detail. In addition to drop-in replacements for
-    toJSON and fromJSON, the package contains funtions to validate, prettify
-    and minify JSON, and many unit tests to verify that all edge cases 
-    are encoded and decoded consistently for use with dynamic data in systems
+    toJSON and fromJSON, the package contains functions to validate, prettify
+    and minify JSON, and many unit tests to verify that all edge cases are
+    encoded and decoded consistently for use with dynamic data in systems
     and applications.
-Suggests: testthat, knitr, reshape2, httr (>= 0.3), rjson
-Packaged: 2014-07-22 03:35:42 UTC; jeroen
+Suggests: testthat, knitr, reshape2, httr (>= 0.3), RCurl, rjson, plyr
+Packaged: 2014-08-02 22:21:26 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2014-07-22 08:48:37
+Date/Publication: 2014-08-03 02:15:08
