@@ -210,7 +210,7 @@ identical(mtcars, fromJSON(toJSON(mtcars)))
 
 <h2>Simplification</h2>
 
-<p>Simplification is the process where <strong>homogeneous JSON arrays</strong> automatically get converted from a list into a more specific R class. The <code>fromJSON</code> function has 3 arguments which control the simplification process: <code>simplifyVector</code>, <code>simplifiyDataFrame</code> and <code>simplifyMatrix</code>. Each one is enabled by default.</p>
+<p>Simplification is the process where JSON arrays automatically get converted from a list into a more specific R class. The <code>fromJSON</code> function has 3 arguments which control the simplification process: <code>simplifyVector</code>, <code>simplifiyDataFrame</code> and <code>simplifyMatrix</code>. Each one is enabled by default.</p>
 
 <table><thead>
 <tr>
@@ -322,7 +322,7 @@ toJSON(mydf, pretty=TRUE)
     &quot;Occupation&quot; : &quot;Koopa&quot;,
     &quot;Ranking&quot; : 4
   }
-]
+] 
 </code></pre>
 
 <h3>Matrices and Arrays</h3>
@@ -349,7 +349,7 @@ mymatrix
 <pre><code class="r">toJSON(mymatrix)
 </code></pre>
 
-<pre><code>[[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+<pre><code>[[1,2,3,4],[5,6,7,8],[9,10,11,12]] 
 </code></pre>
 
 <p>The simplification works for arrays of arbitrary dimensionality, as long as the dimensions (length of the arrays) match, because R has no special data structure for ragged arrays.</p>

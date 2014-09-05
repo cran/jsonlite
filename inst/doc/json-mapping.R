@@ -3,7 +3,7 @@
 #opts_chunk$set(prompt=TRUE, highlight=FALSE, background="white")
 #options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 
-## ----echo=FALSE----------------------------------------------------------
+## ----echo=FALSE, message=FALSE-------------------------------------------
 library(jsonlite)
 library(knitr)
 opts_chunk$set(comment="")

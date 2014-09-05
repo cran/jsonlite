@@ -1,6 +1,6 @@
 Package: jsonlite
-Version: 0.9.10
-Date: 2014-08-02
+Version: 0.9.11
+Date: 2014-09-05
 Title: A smarter JSON encoder/decoder for R
 License: Apache License 2.0
 NeedsCompilation: yes
@@ -21,7 +21,7 @@ Description: This package is a fork of the RJSONIO package by Duncan Temple
     and minify JSON, and many unit tests to verify that all edge cases are
     encoded and decoded consistently for use with dynamic data in systems
     and applications.
-Suggests: testthat, knitr, reshape2, httr (>= 0.3), RCurl, rjson, plyr
-Packaged: 2014-08-02 22:21:26 UTC; jeroen
+Suggests: testthat, knitr, reshape2, httr (>= 0.4), rjson, plyr
+Packaged: 2014-09-04 19:58:35 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2014-08-03 02:15:08
+Date/Publication: 2014-09-05 01:11:57

@@ -13,16 +13,6 @@ givename <- function(obj) {
   return(structure(obj, names = as.character(names(obj))))
 }
 
-# vectorized deparse
-deparse_vector <- function(x) {
-  stopifnot(is.character(x))
-
-  #For these characters deparse() generates invalid JSON escape sequences
-  #Compare ?Quotes and http://json.org/
-  x <- gsub("[\v\a]", "", x)
-  vapply(x, deparse, character(1), USE.NAMES=FALSE)
-}
-
 # trim whitespace
 trim <- function(x) {
   gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)

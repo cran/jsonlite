@@ -4,6 +4,16 @@
 %\VignetteIndexEntry{Fetching JSON data from REST APIs}
 -->
 
+```{r echo=FALSE}
+library(knitr)
+opts_chunk$set(comment="")
+
+#this replaces tabs by spaces because latex-verbatim doesn't like tabs
+toJSON <- function(...){
+  gsub("\t", "  ", jsonlite::toJSON(...), fixed=TRUE);
+}
+```
+
 # Fetching JSON data from REST APIs with jsonlite
 
 This section lists some examples of public HTTP APIs that publish data in JSON format. These are great to get a sense of the complex structures that are encountered in real world JSON data. All services are free, but some require registration/authentication. Each example returns lots of data, therefore not all output is printed in this document.
@@ -42,7 +52,7 @@ nrow(stations)
 The Ergast Developer API is an experimental web service which provides a historical record of motor racing data for non-commercial purposes.
 
 ```{r}
-res <- fromJSON('http://ergast.com/api/f1/2012/1/results.json')
+res <- fromJSON('http://ergast.com/api/f1/2004/1/results.json')
 drivers <- res$MRData$RaceTable$Races$Results[[1]]$Driver
 colnames(drivers)
 drivers[1:10, c("givenName", "familyName", "code", "nationality")]
@@ -148,23 +158,24 @@ consumer_secret = "OIDC4MdfZJ82nbwpZfoUO4WOLTYjoRhpHRAWj6JMec";
 
 #Use basic auth
 library(httr)
-secret <- RCurl::base64(paste(consumer_key, consumer_secret, sep=":"));
+secret <- RCurl::base64(paste(consumer_key, consumer_secret, sep = ":"));
 req <- POST("https://api.twitter.com/oauth2/token",
   config(httpheader = c(
     "Authorization" = paste("Basic", secret),
     "Content-Type" = "application/x-www-form-urlencoded;charset=UTF-8"
   )),
   body = "grant_type=client_credentials",
-  multipart = FALSE
+  encode = "multipart"
 );
 
 #Extract the access token
-token <- paste("Bearer", content(req)$access_token);
+token <- paste("Bearer", content(req)$access_token)
 
 #Actual API call
 url <- "https://api.twitter.com/1.1/statuses/user_timeline.json?count=10&screen_name=Rbloggers"
-call1 <- GET(url, config(httpheader = c("Authorization" = token)))
-obj1 <- fromJSON(rawToChar(call1$content), unicode=TRUE)
-substring(obj1$text, 1, 100)
+req <- GET(url, config(httpheader = c("Authorization" = token)))
+json <- content(req, as = "text")
+tweets <- fromJSON(json)
+substring(tweets$text, 1, 100)
 ```
 

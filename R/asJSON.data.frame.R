@@ -9,9 +9,21 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
     x <- as.vector(x, mode = "list")
   }
 
+  # Unname named lists columns. These are very rare.
+  namedlistvars <- which(vapply(x, is.namedlistnotdf, logical(1)))
+  for (i in namedlistvars) {
+    x[[i]] <- unname(x[[i]])
+  }
+
+  # Convert POSIXlt to POSIXct before we start messing with lists
+  posvars <- which(vapply(x, is, logical(1), "POSIXlt"))
+  for (i in posvars) {
+    x[[i]] <- as.POSIXct(x[[i]])
+  }
+
   # Colum based is same as list based
   if (dataframe == "columns") {
-    return(asJSON(as.list(x), na = na, collapse = collapse, dataframe = dataframe, complex=complex, ...))
+    return(asJSON(as.list(x), is_df = TRUE, na = na, collapse = collapse, dataframe = dataframe, complex=complex, ...))
   }
 
   # Determine "oldna". This is needed when the data frame contains a list column
@@ -29,40 +41,28 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
     return(asJSON(list(), collapse=collapse))
   }
 
-  # Convert POSIXlt to POSIXct before we start messing with lists
-  posvars <- which(as.logical(vapply(x, is, integer(1), "POSIXlt")))
-  for (i in posvars) {
-    x[[i]] <- as.POSIXct(x[[i]])
-  }
-
   # Convert raw vectors
-  rawvars <- which(as.logical(vapply(x, is.raw, integer(1))))
+  rawvars <- which(vapply(x, is.raw, logical(1)))
   for (i in rawvars) {
     x[[i]] <- as.character.hexmode(x[[i]])
   }
 
-  # Unname named lists
-  namedlistvars <- which(as.logical(vapply(x, is.namedlistnotdf, integer(1))))
-  for (i in namedlistvars) {
-    x[[i]] <- unname(x[[i]])
-  }
-
   # Turn complex vectors into data frames
   if(complex == "list"){
-    complxvars <- which(as.logical(vapply(x, is.complex, integer(1))))
+    complxvars <- which(vapply(x, is.complex, logical(1)))
     for (i in complxvars) {
       x[[i]] <- data.frame(real=Re(x[[i]]), imaginary=Im(x[[i]]))
     }
   }
 
   # Check for row names
-  if (!isTRUE(all(grepl("[0-9]+", row.names(x))))) {
+  if (!all(grepl("[0-9]+", row.names(x)))) {
     x <- cbind(data.frame(`$row` = row.names(x), check.names = FALSE, stringsAsFactors = FALSE), x)
   }
 
   #create a matrix of json elements
   dfnames <- deparse_vector(cleannames(names(x)))
-  out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na, oldna = oldna, ...)
+  out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na, oldna = oldna, ..., USE.NAMES = FALSE)
 
   # This would be another way of doing the missing values
   # This does not require the individual classes to support na="NA"

@@ -216,36 +216,36 @@ gg_issues &lt;- fromJSON(&quot;https://api.github.com/repos/hadley/ggplot2/issue
 paste(format(gg_issues$user$login), &quot;:&quot;, gg_issues$title)
 </code></pre>
 
-<pre><code>##  [1] &quot;lccanon         : rqss in stat_quantile ignore the quantile with large number of values&quot;                 
-##  [2] &quot;bergsmat        : Geom not exported?&quot;                                                                    
-##  [3] &quot;iagomosqueira   : size in geom_point using variable with all but 1 as NAs&quot;                               
-##  [4] &quot;xsaintmleux     : allow ggplot_build to return an additional value: the processed data as ...&quot;           
-##  [5] &quot;mkcor           : Edit warning message to reflect intuitive use&quot;                                         
-##  [6] &quot;tsibley         : Rebased and redocumented version of PR #744&quot;                                           
-##  [7] &quot;BrianDiggs      : sqrt_trans, scale limit expansion, and missing breaks&quot;                                 
-##  [8] &quot;marvel64        : Documentation for geom_boxplot&quot;                                                        
-##  [9] &quot;blaquans        : Would it be possible to add notes to a ggplot graph ?&quot;                                 
-## [10] &quot;jiho            : New theme_void(), completely empty&quot;                                                    
-## [11] &quot;veraanadi       : Add new function geom_curve&quot;                                                           
-## [12] &quot;lionelgit       : Facet titles&quot;                                                                          
-## [13] &quot;kent37          : Error in stat_density example text&quot;                                                    
-## [14] &quot;tonytonov       : geom_violin throws error on data with zero variance&quot;                                   
-## [15] &quot;cboettig        : scales=\&quot;free\&quot; on facet_grid no longer has any effect on `y` axis within rows&quot;        
-## [16] &quot;baptiste        : check.class argument to ggsave&quot;                                                        
-## [17] &quot;lionelgit       : Coord expand&quot;                                                                          
-## [18] &quot;croach          : Fix for bad URL in qplot docs&quot;                                                         
-## [19] &quot;richierocks     : geom_hex fails when filled with a continuous variable&quot;                                 
-## [20] &quot;wibeasley       : Setting variable to NULL within `aes_string()`&quot;                                        
-## [21] &quot;tonytonov       : Throw error if lower &gt; upper in cont scales. Fixes #906&quot;                               
-## [22] &quot;joey711         : Fixed typo in `geom_density2d` roxygen2 Description&quot;                                   
-## [23] &quot;blaquans        : Bug with coord_map and world map&quot;                                                      
-## [24] &quot;richierocks     : Added sanitise_dim function for Issue #801&quot;                                            
-## [25] &quot;fabian-s        : tickmark/break calculations with exp_trans, probability_trans fail often&quot;              
-## [26] &quot;imanuelcostigan : Corrected field name: colour =&gt; color&quot;                                                 
-## [27] &quot;gokceneraslan   : geom-bar-.r: Fix typo&quot;                                                                 
-## [28] &quot;lcolladotor     : Error that seems misleading when using geom_line(stat=\&quot;density\&quot;) without enough data&quot;
-## [29] &quot;jennybc         : Reversed date axis has no breaks, no grid lines&quot;                                       
-## [30] &quot;yihui           : Errors in some examples&quot;
+<pre><code> [1] &quot;Henrik-P      : &#39;guides&#39; documentation, possible improvement in last example&quot;                                    
+ [2] &quot;richierocks   : scatterplots of categorical variables cause &#39;row names were found from a short variable&#39; warning&quot;
+ [3] &quot;lselzer       : created fortify.glm&quot;                                                                             
+ [4] &quot;petrbouchal   : scale_colour_manual fails when elements of named matrix are passed to values&quot;                    
+ [5] &quot;smirarab      : stat_ecdf plots extra points&quot;                                                                    
+ [6] &quot;dorvak        : Suggestion: Geom replace infix operator&quot;                                                         
+ [7] &quot;rpruim        : documentation of fun.data (in stat_summary) incorrect?&quot;                                          
+ [8] &quot;ttuggle       : Memory overflow with scale_x_discrete()&quot;                                                         
+ [9] &quot;pengyu        : Added ..Name to each prototype so that str.proto() can show the names correctly&quot;                 
+[10] &quot;pharaveej     : ggplot - geom_step error&quot;                                                                        
+[11] &quot;noamross      : New theme option to put panel/grid on top of data&quot;                                               
+[12] &quot;krlmlr        : geom_boxplot with continuous x and without group aesthetics&quot;                                     
+[13] &quot;lccanon       : rqss in stat_quantile ignore the quantile with large number of values&quot;                           
+[14] &quot;bergsmat      : Geom not exported?&quot;                                                                              
+[15] &quot;iagomosqueira : size in geom_point using variable with all but 1 as NAs&quot;                                         
+[16] &quot;xsaintmleux   : allow ggplot_build to return an additional value: the processed data as ...&quot;                     
+[17] &quot;mkcor         : Edit warning message to reflect intuitive use&quot;                                                   
+[18] &quot;tsibley       : Rebased and redocumented version of PR #744&quot;                                                     
+[19] &quot;BrianDiggs    : sqrt_trans, scale limit expansion, and missing breaks&quot;                                           
+[20] &quot;marvel64      : Documentation for geom_boxplot&quot;                                                                  
+[21] &quot;blaquans      : Would it be possible to add notes to a ggplot graph ?&quot;                                           
+[22] &quot;jiho          : New theme_void(), completely empty&quot;                                                              
+[23] &quot;veraanadi     : Add new function geom_curve&quot;                                                                     
+[24] &quot;lionelgit     : Facet titles&quot;                                                                                    
+[25] &quot;kent37        : Error in stat_density example text&quot;                                                              
+[26] &quot;tonytonov     : geom_violin throws error on data with zero variance&quot;                                             
+[27] &quot;cboettig      : scales=\&quot;free\&quot; on facet_grid no longer has any effect on `y` axis within rows&quot;                  
+[28] &quot;baptiste      : check.class argument to ggsave&quot;                                                                  
+[29] &quot;lionelgit     : Coord expand&quot;                                                                                    
+[30] &quot;croach        : Fix for bad URL in qplot docs&quot;                                                                   
 </code></pre>
 
 <h2>CitiBike NYC</h2>
@@ -257,50 +257,50 @@ stations &lt;- citibike$stationBeanList
 colnames(stations)
 </code></pre>
 
-<pre><code>##  [1] &quot;id&quot;                    &quot;stationName&quot;          
-##  [3] &quot;availableDocks&quot;        &quot;totalDocks&quot;           
-##  [5] &quot;latitude&quot;              &quot;longitude&quot;            
-##  [7] &quot;statusValue&quot;           &quot;statusKey&quot;            
-##  [9] &quot;availableBikes&quot;        &quot;stAddress1&quot;           
-## [11] &quot;stAddress2&quot;            &quot;city&quot;                 
-## [13] &quot;postalCode&quot;            &quot;location&quot;             
-## [15] &quot;altitude&quot;              &quot;testStation&quot;          
-## [17] &quot;lastCommunicationTime&quot; &quot;landMark&quot;
+<pre><code> [1] &quot;id&quot;                    &quot;stationName&quot;          
+ [3] &quot;availableDocks&quot;        &quot;totalDocks&quot;           
+ [5] &quot;latitude&quot;              &quot;longitude&quot;            
+ [7] &quot;statusValue&quot;           &quot;statusKey&quot;            
+ [9] &quot;availableBikes&quot;        &quot;stAddress1&quot;           
+[11] &quot;stAddress2&quot;            &quot;city&quot;                 
+[13] &quot;postalCode&quot;            &quot;location&quot;             
+[15] &quot;altitude&quot;              &quot;testStation&quot;          
+[17] &quot;lastCommunicationTime&quot; &quot;landMark&quot;             
 </code></pre>
 
 <pre><code class="r">nrow(stations)
 </code></pre>
 
-<pre><code>## [1] 332
+<pre><code>[1] 332
 </code></pre>
 
 <h2>Ergast</h2>
 
 <p>The Ergast Developer API is an experimental web service which provides a historical record of motor racing data for non-commercial purposes.</p>
 
-<pre><code class="r">res &lt;- fromJSON(&#39;http://ergast.com/api/f1/2012/1/results.json&#39;)
+<pre><code class="r">res &lt;- fromJSON(&#39;http://ergast.com/api/f1/2004/1/results.json&#39;)
 drivers &lt;- res$MRData$RaceTable$Races$Results[[1]]$Driver
 colnames(drivers)
 </code></pre>
 
-<pre><code>## [1] &quot;driverId&quot;        &quot;permanentNumber&quot; &quot;code&quot;            &quot;url&quot;            
-## [5] &quot;givenName&quot;       &quot;familyName&quot;      &quot;dateOfBirth&quot;     &quot;nationality&quot;
+<pre><code>[1] &quot;driverId&quot;        &quot;code&quot;            &quot;url&quot;             &quot;givenName&quot;      
+[5] &quot;familyName&quot;      &quot;dateOfBirth&quot;     &quot;nationality&quot;     &quot;permanentNumber&quot;
 </code></pre>
 
 <pre><code class="r">drivers[1:10, c(&quot;givenName&quot;, &quot;familyName&quot;, &quot;code&quot;, &quot;nationality&quot;)]
 </code></pre>
 
-<pre><code>##    givenName familyName code nationality
-## 1     Jenson     Button  BUT     British
-## 2  Sebastian     Vettel  VET      German
-## 3      Lewis   Hamilton  HAM     British
-## 4       Mark     Webber  WEB  Australian
-## 5   Fernando     Alonso  ALO     Spanish
-## 6      Kamui  Kobayashi  KOB    Japanese
-## 7       Kimi  Räikkönen  RAI     Finnish
-## 8     Sergio      Pérez  PER     Mexican
-## 9     Daniel  Ricciardo  RIC  Australian
-## 10      Paul   di Resta  DIR    Scottish
+<pre><code>   givenName    familyName code nationality
+1    Michael    Schumacher  MSC      German
+2     Rubens   Barrichello  BAR   Brazilian
+3   Fernando        Alonso  ALO     Spanish
+4       Ralf    Schumacher  SCH      German
+5       Juan Pablo Montoya  MON   Colombian
+6     Jenson        Button  BUT     British
+7      Jarno        Trulli  TRU     Italian
+8      David     Coulthard  COU     British
+9     Takuma          Sato  SAT    Japanese
+10 Giancarlo    Fisichella  FIS     Italian
 </code></pre>
 
 <h2>ProPublica</h2>
@@ -323,23 +323,23 @@ filings &lt;- rbind.pages(pages)
 nrow(filings)
 </code></pre>
 
-<pre><code>## [1] 275
+<pre><code>[1] 275
 </code></pre>
 
 <pre><code class="r">filings[1:10, c(&quot;organization.sub_name&quot;, &quot;organization.city&quot;, &quot;totrevenue&quot;)]
 </code></pre>
 
-<pre><code>##                organization.sub_name organization.city totrevenue
-## 1  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  4.015e+10
-## 2  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  3.779e+10
-## 3        KAISER FOUNDATION HOSPITALS          PORTLAND  1.854e+10
-## 4        KAISER FOUNDATION HOSPITALS          PORTLAND  1.798e+10
-## 5    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  1.045e+10
-## 6    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  9.637e+09
-## 7                     DIGNITY HEALTH           PHOENIX  9.212e+09
-## 8   THRIVENT FINANCIAL FOR LUTHERANS       MINNEAPOLIS  8.507e+09
-## 9                         UPMC GROUP        PITTSBURGH  7.698e+09
-## 10      CLEVELAND CLINIC FOUNDATION          CLEVELAND  7.011e+09
+<pre><code>               organization.sub_name organization.city totrevenue
+1  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  4.015e+10
+2  KAISER FOUNDATION HEALTH PLAN INC          PORTLAND  3.779e+10
+3        KAISER FOUNDATION HOSPITALS          PORTLAND  1.854e+10
+4        KAISER FOUNDATION HOSPITALS          PORTLAND  1.798e+10
+5    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  1.045e+10
+6    PARTNERS HEALTHCARE SYSTEM INC             BOSTON  9.637e+09
+7                     DIGNITY HEALTH           PHOENIX  9.212e+09
+8   THRIVENT FINANCIAL FOR LUTHERANS       MINNEAPOLIS  8.507e+09
+9                         UPMC GROUP        PITTSBURGH  7.698e+09
+10      CLEVELAND CLINIC FOUNDATION          CLEVELAND  7.011e+09
 </code></pre>
 
 <h2>New York Times</h2>
@@ -354,13 +354,13 @@ articles &lt;- req$response$docs
 colnames(articles)
 </code></pre>
 
-<pre><code>##  [1] &quot;web_url&quot;          &quot;snippet&quot;          &quot;lead_paragraph&quot;  
-##  [4] &quot;abstract&quot;         &quot;print_page&quot;       &quot;blog&quot;            
-##  [7] &quot;source&quot;           &quot;multimedia&quot;       &quot;headline&quot;        
-## [10] &quot;keywords&quot;         &quot;pub_date&quot;         &quot;document_type&quot;   
-## [13] &quot;news_desk&quot;        &quot;section_name&quot;     &quot;subsection_name&quot; 
-## [16] &quot;byline&quot;           &quot;type_of_material&quot; &quot;_id&quot;             
-## [19] &quot;word_count&quot;
+<pre><code> [1] &quot;web_url&quot;          &quot;snippet&quot;          &quot;lead_paragraph&quot;  
+ [4] &quot;abstract&quot;         &quot;print_page&quot;       &quot;blog&quot;            
+ [7] &quot;source&quot;           &quot;multimedia&quot;       &quot;headline&quot;        
+[10] &quot;keywords&quot;         &quot;pub_date&quot;         &quot;document_type&quot;   
+[13] &quot;news_desk&quot;        &quot;section_name&quot;     &quot;subsection_name&quot; 
+[16] &quot;byline&quot;           &quot;type_of_material&quot; &quot;_id&quot;             
+[19] &quot;word_count&quot;      
 </code></pre>
 
 <pre><code class="r">#search for best sellers
@@ -372,12 +372,12 @@ category1 &lt;- bestsellers[[1, &quot;books&quot;]]
 subset(category1, select = c(&quot;author&quot;, &quot;title&quot;, &quot;publisher&quot;))
 </code></pre>
 
-<pre><code>##            author                title                  publisher
-## 1   Gillian Flynn            GONE GIRL           Crown Publishing
-## 2    John Grisham        THE RACKETEER Knopf Doubleday Publishing
-## 3       E L James FIFTY SHADES OF GREY Knopf Doubleday Publishing
-## 4 Nicholas Sparks           SAFE HAVEN   Grand Central Publishing
-## 5  David Baldacci        THE FORGOTTEN   Grand Central Publishing
+<pre><code>           author                title                  publisher
+1   Gillian Flynn            GONE GIRL           Crown Publishing
+2    John Grisham        THE RACKETEER Knopf Doubleday Publishing
+3       E L James FIFTY SHADES OF GREY Knopf Doubleday Publishing
+4 Nicholas Sparks           SAFE HAVEN   Grand Central Publishing
+5  David Baldacci        THE FORGOTTEN   Grand Central Publishing
 </code></pre>
 
 <pre><code class="r">#movie reviews
@@ -388,23 +388,23 @@ reviews &lt;- req$results
 colnames(reviews)
 </code></pre>
 
-<pre><code>##  [1] &quot;nyt_movie_id&quot;     &quot;display_title&quot;    &quot;sort_name&quot;       
-##  [4] &quot;mpaa_rating&quot;      &quot;critics_pick&quot;     &quot;thousand_best&quot;   
-##  [7] &quot;byline&quot;           &quot;headline&quot;         &quot;capsule_review&quot;  
-## [10] &quot;summary_short&quot;    &quot;publication_date&quot; &quot;opening_date&quot;    
-## [13] &quot;dvd_release_date&quot; &quot;date_updated&quot;     &quot;seo_name&quot;        
-## [16] &quot;link&quot;             &quot;related_urls&quot;     &quot;multimedia&quot;
+<pre><code> [1] &quot;nyt_movie_id&quot;     &quot;display_title&quot;    &quot;sort_name&quot;       
+ [4] &quot;mpaa_rating&quot;      &quot;critics_pick&quot;     &quot;thousand_best&quot;   
+ [7] &quot;byline&quot;           &quot;headline&quot;         &quot;capsule_review&quot;  
+[10] &quot;summary_short&quot;    &quot;publication_date&quot; &quot;opening_date&quot;    
+[13] &quot;dvd_release_date&quot; &quot;date_updated&quot;     &quot;seo_name&quot;        
+[16] &quot;link&quot;             &quot;related_urls&quot;     &quot;multimedia&quot;      
 </code></pre>
 
 <pre><code class="r">reviews[1:5, c(&quot;display_title&quot;, &quot;byline&quot;, &quot;mpaa_rating&quot;)]
 </code></pre>
 
-<pre><code>##                    display_title              byline mpaa_rating
-## 1                        Boyhood      Manohla Dargis           R
-## 2 Dawn of the Planet of the Apes         A. O. Scott       PG-13
-## 3                      Gabrielle      Stephen Holden           R
-## 4                       Wrinkles Jeannette Catsoulis          NR
-## 5           Deliver Us From Evil     Neil Genzlinger           R
+<pre><code>                   display_title              byline mpaa_rating
+1                        Boyhood      Manohla Dargis           R
+2 Dawn of the Planet of the Apes         A. O. Scott       PG-13
+3                The Empty Hours Jeannette Catsoulis        &lt;NA&gt;
+4                      Gabrielle      Stephen Holden           R
+5                       Wrinkles Jeannette Catsoulis          NR
 </code></pre>
 
 <h2>CrunchBase</h2>
@@ -428,12 +428,12 @@ drone_bills$title &lt;- substring(drone_bills$title, 1, 40)
 print(drone_bills[1:5, c(&quot;title&quot;, &quot;state&quot;, &quot;chamber&quot;, &quot;type&quot;)])
 </code></pre>
 
-<pre><code>##                                      title state chamber       type
-## 1 Sets forth certain standards to be follo    nj   upper       bill
-## 2 &quot;An Act relating to a prohibition on the    ak   upper       bill
-## 3  Unmanned aerial vehicle regulation act.    ks   lower       bill
-## 4 Prohibiting the use of drones by law enf    ks   lower       bill
-## 5 A resolution to condemn Boko Haram for i    mi   lower resolution
+<pre><code>                                     title state chamber type
+1 &quot;An Act relating to a prohibition on the    ak   upper bill
+2            DRONE SURVEIL-LAW ENFORCEMENT    il   upper bill
+3 Sets forth certain standards to be follo    nj   upper bill
+4  Unmanned aerial vehicle regulation act.    ks   lower bill
+5 Prohibiting the use of drones by law enf    ks   lower bill
 </code></pre>
 
 <pre><code class="r">#Congress mentioning &quot;constitution&quot;
@@ -443,13 +443,13 @@ wordcount$day &lt;- as.Date(wordcount$day)
 summary(wordcount)
 </code></pre>
 
-<pre><code>##      count             day               raw_count     
-##  Min.   :   1.0   Min.   :1996-01-02   Min.   :   1.0  
-##  1st Qu.:   3.0   1st Qu.:2000-10-26   1st Qu.:   3.0  
-##  Median :   8.0   Median :2005-07-15   Median :   8.0  
-##  Mean   :  25.1   Mean   :2005-05-30   Mean   :  25.1  
-##  3rd Qu.:  21.0   3rd Qu.:2009-11-21   3rd Qu.:  21.0  
-##  Max.   :1835.0   Max.   :2014-08-01   Max.   :1835.0
+<pre><code>     count             day               raw_count     
+ Min.   :   1.0   Min.   :1996-01-02   Min.   :   1.0  
+ 1st Qu.:   3.0   1st Qu.:2000-10-26   1st Qu.:   3.0  
+ Median :   8.0   Median :2005-07-16   Median :   8.0  
+ Mean   :  25.1   Mean   :2005-06-01   Mean   :  25.1  
+ 3rd Qu.:  21.0   3rd Qu.:2009-11-28   3rd Qu.:  21.0  
+ Max.   :1835.0   Max.   :2014-08-05   Max.   :1835.0  
 </code></pre>
 
 <pre><code class="r">#Local legislators
@@ -458,10 +458,10 @@ legislators &lt;- fromJSON(paste0(&quot;http://congress.api.sunlightfoundation.c
 subset(legislators$results, select=c(&quot;last_name&quot;, &quot;chamber&quot;, &quot;term_start&quot;, &quot;twitter_id&quot;))
 </code></pre>
 
-<pre><code>##   last_name chamber term_start      twitter_id
-## 1    Lummis   house 2013-01-03   CynthiaLummis
-## 2      Enzi  senate 2009-01-06     SenatorEnzi
-## 3  Barrasso  senate 2013-01-03 SenJohnBarrasso
+<pre><code>  last_name chamber term_start      twitter_id
+1    Lummis   house 2013-01-03   CynthiaLummis
+2      Enzi  senate 2009-01-06     SenatorEnzi
+3  Barrasso  senate 2013-01-03 SenJohnBarrasso
 </code></pre>
 
 <h2>Twitter</h2>
@@ -474,36 +474,37 @@ consumer_secret = &quot;OIDC4MdfZJ82nbwpZfoUO4WOLTYjoRhpHRAWj6JMec&quot;;
 
 #Use basic auth
 library(httr)
-secret &lt;- RCurl::base64(paste(consumer_key, consumer_secret, sep=&quot;:&quot;));
+secret &lt;- RCurl::base64(paste(consumer_key, consumer_secret, sep = &quot;:&quot;));
 req &lt;- POST(&quot;https://api.twitter.com/oauth2/token&quot;,
   config(httpheader = c(
     &quot;Authorization&quot; = paste(&quot;Basic&quot;, secret),
     &quot;Content-Type&quot; = &quot;application/x-www-form-urlencoded;charset=UTF-8&quot;
   )),
   body = &quot;grant_type=client_credentials&quot;,
-  multipart = FALSE
+  encode = &quot;multipart&quot;
 );
 
 #Extract the access token
-token &lt;- paste(&quot;Bearer&quot;, content(req)$access_token);
+token &lt;- paste(&quot;Bearer&quot;, content(req)$access_token)
 
 #Actual API call
 url &lt;- &quot;https://api.twitter.com/1.1/statuses/user_timeline.json?count=10&amp;screen_name=Rbloggers&quot;
-call1 &lt;- GET(url, config(httpheader = c(&quot;Authorization&quot; = token)))
-obj1 &lt;- fromJSON(rawToChar(call1$content), unicode=TRUE)
-substring(obj1$text, 1, 100)
+req &lt;- GET(url, config(httpheader = c(&quot;Authorization&quot; = token)))
+json &lt;- content(req, as = &quot;text&quot;)
+tweets &lt;- fromJSON(json)
+substring(tweets$text, 1, 100)
 </code></pre>
 
-<pre><code>##  [1] &quot;Come see RStudio at JSM in Boston http://t.co/7qEtflpwpz #rstats&quot;                         
-##  [2] &quot;Testing an R package’s interactive graphs http://t.co/4NV0xBjI03 #rstats&quot;                 
-##  [3] &quot;Code Snippet:  Extracting a Subsample from a Large File http://t.co/JUdQXs2kpx #rstats&quot;   
-##  [4] &quot;Shiny 0.10.1 http://t.co/Xd98m60una #rstats&quot;                                              
-##  [5] &quot;The R Markdown Cheat Sheet http://t.co/NmvfuxLmYY #rstats&quot;                                
-##  [6] &quot;Plotting gtfs data with R http://t.co/isCtVo2yN0 #rstats&quot;                                 
-##  [7] &quot;Simulating species abundance data with coenocliner http://t.co/UDicaS6z3z #rstats&quot;        
-##  [8] &quot;Adjusted Momentum http://t.co/67FCjTLUAJ #rstats&quot;                                         
-##  [9] &quot;yocto benchmarking http://t.co/2SVk9TLsDO #rstats&quot;                                        
-## [10] &quot;Plot with ggplot2, interact, collaborate, and share online http://t.co/pJVbTwxmmI #rstats&quot;
+<pre><code> [1] &quot;LAST CHANCE TO REGISTER FOR EARL (15-17 September, London) http://t.co/7ZT7cKGP8N #rstats&quot;
+ [2] &quot;Looking For Life http://t.co/luFwXnyF78 #rstats&quot;                                          
+ [3] &quot;Adding the SPSS MEAN.n Function to R http://t.co/gTw60cxWEd #rstats&quot;                      
+ [4] &quot;Brazilian Presidential Election http://t.co/G08Tu63YFn #rstats&quot;                           
+ [5] &quot;Hortonworks Seminar Series: The Modern Data Architecture http://t.co/M4A1S3SRMy #rstats&quot;  
+ [6] &quot;Introducing simmer: Discrete Event Simulation for R http://t.co/vBImwcKP3F #rstats&quot;       
+ [7] &quot;Notifications from R http://t.co/KaQqzFKd6F #rstats&quot;                                      
+ [8] &quot;rNOMADS 2.0.2 released http://t.co/Bcy2D1QBgk #rstats&quot;                                    
+ [9] &quot;New R job: Senior Operations Research Consultant http://t.co/Fimizb8mwg #rstats #jobs&quot;    
+[10] &quot;httr 0.5 http://t.co/hGWvZxrhdu #rstats&quot;                                                  
 </code></pre>
 
 </body>
