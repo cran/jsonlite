@@ -1,5 +1,5 @@
-setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
-  collapse = TRUE, dataframe = c("rows", "columns"), complex = "string", oldna=NULL, ...) {
+setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), collapse = TRUE,
+  dataframe = c("rows", "columns"), complex = "string", oldna = NULL, rownames = NULL, ...) {
 
   # Validate some args
   dataframe <- match.arg(dataframe)
@@ -7,6 +7,13 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
   # Coerse pairlist if needed
   if (is.pairlist(x)) {
     x <- as.vector(x, mode = "list")
+  }
+
+  # Default to adding row names only if they are strings and not just stringified numbers
+  if(isTRUE(rownames) || (is.null(rownames) && is.character(attr(x, "row.names")) && !all(grepl("^\\d+$", row.names(x))))){
+    # we don't use row.names() because this converts numbers to strings,
+    # which will break sorting
+    x[["_row"]] <- attr(x, "row.names")
   }
 
   # Unname named lists columns. These are very rare.
@@ -21,9 +28,10 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
     x[[i]] <- as.POSIXct(x[[i]])
   }
 
-  # Colum based is same as list based
+  # Column based is same as list. Do not pass collapse arg because it is a named list.
   if (dataframe == "columns") {
-    return(asJSON(as.list(x), is_df = TRUE, na = na, collapse = collapse, dataframe = dataframe, complex=complex, ...))
+    return(asJSON(as.list(x), is_df = TRUE, na = na, dataframe = dataframe,
+      complex = complex, rownames = rownames, ...))
   }
 
   # Determine "oldna". This is needed when the data frame contains a list column
@@ -55,14 +63,10 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
     }
   }
 
-  # Check for row names
-  if (!all(grepl("[0-9]+", row.names(x)))) {
-    x <- cbind(data.frame(`$row` = row.names(x), check.names = FALSE, stringsAsFactors = FALSE), x)
-  }
-
   #create a matrix of json elements
   dfnames <- deparse_vector(cleannames(names(x)))
-  out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na, oldna = oldna, ..., USE.NAMES = FALSE)
+  out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na,
+    oldna = oldna, rownames = rownames, ..., USE.NAMES = FALSE)
 
   # This would be another way of doing the missing values
   # This does not require the individual classes to support na="NA"
@@ -77,21 +81,7 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"),
   }
 
   #turn the matrix into json records
-  if(na == "NA") {
-    tmp <- apply(out, 1, function(z){
-      missings <- is.na(z);
-      if(any(missings)){
-        paste0("{", paste(dfnames[!missings], z[!missings], sep = ":", collapse = ","), "}")
-      } else {
-        paste0("{", paste(dfnames, z, sep = ":", collapse = ","), "}")
-      }
-    });
-  } else {
-    #tiny speed up because we don't have to check for NA
-    tmp <- apply(out, 1, function(z){
-      paste0("{", paste(dfnames, z, sep = ":", collapse = ","), "}")
-    });
-  }
+  tmp <- apply(out, 1, collapse_object, x = dfnames);
 
   #collapse
   if(isTRUE(collapse)){

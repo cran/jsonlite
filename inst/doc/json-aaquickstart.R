@@ -3,23 +3,24 @@ library(knitr)
 opts_chunk$set(comment="")
 
 #this replaces tabs by spaces because latex-verbatim doesn't like tabs
-toJSON <- function(...){
-  gsub("\t", "  ", jsonlite::toJSON(...), fixed=TRUE);
-}
+#no longer needed because yajl does not use tabs.
+#toJSON <- function(...){
+#  gsub("\t", "  ", jsonlite::toJSON(...), fixed=TRUE);
+#}
 
 ## ----message=FALSE-------------------------------------------------------
 library(jsonlite)
-identical(mtcars, fromJSON(toJSON(mtcars)))
+all.equal(mtcars, fromJSON(toJSON(mtcars)))
 
 ## ------------------------------------------------------------------------
-# An array with primitives
+# A JSON array of primitives
 json <- '["Mario", "Peach", null, "Bowser"]'
 
-#This turns into an (atomic) vector
+# Simplifies into an atomic vector
 fromJSON(json)
 
 ## ------------------------------------------------------------------------
-#If we disable simplifyVector it would be a list
+# No simplification:
 fromJSON(json, simplifyVector = FALSE)
 
 ## ------------------------------------------------------------------------

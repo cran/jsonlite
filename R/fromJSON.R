@@ -1,33 +1,29 @@
-#' These functions are used to convert between \code{JSON} data and \R{} objects. The \code{\link{toJSON}} and \code{\link{fromJSON}}
+#' These functions are used to convert between JSON data and \R{} objects. The \code{\link{toJSON}} and \code{\link{fromJSON}}
 #' functions use a class based mapping, which follows conventions outlined in this paper:  \url{http://arxiv.org/abs/1403.2805} (also available as vignette).
 #'
 #' The \code{\link{toJSON}} and \code{\link{fromJSON}} functions are drop-in replacements for the identically named functions
 #' in packages \code{rjson} and \code{RJSONIO}. Our implementation uses an alternative, somewhat more consistent mapping
-#' between \R{} objects and \code{JSON} strings.
+#' between \R{} objects and JSON strings.
 #'
 #' The \code{\link{serializeJSON}} and \code{\link{unserializeJSON}} functions in this package use an
-#' alternative system to convert between \R{} objects and \code{JSON}, which supports more classes but is much more verbose.
+#' alternative system to convert between \R{} objects and JSON, which supports more classes but is much more verbose.
 #'
-#' A \code{JSON} string is always unicode, using \code{UTF-8} by default, hence there is usually no need to escape any characters.
-#' However, the \code{JSON} format does support escaping of unicode characters, which are encoded using a backslash followed by
+#' A JSON string is always unicode, using \code{UTF-8} by default, hence there is usually no need to escape any characters.
+#' However, the JSON format does support escaping of unicode characters, which are encoded using a backslash followed by
 #' a lower case \code{"u"} and 4 hex characters, for example: \code{"Z\\u00FCrich"}. The \code{fromJSON} function
-#' will only parse such escape sequences correctly when the \code{unicode} argument is set to \code{TRUE}. Because this introduces
-#' significant performance overhead, it is disabled by default. It is strongly preferable to encode unicode characters in \code{JSON}
-#' using native \code{UTF-8} rather than escape sequences.
-#'
+#' will parse such escape sequences but it is usually preferable to encode unicode characters in JSON using native
+#' \code{UTF-8} rather than escape sequences.
 #
 #' @rdname fromJSON
-#' @title Convert \R{} objects to/from \code{JSON}
+#' @title Convert \R{} objects to/from JSON
 #' @name toJSON, fromJSON
 #' @aliases View fromJSON toJSON
 #' @export View fromJSON toJSON
-#' @param txt a \code{JSON} string, URL or file
-#' @param simplifyVector coerce \code{JSON} arrays containing only primitives into an atomic vector
-#' @param simplifyDataFrame coerce \code{JSON} arrays containing only records (\code{JSON} objects) into a data frame
-#' @param simplifyMatrix coerce \code{JSON} arrays containing vectors of equal mode and dimension into matrix or array
-#' @param flatten flatten nested data frames into a single non-nested data frame (see example)
-#' @param unicode parse escaped (hexadecimal) unicode characters \code{\\uXXXX}. See details.
-#' @param validate automatically \code{\link{validate}} \code{JSON} before parsing it.
+#' @param txt a JSON string, URL or file
+#' @param simplifyVector coerce JSON arrays containing only primitives into an atomic vector
+#' @param simplifyDataFrame coerce JSON arrays containing only records (JSON objects) into a data frame
+#' @param simplifyMatrix coerce JSON arrays containing vectors of equal mode and dimension into matrix or array
+#' @param flatten automatically \code{\link{flatten}} nested data frames into a single non-nested data frame
 #' @param x the object to be encoded
 #' @param dataframe how to encode data.frame objects: must be one of 'rows' or 'columns'
 #' @param matrix how to encode matrices and higher dimensional arrays: must be one of 'rowmajor' or 'columnmajor'.
@@ -38,12 +34,12 @@
 #' @param raw how to encode raw objects: must be one of 'base64', 'hex' or 'mongo'
 #' @param null how to encode NULL values within a list: must be one of 'null' or 'list'
 #' @param na how to print NA values: must be one of 'null' or 'string'. Defaults are class specific
-#' @param auto_unbox automatically \code{\link{unbox}} all atomic vectors of length 1. Not recommended!
+#' @param auto_unbox automatically \code{\link{unbox}} all atomic vectors of length 1. It is usually safer to avoid this and instead use the \code{\link{unbox}} function to unbox individual elements.
 #' @param digits max number of digits (after the dot) to print for numeric values. See: \code{\link{round}}
-#' @param force unclass/skip objects of classes with no defined \code{JSON} mapping
-#' @param pretty adds indentation whitespace to \code{JSON} output. See \code{\link{prettify}}
+#' @param force unclass/skip objects of classes with no defined JSON mapping
+#' @param pretty adds indentation whitespace to JSON output. See \code{\link{prettify}}
 #' @param ... arguments passed on to class specific \code{print} methods
-#' @references Jeroen Ooms (2014). The \code{jsonlite} Package: A Practical and Consistent Mapping Between \code{JSON} Data and \R{} Objects. \emph{arXiv:1403.2805}. \url{http://arxiv.org/abs/1403.2805}
+#' @references Jeroen Ooms (2014). The \code{jsonlite} Package: A Practical and Consistent Mapping Between JSON Data and \R{} Objects. \emph{arXiv:1403.2805}. \url{http://arxiv.org/abs/1403.2805}
 #' @examples #stringify some data
 #' jsoncars <- toJSON(mtcars, pretty=TRUE)
 #' cat(jsoncars)
@@ -52,7 +48,7 @@
 #' fromJSON(jsoncars)
 #'
 #' #parsing escaped unicode
-#' fromJSON('{"city" : "Z\\u00FCrich"}', unicode = TRUE)
+#' fromJSON('{"city" : "Z\\u00FCrich"}')
 #'
 #' \dontrun{
 #' # Parse data frame
@@ -76,7 +72,7 @@
 #' options(scipen=3)
 #' toJSON(10 ^ (0:10))
 fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
-  simplifyMatrix = simplifyVector, flatten = FALSE, unicode = FALSE, validate = FALSE, ...) {
+  simplifyMatrix = simplifyVector, flatten = FALSE, ...) {
 
   # check type
   if (!is.character(txt)) {
@@ -98,22 +94,23 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
     txt <- paste(txt, collapse = "\n")
   }
 
-  # Validate JSON
-  if (isTRUE(validate)) {
-    if(!validate(txt)) {
-      stop("Validation failed! String contains invalid JSON.")
-    }
-  } else if (!grepl("^[ \t\r\n]*(\\{|\\[)", txt)) {
-    #Always do basic validation
-    stop("String does not contain valid JSON: \"", gsub("\\s+", " ", substring(txt, 0, 25)), "...\"")
+  # call the actual function (with deprecated arguments)
+  fromJSON_string(txt = txt, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
+    simplifyMatrix = simplifyMatrix, flatten = flatten, ...)
+}
+
+fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
+  simplifyMatrix = simplifyVector, flatten = FALSE, unicode = TRUE, validate = TRUE, ...){
+
+  if(!missing(unicode)){
+    message("Argument unicode has been deprecated. YAJL always parses unicode.")
   }
 
-  # preparse escaped unicode characters
-  if(isTRUE(unicode)){
-    txt <- unescape_unicode(txt)
+  if(!missing(validate)){
+    message("Argument validate has been deprecated. YAJL automatically validates json while parsing.")
   }
 
-  # parse JSON
+  # parse
   obj <- parseJSON(txt)
 
   # post processing
@@ -124,3 +121,4 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
     return(obj)
   }
 }
+

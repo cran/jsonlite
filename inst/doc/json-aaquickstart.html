@@ -3,7 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Getting started 1: Parsing JSON with jsonlite</title>
+<title>Getting started with JSON and jsonlite</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -45,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -99,7 +108,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -192,21 +203,21 @@ hr {
 <body>
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Getting started: Parsing JSON with jsonlite}
+%\VignetteIndexEntry{Getting started with JSON and jsonlite}
 -->
 
-<h1>Getting started 1: Parsing JSON with jsonlite</h1>
+<h1>Getting started with JSON and jsonlite</h1>
 
 <p>The jsonlite package is a JSON parser/generator optimized for the web. Its main strength is that it implements a bidirectional mapping between JSON data and the most important R data types. Thereby we can convert between R objects and JSON without loss of type or information, and without the need for any manual data munging. This is ideal for interacting with web APIs, or to build pipelines where data structures seamlessly flow in and out of R using JSON.</p>
 
 <pre><code class="r">library(jsonlite)
-identical(mtcars, fromJSON(toJSON(mtcars)))
+all.equal(mtcars, fromJSON(toJSON(mtcars)))
 </code></pre>
 
 <pre><code>[1] TRUE
 </code></pre>
 
-<p>This vignette introduces basic concepts to get started with jsonlite. For a more detailed outline and motivation of the mapping: <a href="http://arxiv.org/abs/1403.2805">arXiv:1403.2805</a>.</p>
+<p>This vignette introduces basic concepts to get started with jsonlite. For a more detailed outline and motivation of the mapping, see: <a href="http://arxiv.org/abs/1403.2805">arXiv:1403.2805</a>.</p>
 
 <h2>Simplification</h2>
 
@@ -222,19 +233,19 @@ identical(mtcars, fromJSON(toJSON(mtcars)))
 </thead><tbody>
 <tr>
 <td>Array of primitives</td>
-<td><code>[&quot;foo&quot;, &quot;bar&quot;]</code></td>
+<td><code>[&quot;Amsterdam&quot;, &quot;Rotterdam&quot;, &quot;Utrecht&quot;, &quot;Den Haag&quot;]</code></td>
 <td>Atomic Vector</td>
 <td>simplifyVector</td>
 </tr>
 <tr>
 <td>Array of objects</td>
-<td><code>[{&quot;x&quot; : &quot;foo&quot;}, {&quot;x&quot;: &quot;bar&quot;} ]</code></td>
+<td><code>[{&quot;name&quot;:&quot;Erik&quot;, &quot;age&quot;:43}, {&quot;name&quot;:&quot;Anna&quot;, &quot;age&quot;:32}]</code></td>
 <td>Data Frame</td>
 <td>simplifyDataFrame</td>
 </tr>
 <tr>
 <td>Array of arrays</td>
-<td><code>[[1,2,3], [4,5,6]]</code></td>
+<td><code>[ [1, 2, 3], [4, 5, 6] ]</code></td>
 <td>Matrix</td>
 <td>simplifyMatrix</td>
 </tr>
@@ -242,21 +253,21 @@ identical(mtcars, fromJSON(toJSON(mtcars)))
 
 <h3>Atomic Vectors</h3>
 
-<p>A JSON array containing primitives (strings, numbers or booleans) gets converted into an atomic vector. Any possible <code>null</code> values turn into <code>NA</code>.</p>
+<p>When <code>simplifyVector</code> is enabled, JSON arrays containing <strong>primitives</strong> (strings, numbers, booleans or null) simplify into an atomic vector:</p>
 
-<pre><code class="r"># An array with primitives
+<pre><code class="r"># A JSON array of primitives
 json &lt;- &#39;[&quot;Mario&quot;, &quot;Peach&quot;, null, &quot;Bowser&quot;]&#39;
 
-#This turns into an (atomic) vector
+# Simplifies into an atomic vector
 fromJSON(json)
 </code></pre>
 
 <pre><code>[1] &quot;Mario&quot;  &quot;Peach&quot;  NA       &quot;Bowser&quot;
 </code></pre>
 
-<p>Without simplification, an array always turns into a list: </p>
+<p>Without simplification, any JSON array turns into a list: </p>
 
-<pre><code class="r">#If we disable simplifyVector it would be a list
+<pre><code class="r"># No simplification:
 fromJSON(json, simplifyVector = FALSE)
 </code></pre>
 
@@ -275,7 +286,7 @@ NULL
 
 <h3>Data Frames</h3>
 
-<p>A JSON array containing JSON objects (key-value pairs) turns into a data frame. Missing fields turn into <code>NA</code> values.</p>
+<p>When <code>simplifyDataFrame</code> is enabled, JSON arrays containing <strong>objects</strong> (key-value pairs) simplify into a data frame:</p>
 
 <pre><code class="r">json &lt;-
 &#39;[
@@ -295,39 +306,42 @@ mydf
 4 Bowser  NA      Koopa
 </code></pre>
 
-<p>The data frame can be converted back into the original JSON structure using <code>toJSON</code> (whitespace and line breaks are ignorable in JSON).</p>
+<p>The data frame gets converted back into the original JSON structure by <code>toJSON</code> (whitespace and line breaks are ignorable in JSON).</p>
 
 <pre><code class="r">mydf$Ranking &lt;- c(3, 1, 2, 4)
 toJSON(mydf, pretty=TRUE)
 </code></pre>
 
 <pre><code>[
-  {
-    &quot;Name&quot; : &quot;Mario&quot;,
-    &quot;Age&quot; : 32,
-    &quot;Occupation&quot; : &quot;Plumber&quot;,
-    &quot;Ranking&quot; : 3
-  },
-  {
-    &quot;Name&quot; : &quot;Peach&quot;,
-    &quot;Age&quot; : 21,
-    &quot;Occupation&quot; : &quot;Princess&quot;,
-    &quot;Ranking&quot; : 1
-  },
-  {
-    &quot;Ranking&quot; : 2
-  },
-  {
-    &quot;Name&quot; : &quot;Bowser&quot;,
-    &quot;Occupation&quot; : &quot;Koopa&quot;,
-    &quot;Ranking&quot; : 4
-  }
-] 
+    {
+        &quot;Name&quot;: &quot;Mario&quot;,
+        &quot;Age&quot;: 32,
+        &quot;Occupation&quot;: &quot;Plumber&quot;,
+        &quot;Ranking&quot;: 3
+    },
+    {
+        &quot;Name&quot;: &quot;Peach&quot;,
+        &quot;Age&quot;: 21,
+        &quot;Occupation&quot;: &quot;Princess&quot;,
+        &quot;Ranking&quot;: 1
+    },
+    {
+        &quot;Ranking&quot;: 2
+    },
+    {
+        &quot;Name&quot;: &quot;Bowser&quot;,
+        &quot;Occupation&quot;: &quot;Koopa&quot;,
+        &quot;Ranking&quot;: 4
+    }
+]
+
 </code></pre>
+
+<p>Hence you can go back and forth between dataframes and JSON, without any manual data restructuring.</p>
 
 <h3>Matrices and Arrays</h3>
 
-<p>A JSON array containing equal-length arrays turns into a matrix or higher order array. Using <code>simplifyMatrix</code> only makes sense in conjunction with <code>simplifyVector</code>.</p>
+<p>When <code>simplifyMatrix</code> is enabled, JSON arrays containing <strong>equal-length sub-arrays</strong> simplify into a matrix (or higher order R array):</p>
 
 <pre><code class="r">json &lt;- &#39;[
   [1, 2, 3, 4],
@@ -344,7 +358,7 @@ mymatrix
 [3,]    9   10   11   12
 </code></pre>
 
-<p>Again, we can use <code>toJSON</code> to convert the matrix or array back into the original JSON format:</p>
+<p>Again, we can use <code>toJSON</code> to convert the matrix or array back into the original JSON structure:</p>
 
 <pre><code class="r">toJSON(mymatrix)
 </code></pre>
@@ -352,7 +366,7 @@ mymatrix
 <pre><code>[[1,2,3,4],[5,6,7,8],[9,10,11,12]] 
 </code></pre>
 
-<p>The simplification works for arrays of arbitrary dimensionality, as long as the dimensions (length of the arrays) match, because R has no special data structure for ragged arrays.</p>
+<p>The simplification works for arrays of arbitrary dimensionality, as long as the dimensions match (R does not support ragged arrays).</p>
 
 <pre><code class="r">json &lt;- &#39;[
    [[1, 2], 
@@ -379,6 +393,8 @@ myarray[1, , ]
 [2,]    5    7
 [3,]    9   11
 </code></pre>
+
+<p>This is all there is to it! For a more detailed outline and motivation of the mapping, see: <a href="http://arxiv.org/abs/1403.2805">arXiv:1403.2805</a>.</p>
 
 </body>
 
