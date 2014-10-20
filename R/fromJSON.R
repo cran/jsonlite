@@ -66,11 +66,6 @@
 #' data3 <- fromJSON("https://api.github.com/users/hadley/repos", flatten=TRUE)
 #' names(data3)
 #' }
-#'
-#' #control scientific notation
-#' toJSON(10 ^ (0:10))
-#' options(scipen=3)
-#' toJSON(10 ^ (0:10))
 fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
   simplifyMatrix = simplifyVector, flatten = FALSE, ...) {
 
@@ -80,12 +75,13 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
   }
 
   # overload for URL or path
-  if (length(txt) == 1 && nchar(txt) < 1000) {
-    if (grepl("^https?://", txt)) {
+  if (length(txt) == 1 && nchar(txt, type="bytes") < 1000) {
+    if (grepl("^https?://", txt, useBytes=TRUE)) {
       loadpkg("httr")
-      txt <- download(txt)
+      txt <- raw_to_json(download_raw(txt))
     } else if (file.exists(txt)) {
-      txt <- paste(readLines(txt, warn = FALSE), collapse = "\n")
+      # With files we can never know for sure the encoding. Lets try UTF8 first.
+      txt <- raw_to_json(readBin(txt, raw(), file.info(txt)$size));
     }
   }
 

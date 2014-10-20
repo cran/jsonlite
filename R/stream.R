@@ -82,7 +82,7 @@
 #' # Calculate delays for flights over 1000 miles in batches of 5k
 #' library(dplyr)
 #' con_in <- gzcon(url("http://jeroenooms.github.io/data/nycflights13.json.gz"))
-#' con_out <- file(tmp <- tempfile(), open = "w")
+#' con_out <- file(tmp <- tempfile(), open = "wb")
 #' stream_in(con_in, handler = function(df){
 #'   df <- dplyr::filter(df, distance > 1000)
 #'   df <- dplyr::mutate(df, delta = dep_delay - arr_delay)
@@ -124,7 +124,8 @@ stream_in <- function(con, handler, pagesize = 500, verbose = TRUE, ...) {
 
   if(!isOpen(con, "r")){
     if(verbose) message("opening ", is(con) ," input connection.")
-    open(con, "r")
+    # binary prevents recoding of utf8 to latin1 on windows
+    open(con, "rb")
     on.exit({
       if(verbose) message("closing ", is(con) ," input connection.")
       close(con)
@@ -136,7 +137,8 @@ stream_in <- function(con, handler, pagesize = 500, verbose = TRUE, ...) {
   }
 
   i <- 1L;
-  while(length(page <- readLines(con, n = pagesize))){
+  # JSON must be UTF-8 by spec
+  while(length(page <- readLines(con, n = pagesize, encoding = "UTF-8"))){
     if(verbose) message("Reading ", length(page), " lines (", i,").")
     mydf <- simplify(lapply(page, parseJSON), ...);
     if(bind_pages){
@@ -166,7 +168,7 @@ stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, ...) {
 
   if(!isOpen(con, "w")){
     if(verbose) message("opening ", is(con) ," output connection.")
-    open(con, "w")
+    open(con, "wb")
     on.exit({
       if(verbose) message("closing ", is(con) ," output connection.")
       close(con)
@@ -177,5 +179,7 @@ stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, ...) {
 }
 
 stream_out_page <- function(page, con, ...){
-  writeLines(asJSON(page, collapse = FALSE, ...), con = con)
+  # useBytes can sometimes prevent recoding of utf8 to latin1 on windows.
+  # on windows there is a bug when useBytes is used with a (non binary) text connection.
+  writeLines(enc2utf8(asJSON(page, collapse = FALSE, ...)), con = con, useBytes = TRUE)
 }
