@@ -74,9 +74,7 @@ x <- iris[1:3,]
 toJSON(x)
 stream_out(x)
 
-\dontrun{
-
-# stream large dataset to file and back
+\dontrun{stream large dataset to file and back
 library(nycflights13)
 stream_out(flights, file(tmp <- tempfile()))
 flights2 <- stream_in(file(tmp))
@@ -90,9 +88,14 @@ diamonds2 <- stream_in(url("http://jeroenooms.github.io/data/diamonds.json"))
 flights3 <- stream_in(gzcon(url("http://jeroenooms.github.io/data/nycflights13.json.gz")))
 all.equal(flights3, as.data.frame(flights))
 
-# stream over HTTPS (HTTP+SSL) via curl pipe
-flights4 <- stream_in(gzcon(pipe("curl https://jeroenooms.github.io/data/nycflights13.json.gz")))
+# stream over HTTPS (HTTP+SSL) via curl
+library(curl)
+flights4 <- stream_in(gzcon(curl("https://jeroenooms.github.io/data/nycflights13.json.gz")))
 all.equal(flights4, as.data.frame(flights))
+
+# or alternatively:
+flights5 <- stream_in(gzcon(pipe("curl https://jeroenooms.github.io/data/nycflights13.json.gz")))
+all.equal(flights5, as.data.frame(flights))
 
 # Full JSON IO stream from URL to file connection.
 # Calculate delays for flights over 1000 miles in batches of 5k

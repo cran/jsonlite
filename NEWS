@@ -1,3 +1,12 @@
+0.9.14
+ - Change license to MIT (for GPL2 compatibility).
+ - Add support for digits = I(n) to use significant precision.
+ - When 'pretty' in toJSON is numeric, it specifies the number of spaces to indent.
+ - Bug fix in validate() related to ScalarLogical
+ - Add support for dataframe = "values"
+ - Byte-order-marks are now ignored as suggested by rfc7159
+ - Add support for integer64 class (bit64 package)
+
 0.9.13
  - Ported some number formatting to C
  - Fix when http server gives no content-type header

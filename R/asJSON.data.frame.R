@@ -1,5 +1,5 @@
 setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), collapse = TRUE,
-  dataframe = c("rows", "columns"), complex = "string", oldna = NULL, rownames = NULL, ...) {
+  dataframe = c("rows", "columns", "values"), complex = "string", oldna = NULL, rownames = NULL, ...) {
 
   # Validate some args
   dataframe <- match.arg(dataframe)
@@ -42,7 +42,9 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), co
   }
 
   # Set default for row based, don't do it earlier because it will affect 'oldna' or dataframe="columns"
-  na <- match.arg(na)
+  if(dataframe == "rows"){
+    na <- match.arg(na)
+  }
 
   # no records
   if (!nrow(x)) {
@@ -66,7 +68,7 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), co
   #create a matrix of json elements
   dfnames <- deparse_vector(cleannames(names(x)))
   out <- vapply(x, asJSON, character(nrow(x)), collapse=FALSE, complex = complex, na = na,
-    oldna = oldna, rownames = rownames, ..., USE.NAMES = FALSE)
+    oldna = oldna, rownames = rownames, dataframe = dataframe, ..., USE.NAMES = FALSE)
 
   # This would be another way of doing the missing values
   # This does not require the individual classes to support na="NA"
@@ -81,7 +83,12 @@ setMethod("asJSON", "data.frame", function(x, na = c("NA", "null", "string"), co
   }
 
   #turn the matrix into json records
-  tmp <- apply(out, 1, collapse_object, x = dfnames);
+  tmp <- if(dataframe == "rows") {
+    apply(out, 1, collapse_object, x = dfnames);
+  } else {
+    # for dataframe = "values"
+    apply(out, 1, collapse);
+  }
 
   #collapse
   if(isTRUE(collapse)){

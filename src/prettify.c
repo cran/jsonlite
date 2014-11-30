@@ -84,7 +84,7 @@ static yajl_callbacks callbacks = {
     reformat_end_array
 };
 
-SEXP R_reformat(SEXP x, SEXP pretty) {
+SEXP R_reformat(SEXP x, SEXP pretty, SEXP indent_string) {
     yajl_status stat;
     yajl_handle hand;
     yajl_gen g;
@@ -93,6 +93,7 @@ SEXP R_reformat(SEXP x, SEXP pretty) {
     /* init generator */
     g = yajl_gen_alloc(NULL);
     yajl_gen_config(g, yajl_gen_beautify, asInteger(pretty));
+    yajl_gen_config(g, yajl_gen_indent_string, translateCharUTF8(asChar(indent_string)));
     yajl_gen_config(g, yajl_gen_validate_utf8, 0);
 
     /* init parser */
@@ -100,6 +101,13 @@ SEXP R_reformat(SEXP x, SEXP pretty) {
 
     /* get data from R */
     const char* json = translateCharUTF8(asChar(x));
+
+    /* ignore BOM */
+    if(json[0] == '\xEF' && json[1] == '\xBB' && json[2] == '\xBF'){
+      json = json + 3;
+    }
+
+    /* Get length (after removing bom) */
     const size_t rd = strlen(json);
 
     /* parse */
@@ -122,6 +130,7 @@ SEXP R_reformat(SEXP x, SEXP pretty) {
       //force as UTF8 string
       output = PROTECT(allocVector(STRSXP, 1));
       SET_STRING_ELT(output, 0, mkCharCE((const char*) buf, CE_UTF8));
+      setAttrib(output, R_ClassSymbol, mkString("json"));
       UNPROTECT(1);
     }
 

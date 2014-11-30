@@ -1,4 +1,5 @@
-setMethod("asJSON", "numeric", function(x, collapse = TRUE, digits = 5, na = c("string", "null", "NA"), auto_unbox = FALSE, ...) {
+setMethod("asJSON", "numeric", function(x, digits = 5, use_signif = is(digits, "AsIs"),
+  na = c("string", "null", "NA"), auto_unbox = FALSE, collapse = TRUE, ...) {
 
   na <- match.arg(na);
   na_as_string <- switch(na,
@@ -8,11 +9,15 @@ setMethod("asJSON", "numeric", function(x, collapse = TRUE, digits = 5, na = c("
     stop("invalid na_as_string")
   )
 
-  # slower R implementation
+  # old R implementation
   # tmp <- num_to_char_R(x, digits, na_as_string);
 
   # fast C implementation
-  tmp <- num_to_char(x, digits, na_as_string);
+  tmp <- if(is(x, "integer64")){
+    integer64_to_char(x, na_as_string)
+  } else {
+    num_to_char(x, digits, na_as_string, use_signif);
+  }
 
   if(isTRUE(auto_unbox) && length(tmp) == 1){
     return(tmp);
@@ -24,3 +29,7 @@ setMethod("asJSON", "numeric", function(x, collapse = TRUE, digits = 5, na = c("
     tmp
   }
 })
+
+# This is for the bit64 package
+setOldClass("integer64")
+setMethod("asJSON", "integer64", getMethod("asJSON", "numeric"));

@@ -7,7 +7,6 @@
 */
 
 #include <Rinternals.h>
-#include <string.h>
 #include <yajl_tree.h>
 
 SEXP ParseObject(yajl_val node);
@@ -17,12 +16,18 @@ SEXP ParseValue(yajl_val node);
 SEXP R_parse(SEXP x) {
     /* get data from R */
     const char* json = translateCharUTF8(asChar(x));
-    yajl_val node;
+
+    /* ignore BOM as suggested by RFC */
+    if(json[0] == '\xEF' && json[1] == '\xBB' && json[2] == '\xBF'){
+      warning("JSON string contains (illegal) UTF8 byte-order-mark!");
+      json = json + 3;
+    }
+
+    /* parse json */
     char errbuf[1024];
+    yajl_val node = yajl_tree_parse(json, errbuf, sizeof(errbuf));
 
-    node = yajl_tree_parse(json, errbuf, sizeof(errbuf));
-
-    /* parse error handling */
+    /* parser error */
     if (!node) {
       error(errbuf);
     }
@@ -54,7 +59,8 @@ SEXP ParseValue(yajl_val node){
   }
   if(YAJL_IS_NUMBER(node)){
     /* A number that is not int or double (very rare) */
-    return(mkString(YAJL_GET_NUMBER(node)));
+    /* This seems to correctly round to Inf/0/-Inf */
+    return(ScalarReal(YAJL_GET_DOUBLE(node)));
   }
   if(YAJL_IS_TRUE(node)){
     return(ScalarLogical(1));
@@ -93,4 +99,3 @@ SEXP ParseArray(yajl_val node){
   UNPROTECT(1);
   return vec;
 }
-
