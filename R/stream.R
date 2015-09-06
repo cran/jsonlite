@@ -9,7 +9,7 @@
 #' Because parsing huge JSON strings is difficult and inefficient, JSON streaming
 #' is done using \strong{lines of minified JSON records}, sometimes also called
 #' \href{http://jsonlines.org/}{jsonlines}. This is pretty standard: JSON databases such
-#' as MongoDB or \href{http://dat-data.com/}{dat} use the same format to import/export
+#' as MongoDB or \href{https://github.com/maxogden/dat}{dat} use the same format to import/export
 #' large datasets. Note that this means that the total stream combined is
 #' not valid JSON itself; only the individual lines are. Also note that because line-breaks
 #' are used as separators, prettified JSON is not permitted: the JSON lines \emph{must}
@@ -60,6 +60,9 @@
 #' toJSON(x)
 #' stream_out(x)
 #'
+#' # Trivial example
+#' mydata <- stream_in(url("http://httpbin.org/stream/100"))
+#'
 #' \dontrun{stream large dataset to file and back
 #' library(nycflights13)
 #' stream_out(flights, file(tmp <- tempfile()))
@@ -109,58 +112,76 @@
 #' library(dplyr)
 #' daily14f <- flatten(daily14)
 #' filter(daily14f, city.name == "Berlin")$data[[1]]
+#'
+#' # Another large dataset
+#' download.file("http://jsonstudio.com/wp-content/uploads/2014/02/companies.zip", "companies.zip")
+#' unzip("companies.zip")
+#' unlink("companies.zip")
+#' companies <- stream_in(file("companies.json"))
 #' }
-stream_in <- function(con, handler, pagesize = 500, verbose = TRUE, ...) {
+stream_in <- function(con, handler = NULL, pagesize = 500, verbose = TRUE, ...) {
 
-  # check if we use a custom handler
-  bind_pages <- missing(handler) || is.null(handler);
-
+  # Maybe also handle URLs here in future.
   if(!is(con, "connection")){
-    # Maybe handle URLs here in future.
     stop("Argument 'con' must be a connection.")
   }
 
-  if(bind_pages){
-    loadpkg("plyr")
-  } else{
-    stopifnot(is.function(handler))
-    if(verbose) message("using a custom handler function.")
+  # Same as mongolite
+  count <- 0
+  cb <- if(is.null(handler)){
+    out <- new.env()
+    function(x){
+      if(length(x)){
+        count <<- count + length(x)
+        out[[as.character(count)]] <<- x
+      }
+    }
+  } else {
+    if(verbose)
+      message("using a custom handler function.")
+    function(x){
+      handler(post_process(x))
+      count <<- count + length(x)
+    }
   }
 
   if(!isOpen(con, "r")){
-    if(verbose) message("opening ", is(con) ," input connection.")
-    # binary prevents recoding of utf8 to latin1 on windows
+    if(verbose)
+      message("opening ", is(con) ," input connection.")
+
+    # binary connection prevents recoding of utf8 to latin1 on windows
     open(con, "rb")
     on.exit({
-      if(verbose) message("closing ", is(con) ," input connection.")
+      if(verbose)
+        message("closing ", is(con) ," input connection.")
       close(con)
     })
   }
 
-  if(bind_pages){
-    dfstack <- list();
-  }
-
-  i <- 1L;
-  # JSON must be UTF-8 by spec
-  while(length(page <- readLines(con, n = pagesize, encoding = "UTF-8"))){
-    if(verbose) cat("\rFound", (i-1) * pagesize + length(page), "lines...")
-    mydf <- simplify(lapply(page, parseJSON), ...);
-    if(bind_pages){
-      dfstack[[i]] <- mydf;
-    } else {
-      handler(mydf);
+  # Read data page by page
+  repeat {
+    page <- readLines(con, n = pagesize, encoding = "UTF-8")
+    if(length(page)){
+      cb(lapply(page, parseJSON))
+      if(verbose)
+        cat("\r Found", count, "records...")
     }
-    i <- i + 1L;
+    if(length(page) < pagesize)
+      break
   }
 
   # Either return a big data frame, or nothing.
-  if(bind_pages){
-    if(verbose) message("binding pages together (no custom handler).")
-    rbind.pages(dfstack)
+  if(is.null(handler)){
+    if(verbose) cat("\r Imported", count, "records. Simplifying into dataframe...\n")
+    out <- as.list(out, sorted = FALSE)
+    post_process(unlist(out[order(as.numeric(names(out)))], FALSE, FALSE))
   } else {
-    invisible();
+    invisible()
   }
+}
+
+post_process <- function(x){
+  as.data.frame(simplify(x))
 }
 
 #' @rdname stream_in

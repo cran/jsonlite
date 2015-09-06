@@ -20,7 +20,7 @@ SEXP R_parse(SEXP x, SEXP bigint_as_char) {
 
     /* ignore BOM as suggested by RFC */
     if(json[0] == '\xEF' && json[1] == '\xBB' && json[2] == '\xBF'){
-      warning("JSON string contains (illegal) UTF8 byte-order-mark!");
+      warningcall(R_NilValue, "JSON string contains (illegal) UTF8 byte-order-mark!");
       json = json + 3;
     }
 
@@ -30,7 +30,7 @@ SEXP R_parse(SEXP x, SEXP bigint_as_char) {
 
     /* parser error */
     if (!node) {
-      error(errbuf);
+      Rf_errorcall(R_NilValue, errbuf);
     }
     SEXP out = ParseValue(node, bigint);
     yajl_tree_free(node);

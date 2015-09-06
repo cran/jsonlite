@@ -17,7 +17,7 @@
 #' @rdname fromJSON
 #' @title Convert \R{} objects to/from JSON
 #' @name toJSON, fromJSON
-#' @aliases View fromJSON toJSON
+#' @aliases View fromJSON toJSON jsonlite
 #' @export View fromJSON toJSON
 #' @param txt a JSON string, URL or file
 #' @param simplifyVector coerce JSON arrays containing only primitives into an atomic vector
@@ -82,7 +82,7 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
   }
 
   # overload for URL or path
-  if (is.character(txt) && length(txt) == 1 && nchar(txt, type="bytes") < 1000) {
+  if (is.character(txt) && length(txt) == 1 && nchar(txt, type="bytes") < 10000) {
     if (grepl("^https?://", txt, useBytes=TRUE)) {
       loadpkg("curl")
       txt <- curl::curl(txt)
