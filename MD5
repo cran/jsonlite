@@ -1,7 +1,7 @@
-595635f2f622e9ee025b2dbe2ba5c3ca *DESCRIPTION
+50e2a8abe7d4d781928e736c065375be *DESCRIPTION
 2b11af982e62e96e928587e70fe113fa *LICENSE
 01e0abb3ab6a206577a664eac86399a5 *NAMESPACE
-2dd8e177407c687579bd7496ca0cc8d7 *NEWS
+c63be9c50ba18c1e0b6a84e1c9dc0c38 *NEWS
 6392afdce07064ef77d4d49d02afb914 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 f5128c6b69f745efe3478372c1edf744 *R/asJSON.AAAgeneric.R
@@ -17,7 +17,7 @@ b51612de3148fa36cacc82d1b856c7ad *R/asJSON.classRepresentation.R
 b3ea8259af7281920005d7b17924eee9 *R/asJSON.data.frame.R
 557ff63ba0ec13de5b6f727627ec51f1 *R/asJSON.factor.R
 9df01dee05497f6ca358b80169e8f9ae *R/asJSON.function.R
-b9ab37dce9f9c11e47b2ed24be668a0c *R/asJSON.int64.R
+b58441d8b3ee56dcf5c05aab05fedf92 *R/asJSON.int64.R
 4cd5cff473a75152242c2c0c88e25245 *R/asJSON.json.R
 41e3855be2ae4d4eb0f6578bfe009e0c *R/asJSON.list.R
 a6072971e1167adb5d077e5d7d9c50ea *R/asJSON.logical.R
@@ -33,7 +33,7 @@ af33fe6e18b089922504cd706e4c32a4 *R/base64.R
 d97f2b53cacf86184caf6959d1e46152 *R/deparse_vector.R
 8f4a044a90bf62da1f4233dc49aedf2c *R/fixNativeSymbol.R
 22a25cd71893e904b27ec45c16f259ad *R/flatten.R
-bfd552a717054e286fa613cb431dce84 *R/fromJSON.R
+9e0500afc57083838a8bb42ff2d6874a *R/fromJSON.R
 c0ffae30c415067ec42c0c75b5fb43d1 *R/helpfunctions.R
 ddd8e726241c082235d01da679c08006 *R/is.recordlist.R
 359fa06156183f02a19595b59d26ef54 *R/is.scalarlist.R
@@ -42,7 +42,7 @@ f2a790afb805eab141a57244d7ae2525 *R/list_to_vec.R
 a11832ba11c041a7278f1ab8baf591a8 *R/makesymbol.R
 092b4a52b2af56d68b8e99e4b8cb9b32 *R/null_to_na.R
 e0379b523ef1d1d5608753796301590b *R/num_to_char.R
-1d92e551f31647e5985ab776b1fb3d41 *R/onLoad.R
+875f913cfe29c153b66542115d5c52c9 *R/onLoad.R
 510f85cb798a5e7a61f1fba82bdbb221 *R/pack.R
 ec478d3b9e438dd9b21858fce1a49801 *R/parseJSON.R
 0803a4e10e819cabb638d29739b4f7f0 *R/prettify.R
@@ -54,8 +54,8 @@ a13262093fcd5fe68cdf1b6db628b5bb *R/raw_to_json.R
 1dd24c1536f68288d0d4dddeb30d5fef *R/simplify.R
 ba01e3e30193969a46cb9c5ba74cc769 *R/simplifyDataFrame.R
 d735d795c263b8e9a6400df135a54190 *R/stop.R
-c741ad2496708b62aea2066a2a91b8fb *R/stream.R
-27bc07c1178dda7a837ee2035497f987 *R/toJSON.R
+a03eca64105a2a09e234411a65e5ed4f *R/stream.R
+8b47fa6e1c1cd9a5cef4736532470197 *R/toJSON.R
 241d61276b727fc1e7348dbeab742e47 *R/unbox.R
 d8505e361886fc0ac03d93b26eda8626 *R/unescape_unicode.R
 77465bb5bcda44fec86bbe810150618e *R/utf8conv.R
@@ -68,7 +68,7 @@ d02344562338775bfd92f48090f8f623 *inst/doc/json-aaquickstart.R
 43583af54063abb63a1836a375b41b04 *inst/doc/json-aaquickstart.html
 4e99d2b8c7a7580f31c1bf2ba2957a25 *inst/doc/json-apis.Rmd
 a03498e36b1a92f116b84127fa1b2854 *inst/doc/json-apis.html
-f5a07326c15981912abef99691e3831d *inst/doc/json-mapping.pdf
+95e1d8d7af26b7741c65bd3ed2d32805 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 41627461cb61033b6332d711e60761d8 *inst/doc/json-opencpu.R
 5577cc27f9fe4d7d86faa3ca88b74f90 *inst/doc/json-opencpu.Rnw
@@ -113,7 +113,7 @@ e635dae3629bdc8929ad6333fb490933 *man/flatten.Rd
 c11fc6155ec81aa0328ded58d25f9c21 *man/prettify.Rd
 a62c8f16af864d890e437afbec5b485b *man/rbind.pages.Rd
 5ffee26ad9e5d035f91677488f3d088c *man/serializeJSON.Rd
-26fad7c61e9c88a41a5387323c581736 *man/stream_in.Rd
+29d3fc427815a7ea1c30d6f011a5cab4 *man/stream_in.Rd
 b061d1c30f4dc301d0dfc28cf98f1e8a *man/unbox.Rd
 70dd43a31bfbdacef6f6688f48d02cba *man/validate.Rd
 36086dda4d4fecd925d8e45f9805d25a *src/Makevars
