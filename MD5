@@ -1,7 +1,7 @@
-50e2a8abe7d4d781928e736c065375be *DESCRIPTION
+826885e9a9cd67f4c315131c481cf63f *DESCRIPTION
 2b11af982e62e96e928587e70fe113fa *LICENSE
-01e0abb3ab6a206577a664eac86399a5 *NAMESPACE
-c63be9c50ba18c1e0b6a84e1c9dc0c38 *NEWS
+5a58c9e49d90f11642db23d72b8ce327 *NAMESPACE
+e442b90763067e25312b5689f3db8bd6 *NEWS
 6392afdce07064ef77d4d49d02afb914 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 f5128c6b69f745efe3478372c1edf744 *R/asJSON.AAAgeneric.R
@@ -33,7 +33,7 @@ af33fe6e18b089922504cd706e4c32a4 *R/base64.R
 d97f2b53cacf86184caf6959d1e46152 *R/deparse_vector.R
 8f4a044a90bf62da1f4233dc49aedf2c *R/fixNativeSymbol.R
 22a25cd71893e904b27ec45c16f259ad *R/flatten.R
-9e0500afc57083838a8bb42ff2d6874a *R/fromJSON.R
+33f443bbe70eb553a0c7c4c97017dccb *R/fromJSON.R
 c0ffae30c415067ec42c0c75b5fb43d1 *R/helpfunctions.R
 ddd8e726241c082235d01da679c08006 *R/is.recordlist.R
 359fa06156183f02a19595b59d26ef54 *R/is.scalarlist.R
@@ -42,7 +42,6 @@ f2a790afb805eab141a57244d7ae2525 *R/list_to_vec.R
 a11832ba11c041a7278f1ab8baf591a8 *R/makesymbol.R
 092b4a52b2af56d68b8e99e4b8cb9b32 *R/null_to_na.R
 e0379b523ef1d1d5608753796301590b *R/num_to_char.R
-875f913cfe29c153b66542115d5c52c9 *R/onLoad.R
 510f85cb798a5e7a61f1fba82bdbb221 *R/pack.R
 ec478d3b9e438dd9b21858fce1a49801 *R/parseJSON.R
 0803a4e10e819cabb638d29739b4f7f0 *R/prettify.R
@@ -55,7 +54,7 @@ a13262093fcd5fe68cdf1b6db628b5bb *R/raw_to_json.R
 ba01e3e30193969a46cb9c5ba74cc769 *R/simplifyDataFrame.R
 d735d795c263b8e9a6400df135a54190 *R/stop.R
 a03eca64105a2a09e234411a65e5ed4f *R/stream.R
-8b47fa6e1c1cd9a5cef4736532470197 *R/toJSON.R
+456003c526a090942774cde7fefba02d *R/toJSON.R
 241d61276b727fc1e7348dbeab742e47 *R/unbox.R
 d8505e361886fc0ac03d93b26eda8626 *R/unescape_unicode.R
 77465bb5bcda44fec86bbe810150618e *R/utf8conv.R
@@ -68,7 +67,7 @@ d02344562338775bfd92f48090f8f623 *inst/doc/json-aaquickstart.R
 43583af54063abb63a1836a375b41b04 *inst/doc/json-aaquickstart.html
 4e99d2b8c7a7580f31c1bf2ba2957a25 *inst/doc/json-apis.Rmd
 a03498e36b1a92f116b84127fa1b2854 *inst/doc/json-apis.html
-95e1d8d7af26b7741c65bd3ed2d32805 *inst/doc/json-mapping.pdf
+719e45223ab9bff85c709ad0e0525d91 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 41627461cb61033b6332d711e60761d8 *inst/doc/json-opencpu.R
 5577cc27f9fe4d7d86faa3ca88b74f90 *inst/doc/json-opencpu.Rnw
@@ -109,7 +108,7 @@ b67ddf907b7eda8835e59b0cf944f1b3 *inst/tests/test-toJSON-raw.R
 bdad5ec4e8cd10c38cf233a8b1305daa *inst/tests/test-toJSON-zerovec.R
 609172b33786e8d3ae0dab8450d21a0a *inst/tests/testS4.R
 e635dae3629bdc8929ad6333fb490933 *man/flatten.Rd
-983c002daec03d1ae70660fb8ee17063 *man/fromJSON.Rd
+0f62f6e6c6685865bddaa8fc72efa0dc *man/fromJSON.Rd
 c11fc6155ec81aa0328ded58d25f9c21 *man/prettify.Rd
 a62c8f16af864d890e437afbec5b485b *man/rbind.pages.Rd
 5ffee26ad9e5d035f91677488f3d088c *man/serializeJSON.Rd
