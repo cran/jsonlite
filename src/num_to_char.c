@@ -3,10 +3,11 @@
 #include <stdlib.h>
 #include <modp_numtoa.h>
 
-SEXP R_num_to_char(SEXP x, SEXP digits, SEXP na_as_string, SEXP use_signif) {
+SEXP R_num_to_char(SEXP x, SEXP digits, SEXP na_as_string, SEXP use_signif, SEXP always_decimal) {
   int len = length(x);
   int na_string = asLogical(na_as_string);
   int signif = asLogical(use_signif);
+  int always_dec = asLogical(always_decimal);
   char buf[32];
   SEXP out = PROTECT(allocVector(STRSXP, len));
   if(isInteger(x)){
@@ -26,6 +27,7 @@ SEXP R_num_to_char(SEXP x, SEXP digits, SEXP na_as_string, SEXP use_signif) {
     }
   } else if(isReal(x)) {
     int precision = asInteger(digits);
+    int sig_digits = signif ? ceil(fmin(15, precision)) : 0;
     double * xreal = REAL(x);
     for (int i=0; i<len; i++) {
       double val = xreal[i];
@@ -47,12 +49,15 @@ SEXP R_num_to_char(SEXP x, SEXP digits, SEXP na_as_string, SEXP use_signif) {
         } else {
           SET_STRING_ELT(out, i, mkChar("null"));
         }
+      } else if(always_dec && fabs(val) < 1e15 && !fmod(val, 1)){
+        snprintf(buf, 32, "%.1f", val);
+        SET_STRING_ELT(out, i, mkChar(buf));
       } else if(precision == NA_INTEGER){
         snprintf(buf, 32, "%.15g", val);
         SET_STRING_ELT(out, i, mkChar(buf));
       } else if(signif){
         //use signifant digits rather than decimal digits
-        snprintf(buf, 32, "%.*g", (int) ceil(fmin(15, precision)), val);
+        snprintf(buf, 32, "%.*g", sig_digits, val);
         SET_STRING_ELT(out, i, mkChar(buf));
       } else if(precision > -1 && precision < 10 && fabs(val) < 2147483647 && fabs(val) > 1e-5) {
         //preferred method: fast with fixed decimal digits

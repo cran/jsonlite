@@ -1,5 +1,5 @@
 Package: jsonlite
-Version: 0.9.20
+Version: 0.9.21
 Title: A Robust, High Performance JSON Parser and Generator for R
 License: MIT + file LICENSE
 NeedsCompilation: yes
@@ -22,6 +22,6 @@ Description: A fast JSON parser and generator optimized for statistical data
     use with dynamic data in systems and applications.
 Suggests: httr, curl, plyr, testthat, knitr, rmarkdown, R.rsp
 RoxygenNote: 5.0.1
-Packaged: 2016-05-09 22:10:57 UTC; jeroen
+Packaged: 2016-06-04 10:35:31 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2016-05-10 06:56:49
+Date/Publication: 2016-06-04 13:40:20

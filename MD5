@@ -1,7 +1,7 @@
-1af1ba6b4f69c8a46873f0d322654acc *DESCRIPTION
+0eb86eb2d209ccc0280950fddbc75c7a *DESCRIPTION
 91443a13b3d89ea22bfa1222461b0111 *LICENSE
 1dc218cb7dbd7a23e3e1b7bc458852ed *NAMESPACE
-96f1c8f67af7b6284ef999f569ffef32 *NEWS
+f866522a8af556e7df06997bdd1991f3 *NEWS
 63ec63f3a8c7d5b73f74cef6ec5b3044 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 f5128c6b69f745efe3478372c1edf744 *R/asJSON.AAAgeneric.R
@@ -21,7 +21,7 @@ b58441d8b3ee56dcf5c05aab05fedf92 *R/asJSON.int64.R
 4cd5cff473a75152242c2c0c88e25245 *R/asJSON.json.R
 41e3855be2ae4d4eb0f6578bfe009e0c *R/asJSON.list.R
 a6072971e1167adb5d077e5d7d9c50ea *R/asJSON.logical.R
-328eead4cc7313d02a27b8260203a070 *R/asJSON.numeric.R
+be1e5d6bc3c6a2714b0dd6d25164d811 *R/asJSON.numeric.R
 b376c50c91caddd8a390e256d5ed9b13 *R/asJSON.pairlist.R
 fa461eada788c9231b8f486d0449c934 *R/asJSON.raw.R
 ff63b75529d018c9d22309715a6cd04e *R/asJSON.scalar.R
@@ -41,7 +41,7 @@ f2a790afb805eab141a57244d7ae2525 *R/list_to_vec.R
 2fdf2de3abf1a95c7728bad187a454ae *R/loadpkg.R
 a11832ba11c041a7278f1ab8baf591a8 *R/makesymbol.R
 092b4a52b2af56d68b8e99e4b8cb9b32 *R/null_to_na.R
-e0379b523ef1d1d5608753796301590b *R/num_to_char.R
+22d468abb392eef63f8f0d94b2cf0f0c *R/num_to_char.R
 510f85cb798a5e7a61f1fba82bdbb221 *R/pack.R
 ec478d3b9e438dd9b21858fce1a49801 *R/parseJSON.R
 0803a4e10e819cabb638d29739b4f7f0 *R/prettify.R
@@ -67,7 +67,7 @@ d02344562338775bfd92f48090f8f623 *inst/doc/json-aaquickstart.R
 625824af04ebf3e06152ac01cbb7d1eb *inst/doc/json-aaquickstart.html
 e70fb666c92784113e6d38025571928c *inst/doc/json-apis.Rmd
 95f1318e952b052d0274584fe790eacd *inst/doc/json-apis.html
-d9609babfaedb427e2cfa9bfa6ff55c6 *inst/doc/json-mapping.pdf
+f53dc31e03213eb69e3b03b160b83a12 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 41627461cb61033b6332d711e60761d8 *inst/doc/json-opencpu.R
 5577cc27f9fe4d7d86faa3ca88b74f90 *inst/doc/json-opencpu.Rnw
@@ -95,7 +95,7 @@ ba977a53aa8e0ebd1bab8d9ba4c3276b *src/is_recordlist.c
 2efe63deda72cbbd3ced4181899f214a *src/modp_numtoa.c
 a1a97f472d00c7f705a84e96feb7d352 *src/modp_numtoa.h
 b1d3deee3a4ba2960d857892991ad682 *src/null_to_na.c
-1664105ca329631102383dadd72dec79 *src/num_to_char.c
+649f6478c6bd2378f35f8166a460f339 *src/num_to_char.c
 5bb8438acc3c958a2724526e4a6674c2 *src/parse.c
 ca491c7e763e61bf82e17b66966ecc78 *src/prettify.c
 8becd2a5c39b0f1705dc432f50d2ee87 *src/push_parser.c
@@ -153,7 +153,7 @@ c9de8f6eb487ce445780eb3fbbf0209e *tests/testthat/test-toJSON-complex.R
 6319bd28125018c6b955b284de617dec *tests/testthat/test-toJSON-keep-vec-names.R
 5a7f74f2f51703cdae5eed433b4ed5d4 *tests/testthat/test-toJSON-logical.R
 fb28c7dc5dbd33ed9c9f4cb6d2d7ab01 *tests/testthat/test-toJSON-matrix.R
-0759a0a27f2346bb29cb13179ca5759d *tests/testthat/test-toJSON-numeric.R
+34b885ba9cdbbdf3562650e7f8e073b8 *tests/testthat/test-toJSON-numeric.R
 b67ddf907b7eda8835e59b0cf944f1b3 *tests/testthat/test-toJSON-raw.R
 bdad5ec4e8cd10c38cf233a8b1305daa *tests/testthat/test-toJSON-zerovec.R
 609172b33786e8d3ae0dab8450d21a0a *tests/testthat/testS4.R
