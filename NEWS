@@ -1,3 +1,10 @@
+0.9.22
+ - Fix for side effects of 'always_decimal' on Date and POSIXt integer encoding
+ - Fixed a small memory leak in the push parser (fromJSON.connection)
+ - Cleaned up Makevars
+ - Replace base64 encoder/decoder to be in-memory
+ - Special case toJSON(NULL, null = "null") now returns "null"
+
 0.9.21
  - Add 'always_decimal' argument in toJSON for real number notation in whole number doubles.
 
