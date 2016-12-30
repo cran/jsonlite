@@ -20,16 +20,10 @@ simplifyDataFrame <- function(recordlist, columns, flatten, simplifyMatrix) {
     columns <- unique(unlist(lapply(recordlist, names), recursive = FALSE, use.names = FALSE))
   }
 
-  # make new recordlist with requested only requested values
-  #recordlist <- lapply(recordlist, function(x) {
-  #  # a new record with each requested column
-  #  x <- as.list(x)[columns]
-  #  names(x) <- columns
-  #  x
-  #})
-
   # Convert row lists to column lists. This is the heavy lifting
-  columnlist <- lapply(columns, function(x) lapply(recordlist, "[[", x))
+  # columnlist <- lapply(columns, function(x) lapply(recordlist, "[[", x))
+  # Now slighlty optimized
+  columnlist <- transpose_list(recordlist, columns)
 
   # simplify vectors and nested data frames
   columnlist <- lapply(columnlist, simplify, simplifyVector = TRUE, simplifyDataFrame = TRUE,

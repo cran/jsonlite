@@ -8,13 +8,13 @@ setMethod("asJSON", "POSIXt", function(x, POSIXt = c("string", "ISO8601", "epoch
 
   # Encode based on a schema
   if (POSIXt == "mongo") {
-    if (is(x, "POSIXlt")) {
+    if (inherits(x, "POSIXlt")) {
       x <- as.POSIXct(x)
     }
     df <- data.frame("$date" = floor(unclass(x) * 1000), check.names = FALSE)
     if(inherits(x, "scalar"))
       class(df) <- c("scalar", class(df))
-    return(asJSON(df, digits = 0, always_decimal = FALSE, ...))
+    return(asJSON(df, digits = NA, always_decimal = FALSE, ...))
   }
 
   # Epoch millis
