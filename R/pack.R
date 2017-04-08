@@ -5,6 +5,11 @@ pack <- function(obj, ...) {
   # encode by storage mode
   encoding.mode <- typeof(obj)
 
+  # null may not have attributes
+  if (encoding.mode == "NULL") {
+    return(list(type = as.scalar(encoding.mode)))
+  }
+
   # needed because formals become attributes, etc
   if (encoding.mode == "closure") {
     obj <- as.list(obj)
@@ -15,16 +20,23 @@ pack <- function(obj, ...) {
     encoding.mode <- "namespace"
   }
 
+  # Strip off 'class' from S4 attributes
+  attrib <- attributes(obj)
+  if(isS4(obj)){
+    attrib <- attrib[slotNames(obj)]
+    names(attrib) <- slotNames(obj)
+  }
+
   # encode recursively
   list(
     type = as.scalar(encoding.mode),
-    attributes = givename(lapply(attributes(obj), pack, ...)),
+    attributes = givename(lapply(attrib, pack, ...)),
     value = switch(encoding.mode,
-      `NULL` = obj,
       environment = NULL,
       externalptr = NULL,
       namespace = lapply(as.list(getNamespaceInfo(obj, "spec")), as.scalar),
-      S4 = list(class = as.scalar(as.character(attr(obj, "class"))), package = as.scalar(attr(attr(obj, "class"), "package"))),
+      S4 = list(class = as.scalar(class(obj)),
+                package = as.scalar(attr(class(obj), "package"))),
       raw = as.scalar(base64_enc(unclass(obj))),
       logical = as.vector(unclass(obj), mode = "logical"),
       integer = as.vector(unclass(obj), mode = "integer"),
@@ -50,13 +62,24 @@ unpack <- function(obj) {
 
   encoding.mode <- obj$type
 
+  # functions are special
+  if (encoding.mode == "NULL") {
+    return(NULL)
+  }
+
+  if(identical(encoding.mode, "S4")){
+    obj_class <- load_s4_class(obj$value$class, package = obj$value$package)
+    obj_data <- lapply(obj$attributes, unpack)
+    if(!length(obj_class))
+      obj_class <- obj$value$class
+    return(do.call(new, c(Class = obj_class, obj_data)))
+  }
+
   newdata <- c(
     list(.Data = switch(encoding.mode,
-      `NULL` = NULL,
       environment = new.env(parent=emptyenv()),
       namespace = getNamespace(obj$value$name),
       externalptr = NULL,
-      S4 = getClass(obj$value$class, where = getNamespace(obj$value$package)),
       raw = base64_dec(obj$value),
       logical = as.logical(list_to_vec(obj$value)),
       integer = as.integer(list_to_vec(obj$value)),
@@ -104,4 +127,12 @@ unpack <- function(obj) {
 
   # return
   return(output)
+}
+
+load_s4_class <- function(name, package){
+  cls <- tryCatch({
+    getClassDef(name, package = package)
+  }, error = function(e){
+    stop(sprintf("Failed to load S4 class definition '%s' from '%s' (%s)", name, package, e$message), call. = FALSE)
+  })
 }

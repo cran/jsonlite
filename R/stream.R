@@ -67,25 +67,25 @@
 #' all.equal(flights2, as.data.frame(flights))
 #'
 #' # stream over HTTP
-#' diamonds2 <- stream_in(url("http://jeroenooms.github.io/data/diamonds.json"))
+#' diamonds2 <- stream_in(url("http://jeroen.github.io/data/diamonds.json"))
 #'
 #' # stream over HTTP with gzip compression
-#' flights3 <- stream_in(gzcon(url("http://jeroenooms.github.io/data/nycflights13.json.gz")))
+#' flights3 <- stream_in(gzcon(url("http://jeroen.github.io/data/nycflights13.json.gz")))
 #' all.equal(flights3, as.data.frame(flights))
 #'
 #' # stream over HTTPS (HTTP+SSL) via curl
 #' library(curl)
-#' flights4 <- stream_in(gzcon(curl("https://jeroenooms.github.io/data/nycflights13.json.gz")))
+#' flights4 <- stream_in(gzcon(curl("https://jeroen.github.io/data/nycflights13.json.gz")))
 #' all.equal(flights4, as.data.frame(flights))
 #'
 #' # or alternatively:
-#' flights5 <- stream_in(gzcon(pipe("curl https://jeroenooms.github.io/data/nycflights13.json.gz")))
+#' flights5 <- stream_in(gzcon(pipe("curl https://jeroen.github.io/data/nycflights13.json.gz")))
 #' all.equal(flights5, as.data.frame(flights))
 #'
 #' # Full JSON IO stream from URL to file connection.
 #' # Calculate delays for flights over 1000 miles in batches of 5k
 #' library(dplyr)
-#' con_in <- gzcon(url("http://jeroenooms.github.io/data/nycflights13.json.gz"))
+#' con_in <- gzcon(url("http://jeroen.github.io/data/nycflights13.json.gz"))
 #' con_out <- file(tmp <- tempfile(), open = "wb")
 #' stream_in(con_in, handler = function(df){
 #'   df <- dplyr::filter(df, distance > 1000)
@@ -190,7 +190,8 @@ post_process <- function(x, simplifyVector = TRUE, simplifyDataFrame = simplifyV
 }
 
 #' @rdname stream_in
-stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, ...) {
+#' @param prefix string to write before each line (use \code{"\u001e"} to write rfc7464 text sequences)
+stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, prefix = "", ...) {
 
   if(!is(con, "connection")){
     # Maybe handle URLs here in future.
@@ -206,11 +207,14 @@ stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, ...) {
     })
   }
 
-  invisible(apply_by_pages(x, stream_out_page, pagesize = pagesize, con = con, verbose = verbose, ...));
+  invisible(apply_by_pages(x, stream_out_page, pagesize = pagesize, con = con, verbose = verbose, prefix = prefix, ...));
 }
 
-stream_out_page <- function(page, con, ...){
+stream_out_page <- function(page, con, prefix, ...){
   # useBytes can sometimes prevent recoding of utf8 to latin1 on windows.
   # on windows there is a bug when useBytes is used with a (non binary) text connection.
-  writeLines(enc2utf8(asJSON(page, collapse = FALSE, ...)), con = con, useBytes = TRUE)
+  str <- enc2utf8(asJSON(page, collapse = FALSE, ...))
+  if(is.character(prefix) && length(prefix) && nchar(prefix))
+    str <- paste0(prefix[1], str)
+  writeLines(str, con = con, useBytes = TRUE)
 }
