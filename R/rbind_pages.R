@@ -7,30 +7,29 @@
 #' book. In practice this is often implemented using a \code{page} parameter in the API. The
 #' \code{rbind_pages} function can be used to combine these pages back into a single dataset.
 #'
-#' The \code{\link{rbind_pages}} function generalizes \code{\link[base:rbind]{base::rbind}} and
+#' The \code{\link{rbind_pages}} function generalizes \code{\link[base:cbind]{base::rbind}} and
 #' \code{\link[plyr:rbind.fill]{plyr::rbind.fill}} with added support for nested data frames. Not each column
 #' has to be present in each of the individual data frames; missing columns will be filled
 #' up in \code{NA} values.
 #'
-#' @export rbind_pages rbind.pages
-#' @aliases rbind_pages rbind.pages
+#' @export
 #' @param pages a list of data frames, each representing a \emph{page} of data
 #' @examples # Basic example
 #' x <- data.frame(foo = rnorm(3), bar = c(TRUE, FALSE, TRUE))
 #' y <- data.frame(foo = rnorm(2), col = c("blue", "red"))
 #' rbind_pages(list(x, y))
 #'
-#' \dontrun{
-#' baseurl <- "http://projects.propublica.org/nonprofits/api/v1/search.json"
+#' \donttest{
+#' baseurl <- "https://projects.propublica.org/nonprofits/api/v2/search.json"
 #' pages <- list()
 #' for(i in 0:20){
 #'   mydata <- fromJSON(paste0(baseurl, "?order=revenue&sort_order=desc&page=", i))
 #'   message("Retrieving page ", i)
-#'   pages[[i+1]] <- mydata$filings
+#'   pages[[i+1]] <- mydata$organizations
 #' }
-#' filings <- rbind_pages(pages)
-#' nrow(filings)
-#' colnames(filings)
+#' organizations <- rbind_pages(pages)
+#' nrow(organizations)
+#' colnames(organizations)
 #' }
 rbind_pages <- function(pages){
   #Load plyr
@@ -85,10 +84,4 @@ rbind_pages <- function(pages){
 
   #out
   outdf
-}
-
-#' @export
-rbind.pages <- function(...){
-  .Deprecated('rbind_pages')
-  rbind_pages(...)
 }

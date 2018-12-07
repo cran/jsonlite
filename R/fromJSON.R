@@ -55,7 +55,8 @@
 #' toJSON(pi, digits=3)
 #' toJSON(pi, digits=I(3))
 #'
-#' \dontrun{retrieve data frame
+#' \dontrun{
+#' #retrieve data frame
 #' data1 <- fromJSON("https://api.github.com/users/hadley/orgs")
 #' names(data1)
 #' data1$login
@@ -82,7 +83,7 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
   }
 
   # overload for URL or path
-  if (is.character(txt) && length(txt) == 1 && nchar(txt, type="bytes") < 1000 && !validate(txt)) {
+  if (is.character(txt) && length(txt) == 1 && nchar(txt, type="bytes") < 2084 && !validate(txt)) {
     if (grepl("^https?://", txt, useBytes=TRUE)) {
       loadpkg("curl")
       h <- curl::new_handle(useragent = paste("jsonlite /", R.version.string))
@@ -96,11 +97,11 @@ fromJSON <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVec
   }
 
   # call the actual function (with deprecated arguments)
-  fromJSON_string(txt = txt, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
+  parse_and_simplify(txt = txt, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
     simplifyMatrix = simplifyMatrix, flatten = flatten, ...)
 }
 
-fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
+parse_and_simplify <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
   simplifyMatrix = simplifyVector, flatten = FALSE, unicode = TRUE, validate = TRUE, bigint_as_char = FALSE, ...){
 
   if(!missing(unicode)){
@@ -123,3 +124,6 @@ fromJSON_string <- function(txt, simplifyVector = TRUE, simplifyDataFrame = simp
   }
 }
 
+
+# Backward compatiblity
+fromJSON_string <- parse_and_simplify
