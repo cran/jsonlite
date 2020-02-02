@@ -8,8 +8,7 @@
 \usage{
 stream_in(con, handler = NULL, pagesize = 500, verbose = TRUE, ...)
 
-stream_out(x, con = stdout(), pagesize = 500, verbose = TRUE,
-  prefix = "", ...)
+stream_out(x, con = stdout(), pagesize = 500, verbose = TRUE, prefix = "", ...)
 }
 \arguments{
 \item{con}{a \code{\link{connection}} object. If the connection is not open,
@@ -79,7 +78,8 @@ stream_out(x)
 # Trivial example
 mydata <- stream_in(url("http://httpbin.org/stream/100"))
 
-\dontrun{stream large dataset to file and back
+\dontrun{
+#stream large dataset to file and back
 library(nycflights13)
 stream_out(flights, file(tmp <- tempfile()))
 flights2 <- stream_in(file(tmp))
