@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2018-12-05" />
+<meta name="date" content="2020-06-25" />
 
 <title>Fetching JSON data from REST APIs</title>
 
@@ -376,7 +376,7 @@ summary {
 
 
 <h1 class="title toc-ignore">Fetching JSON data from REST APIs</h1>
-<h4 class="date">2018-12-05</h4>
+<h4 class="date">2020-06-25</h4>
 
 </div>
 
@@ -393,36 +393,36 @@ gg_issues &lt;- fromJSON(&quot;https://api.github.com/repos/hadley/ggplot2/issue
 
 #latest issues
 paste(format(gg_issues$user$login), &quot;:&quot;, gg_issues$title)</code></pre>
-<pre><code> [1] &quot;sebneus         : geom_raster plots differently to geom_tile&quot;                                                         
- [2] &quot;clauswilke      : fix nudging with multiple values. closes #2977&quot;                                                     
- [3] &quot;slowkow         : text is misplaced with position_dodge()&quot;                                                            
- [4] &quot;wongjingping    : Allow ggsave to create directory if path doesn&#39;t exist&quot;                                             
- [5] &quot;llrs            : Updating a theme to remove panel.grid.major.x&quot;                                                      
- [6] &quot;IndrajeetPatil  : feature request: `layer_data` returns a tibble&quot;                                                     
- [7] &quot;danielsjf       : Invalid filename error with ggsave after saving in a folder with a percentage sign (%)&quot;             
- [8] &quot;thomasp85       : No plyr&quot;                                                                                            
- [9] &quot;PaulLantos      : geom_sf layers do not align&quot;                                                                        
-[10] &quot;dpseidel        : Fix tick misalignment with secondary axes (#2978)&quot;                                                  
-[11] &quot;blueskypie      : possible bug in resolution() causes wrong height and width in geom_jitter()&quot;                        
-[12] &quot;jarauh          : Documentation of geom_bar: aesthetics \&quot;weight\&quot; is not mentioned&quot;                                  
-[13] &quot;clauswilke      : coord_sf() doesn&#39;t adjust line size for graticule lines&quot;                                            
-[14] &quot;anthonytw       : Secondary axis doesn&#39;t show axis ticks or labels with coord_trans&quot;                                  
-[15] &quot;lionel-         : Should we compact facet grid specs?&quot;                                                                
-[16] &quot;clauswilke      : coord_sf() drops axis labels if graticules don&#39;t extend all the way to the plot boundary&quot;           
-[17] &quot;ptoche          : breaks = NULL drops axis altogether&quot;                                                                
-[18] &quot;mbertolacci     : Ticks misaligned for sec_axis with some scale transformations and data in 3.1.0&quot;                    
-[19] &quot;steffilazerte   : Multiple nudge arguments results in warning&quot;                                                        
-[20] &quot;ptoche          : scale_x_discrete with numeric drops axis with no warning&quot;                                           
-[21] &quot;danielsjf       : geom_curve with curvature aesthetic&quot;                                                                
-[22] &quot;felipegerard    : Reference lines break facet_wrap when facets are the product of a function&quot;                         
-[23] &quot;hadley          : Update economics data&quot;                                                                              
-[24] &quot;hadley          : Ensure core developers are listed in chronological order&quot;                                           
-[25] &quot;RichardJActon   : Warn when a supplied mapping is going to be overwritten by geom_hline / vline / abline&quot;             
-[26] &quot;mkoohafkan      : using `stat_ydensity` with `geom = \&quot;density\&quot;`---scaling the density line similar to `geom_violin`&quot;
-[27] &quot;earthcli        : strange behavior with the margin of legend.text for R3.5&quot;                                           
-[28] &quot;rharfoot        : Vertical line and crossbar jitter being applied differently.&quot;                                       
-[29] &quot;yutannihilation : Use .ignore_empty=\&quot;all\&quot; for enquos()&quot;                                                             
-[30] &quot;pank            : theme: Add different ticks length for different axes&quot;                                               </code></pre>
+<pre><code> [1] &quot;ds-jim          : Nothing plotted with manual_scale when a named vector is used as the input.&quot;                  
+ [2] &quot;thomasp85       : Should ggsave use ragg if available?&quot;                                                         
+ [3] &quot;jdsher          : Cannot override.aes with guide_bins?&quot;                                                         
+ [4] &quot;karawoo         : Combined facet labels aren&#39;t parsed when .multi_line = FALSE&quot;                                 
+ [5] &quot;mevers          : `coord_polar` causes error with `ggtext::element_markdown`&quot;                                   
+ [6] &quot;yutannihilation : WIP: Deprecate qplot()&quot;                                                                       
+ [7] &quot;tdhock          : Fix aes(groupS)&quot;                                                                              
+ [8] &quot;tdhock          : same argument/param in both stat and geom?&quot;                                                   
+ [9] &quot;tdhock          : undefined columns selected with groupS aes in custom geom&quot;                                    
+[10] &quot;SimonDedman     : geom_violin default adjust value for integers&quot;                                                
+[11] &quot;tdhock          : group column in built data even when aes(group) absent&quot;                                       
+[12] &quot;TylerGrantSmith : Add layer names&quot;                                                                              
+[13] &quot;krlmlr          : Support ptype argument for scale() functions&quot;                                                 
+[14] &quot;clauswilke      : Annotate all facets with axis ticks and labels for fixed scales&quot;                              
+[15] &quot;evodevosys      : theme_void() removes geom_segments (at least visually) when an alpha aesthetic is used&quot;       
+[16] &quot;hadley          : ggsave should use plot theme for default background&quot;                                          
+[17] &quot;yqgchen         : strip.text.y = element_blank() yields an error when there are multiple layers of strip labels&quot;
+[18] &quot;DrrDom          : Points fill in legend&quot;                                                                        
+[19] &quot;xvrdm           : WIP: Add scale_color_viridis_b&quot;                                                               
+[20] &quot;thomas-neitmann : `ggsave()` produces aliased png files on Windows&quot;                                             
+[21] &quot;atusy           : Export pch_table&quot;                                                                             
+[22] &quot;moodymudskipper : default xlim and ylim in qplot are not supportd when non missing&quot;                             
+[23] &quot;yutannihilation : Can geom_abline() draw lines a bit longer than the actual Coord range?&quot;                       
+[24] &quot;vitor-mendes-iq : scale_*_reverse() is ignored when limits are set on Coord&quot;                                    
+[25] &quot;LiRogers        : Justifying the legend with respect to the full plot area rather than the panel&quot;               
+[26] &quot;Shians          : scale_fill_steps produces unevenly spaced legend when limits are set&quot;                         
+[27] &quot;SimonDedman     : Add &#39;reverse&#39; option to scale_y_date?&quot;                                                        
+[28] &quot;echasnovski     : Add `bounds` argument to `geom_density()`&quot;                                                    
+[29] &quot;swebs           : timezone parameter for scale_x_datetime has no effect&quot;                                        
+[30] &quot;jgjl            : Update stat_ecdf to work either on the x or the y aesthetic.&quot;                                 </code></pre>
 </div>
 <div id="citibike-nyc" class="section level2">
 <h2>CitiBike NYC</h2>
@@ -430,17 +430,13 @@ paste(format(gg_issues$user$login), &quot;:&quot;, gg_issues$title)</code></pre>
 <pre class="r"><code>citibike &lt;- fromJSON(&quot;http://citibikenyc.com/stations/json&quot;)
 stations &lt;- citibike$stationBeanList
 colnames(stations)</code></pre>
-<pre><code> [1] &quot;id&quot;                    &quot;stationName&quot;          
- [3] &quot;availableDocks&quot;        &quot;totalDocks&quot;           
- [5] &quot;latitude&quot;              &quot;longitude&quot;            
- [7] &quot;statusValue&quot;           &quot;statusKey&quot;            
- [9] &quot;availableBikes&quot;        &quot;stAddress1&quot;           
-[11] &quot;stAddress2&quot;            &quot;city&quot;                 
-[13] &quot;postalCode&quot;            &quot;location&quot;             
-[15] &quot;altitude&quot;              &quot;testStation&quot;          
+<pre><code> [1] &quot;id&quot;                    &quot;stationName&quot;           &quot;availableDocks&quot;        &quot;totalDocks&quot;           
+ [5] &quot;latitude&quot;              &quot;longitude&quot;             &quot;statusValue&quot;           &quot;statusKey&quot;            
+ [9] &quot;availableBikes&quot;        &quot;stAddress1&quot;            &quot;stAddress2&quot;            &quot;city&quot;                 
+[13] &quot;postalCode&quot;            &quot;location&quot;              &quot;altitude&quot;              &quot;testStation&quot;          
 [17] &quot;lastCommunicationTime&quot; &quot;landMark&quot;             </code></pre>
 <pre class="r"><code>nrow(stations)</code></pre>
-<pre><code>[1] 813</code></pre>
+<pre><code>[1] 973</code></pre>
 </div>
 <div id="ergast" class="section level2">
 <h2>Ergast</h2>
@@ -448,8 +444,8 @@ colnames(stations)</code></pre>
 <pre class="r"><code>res &lt;- fromJSON(&#39;http://ergast.com/api/f1/2004/1/results.json&#39;)
 drivers &lt;- res$MRData$RaceTable$Races$Results[[1]]$Driver
 colnames(drivers)</code></pre>
-<pre><code>[1] &quot;driverId&quot;        &quot;code&quot;            &quot;url&quot;             &quot;givenName&quot;      
-[5] &quot;familyName&quot;      &quot;dateOfBirth&quot;     &quot;nationality&quot;     &quot;permanentNumber&quot;</code></pre>
+<pre><code>[1] &quot;driverId&quot;        &quot;code&quot;            &quot;url&quot;             &quot;givenName&quot;       &quot;familyName&quot;      &quot;dateOfBirth&quot;    
+[7] &quot;nationality&quot;     &quot;permanentNumber&quot;</code></pre>
 <pre class="r"><code>drivers[1:10, c(&quot;givenName&quot;, &quot;familyName&quot;, &quot;code&quot;, &quot;nationality&quot;)]</code></pre>
 <pre><code>   givenName    familyName code nationality
 1    Michael    Schumacher  MSC      German
@@ -482,17 +478,17 @@ organizations &lt;- rbind_pages(pages)
 nrow(organizations)</code></pre>
 <pre><code>[1] 1100</code></pre>
 <pre class="r"><code>organizations[1:10, c(&quot;name&quot;, &quot;city&quot;, &quot;strein&quot;)]</code></pre>
-<pre><code>                           name         city     strein
-1                   00295 LOCAL        MEDIA 23-6420101
-2               007 BENEFIT LTD       RESTON 47-4146355
-3                   00736 LOCAL     BARTLETT 42-1693318
-4               03XX FOUNDATION       SANTEE 38-3915658
-5  05-THE FILSON CLUB ET AL TUW PHILADELPHIA 61-6125263
-6     06 UNITED SOCCER CLUB INC    REGO PARK 35-2518301
-7                 08 CHURCH INC  BAKERSFIELD 27-3924877
-8                1 1 FOUNDATION    PLACENTIA 47-4335155
-9                     1 BOX LLC     SOMERSET 81-3408531
-10       1 FAMILY 2GETHER 4EVER   PLAINFIELD 81-1287436</code></pre>
+<pre><code>                            name        city     strein
+1           0 DEBT EDUCATION INC  SANTA ROSA 46-4744976
+2                0 TOLERANCE INC     SUWANEE 27-2620044
+3                  0 U R PASSION   KENNEWICK 81-4045228
+4                00 MOVEMENT INC   PENSACOLA 82-4704419
+5                    00006 LOCAL       MEDIA 22-6062777
+6             0003 POSTAL FAMILY  CINCINNATI 31-0240910
+7                        0005 GA   HEPHZIBAH 58-1514574
+8  0005 WRIGHT-PATT CREDIT UNION BEAVERCREEK 31-0278870
+9                        0009 DE   GREENWOOD 26-4507405
+10               0011 CALIFORNIA      REDWAY 36-4654777</code></pre>
 </div>
 <div id="new-york-times" class="section level2">
 <h2>New York Times</h2>
@@ -503,12 +499,10 @@ url &lt;- &quot;http://api.nytimes.com/svc/search/v2/articlesearch.json?q=obamac
 req &lt;- fromJSON(paste0(url, article_key))
 articles &lt;- req$response$docs
 colnames(articles)</code></pre>
-<pre><code> [1] &quot;web_url&quot;          &quot;snippet&quot;          &quot;print_page&quot;      
- [4] &quot;blog&quot;             &quot;source&quot;           &quot;multimedia&quot;      
- [7] &quot;headline&quot;         &quot;keywords&quot;         &quot;pub_date&quot;        
-[10] &quot;document_type&quot;    &quot;news_desk&quot;        &quot;byline&quot;          
-[13] &quot;type_of_material&quot; &quot;_id&quot;              &quot;word_count&quot;      
-[16] &quot;score&quot;            &quot;uri&quot;              &quot;section_name&quot;    </code></pre>
+<pre><code> [1] &quot;abstract&quot;         &quot;web_url&quot;          &quot;snippet&quot;          &quot;lead_paragraph&quot;   &quot;print_section&quot;   
+ [6] &quot;print_page&quot;       &quot;source&quot;           &quot;multimedia&quot;       &quot;headline&quot;         &quot;keywords&quot;        
+[11] &quot;pub_date&quot;         &quot;document_type&quot;    &quot;news_desk&quot;        &quot;section_name&quot;     &quot;byline&quot;          
+[16] &quot;type_of_material&quot; &quot;_id&quot;              &quot;word_count&quot;       &quot;uri&quot;              &quot;subsection_name&quot; </code></pre>
 <pre class="r"><code>#search for best sellers
 books_key &lt;- &quot;&amp;api-key=76363c9e70bc401bac1e6ad88b13bd1d&quot;
 url &lt;- &quot;http://api.nytimes.com/svc/books/v2/lists/overview.json?published_date=2013-01-01&quot;
@@ -522,23 +516,6 @@ subset(category1, select = c(&quot;author&quot;, &quot;title&quot;, &quot;publis
 3       E L James FIFTY SHADES OF GREY Knopf Doubleday Publishing
 4 Nicholas Sparks           SAFE HAVEN   Grand Central Publishing
 5  David Baldacci        THE FORGOTTEN   Grand Central Publishing</code></pre>
-<pre class="r"><code>#movie reviews
-movie_key &lt;- &quot;&amp;api-key=b75da00e12d54774a2d362adddcc9bef&quot;
-url &lt;- &quot;http://api.nytimes.com/svc/movies/v2/reviews/dvd-picks.json?order=by-date&quot;
-req &lt;- fromJSON(paste0(url, movie_key))
-reviews &lt;- req$results
-colnames(reviews)</code></pre>
-<pre><code> [1] &quot;display_title&quot;    &quot;mpaa_rating&quot;      &quot;critics_pick&quot;    
- [4] &quot;byline&quot;           &quot;headline&quot;         &quot;summary_short&quot;   
- [7] &quot;publication_date&quot; &quot;opening_date&quot;     &quot;date_updated&quot;    
-[10] &quot;link&quot;             &quot;multimedia&quot;      </code></pre>
-<pre class="r"><code>reviews[1:5, c(&quot;display_title&quot;, &quot;byline&quot;, &quot;mpaa_rating&quot;)]</code></pre>
-<pre><code>       display_title        byline mpaa_rating
-1        Ben Is Back    A.O. SCOTT           R
-2              Tyrel   BILGE EBIRI            
-3        The Charmer WESLEY MORRIS            
-4 Head Full of Honey   BILGE EBIRI       PG-13
-5   Happy as Lazzaro    A.O. SCOTT       PG-13</code></pre>
 </div>
 <div id="twitter" class="section level2">
 <h2>Twitter</h2>
@@ -567,16 +544,16 @@ req &lt;- httr::GET(url, httr::add_headers(Authorization = token))
 json &lt;- httr::content(req, as = &quot;text&quot;)
 tweets &lt;- fromJSON(json)
 substring(tweets$text, 1, 100)</code></pre>
-<pre><code> [1] &quot;Trust in ML models. Slides from TWiML &amp;amp; AI EMEA Meetup + iX Articles https://t.co/XUVyu5D5gW #rs&quot;
- [2] &quot;Solving #AdventOfCode day 3 and 4 with R https://t.co/lvZlUqMZhS #rstats #DataScience&quot;               
- [3] &quot;Automated Dashboard with various correlation visualizations in R https://t.co/hC36eeFQLR #rstats #Da&quot;
- [4] &quot;New R job: Adjunct Professor https://t.co/2K75pHzPey #rstats #DataScience #jobs&quot;                     
- [5] &quot;ggQC | ggplot Quality Control Charts – New Release https://t.co/ctfhMzMf3z #rstats #DataScience&quot;     
- [6] &quot;A Tidy Text Analysis of R Weekly Posts https://t.co/EAleVu4tjo #rstats #DataScience&quot;                 
- [7] &quot;Day 05 – little helper get_network https://t.co/whv74exvQS #rstats #DataScience&quot;                     
- [8] &quot;Community Call – Governance strategies for open source research software projects https://t.co/tkBpz&quot;
- [9] &quot;NBA Team Twitter Analysis Flexdashboard https://t.co/uSL2myAK0W #rstats #DataScience&quot;                
-[10] &quot;Bayesian Nonparametric Models in NIMBLE, Part 1: Density Estimation https://t.co/GZS0w3MwAI #rstats &quot;</code></pre>
+<pre><code> [1] &quot;https://t.co/Jac2KxZJkv in R: How to Make a Computer Vision Model within an R Environment  {https://&quot;
+ [2] &quot;Estimating Group Differences in Network Models using Moderation  {https://t.co/3ViArl9OZ2} #rstats #&quot;
+ [3] &quot;Deep attractors: Where deep learning meets chaos  {https://t.co/u3HniDkjWw} #rstats #DataScience&quot;    
+ [4] &quot;R Communities in South Africa  {https://t.co/cRBfDMPtBE} #rstats #DataScience&quot;                       
+ [5] &quot;Interactively perform a spatial interpolation with the GUInterp Shiny interface  {https://t.co/jzidD&quot;
+ [6] &quot;Advanced Modelling in R with CARET – a focus on supervised machine learning  {https://t.co/TSQtoxWrb&quot;
+ [7] &quot;Color Bars  {https://t.co/HJ2Ip24rnb} #rstats #DataScience&quot;                                          
+ [8] &quot;Why R? Webinar – Neural Networks for Modelling Molecular Interactions with Tensorflow  {https://t.co&quot;
+ [9] &quot;COVID-19: False Positive Alarm  {https://t.co/0ufxeYAPQc} #rstats #DataScience&quot;                      
+[10] &quot;#27: R and CRAN Binaries for Ubuntu  {https://t.co/yi5Xi9xQT9} #rstats #DataScience&quot;                 </code></pre>
 </div>
 
 
