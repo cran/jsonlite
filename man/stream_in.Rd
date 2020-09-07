@@ -44,7 +44,7 @@ from \code{\link{fromJSON}} and \code{\link{toJSON}}, see details.
 \details{
 Because parsing huge JSON strings is difficult and inefficient, JSON streaming is done
 using \strong{lines of minified JSON records}, a.k.a. \href{http://ndjson.org}{ndjson}.
-This is pretty standard: JSON databases such as \href{https://github.com/maxogden/dat}{dat}
+This is pretty standard: JSON databases such as \href{https://github.com/datproject/dat}{dat}
 or MongoDB use the same format to import/export datasets. Note that this means that the
 total stream combined is not valid JSON itself; only the individual lines are. Also note
 that because line-breaks are used as separators, prettified JSON is not permitted: the
@@ -62,6 +62,9 @@ is specified, \code{stream_in} does not store any intermediate results and alway
 A \code{handler} function that does not store intermediate results in memory (for
 example by writing output to another connection) results in a pipeline that can process an
 unlimited amount of data. See example.
+
+Note that a vector of JSON strings already in R can parsed with \code{stream_in} by
+creating a connection to it with \code{\link{textConnection}}.
 
 If a connection is not opened yet, \code{stream_in} and \code{stream_out}
 will automatically open and later close the connection. Because R destroys connections
@@ -139,4 +142,7 @@ companies <- stream_in(unz(tmp, "companies.json"))
 MongoDB export format: \url{https://docs.mongodb.com/manual/reference/program/mongoexport/}
 
 Documentation for the JSON Lines text file format: \url{http://jsonlines.org/}
+}
+\seealso{
+\code{\link{fromJSON}}, \code{\link{read_json}}
 }
