@@ -1,6 +1,6 @@
 ---
 title: "Combining pages of JSON data with jsonlite"
-date: "2020-06-25"
+date: "2022-01-16"
 output:
   html_document
 vignette: >
@@ -48,14 +48,14 @@ mydata0$organizations[1:10, c("name", "city", "strein")]
                             name        city     strein
 1           0 DEBT EDUCATION INC  SANTA ROSA 46-4744976
 2                0 TOLERANCE INC     SUWANEE 27-2620044
-3                  0 U R PASSION   KENNEWICK 81-4045228
-4                00 MOVEMENT INC   PENSACOLA 82-4704419
-5                    00006 LOCAL       MEDIA 22-6062777
-6             0003 POSTAL FAMILY  CINCINNATI 31-0240910
-7                        0005 GA   HEPHZIBAH 58-1514574
-8  0005 WRIGHT-PATT CREDIT UNION BEAVERCREEK 31-0278870
-9                        0009 DE   GREENWOOD 26-4507405
-10               0011 CALIFORNIA      REDWAY 36-4654777
+3                00 MOVEMENT INC   PENSACOLA 82-4704419
+4                    00006 LOCAL       MEDIA 22-6062777
+5             0003 POSTAL FAMILY  CINCINNATI 31-0240910
+6                        0005 GA   HEPHZIBAH 58-1514574
+7  0005 WRIGHT-PATT CREDIT UNION BEAVERCREEK 31-0278870
+8                        0009 DE   GREENWOOD 26-4507405
+9                0011 CALIFORNIA      REDWAY 36-4654777
+10                   00141 LOCAL       MEDIA 94-0507697
 ```
 
 To analyze or visualize these data, we need to combine the pages into a single dataset. We can do this with the `rbind_pages` function. Note that in this example, the actual data is contained by the `organizations` field:
@@ -115,9 +115,8 @@ colnames(organizations)
 ```
 
 ```
- [1] "ein"           "strein"        "name"          "sub_name"      "city"          "state"        
- [7] "ntee_code"     "raw_ntee_code" "subseccd"      "has_subseccd"  "have_filings"  "have_extracts"
-[13] "have_pdfs"     "score"        
+ [1] "ein"           "strein"        "name"          "sub_name"      "city"          "state"         "ntee_code"     "raw_ntee_code"
+ [9] "subseccd"      "has_subseccd"  "have_filings"  "have_extracts" "have_pdfs"     "score"        
 ```
 
 From here, we can go straight to analyzing the organizations data without any further tedious data manipulation.
