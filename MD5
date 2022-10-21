@@ -1,7 +1,7 @@
-67d8443ce82b90aad713f99eee638ee5 *DESCRIPTION
+bda4be3a5c70283020a0fdfdfe46e5c2 *DESCRIPTION
 27b6128fe44dac890bf5c9dfce3a744c *LICENSE
 abd1b710f0f251838aec99d4fab8d08b *NAMESPACE
-e7fb758172252d4dd64a762508fe4ae7 *NEWS
+621c643d21425a8007ec842c83185404 *NEWS
 63ec63f3a8c7d5b73f74cef6ec5b3044 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 0c2ee95685ab1bd4e85364dfd00bb496 *R/asJSON.AAAgeneric.R
@@ -69,15 +69,15 @@ f63dc8cea8e10742970bb44db8bdd70e *R/warn_keep_vec_names.R
 192e3ea56abfef6ee44714e69cae5e51 *inst/CITATION
 63f88db76f35f71d39649477e5122d3a *inst/doc/json-aaquickstart.R
 4f11cd7a351291227464e5771d460802 *inst/doc/json-aaquickstart.Rmd
-790740b94205e401023ac39e6c2c7c83 *inst/doc/json-aaquickstart.html
+13b8b10576ae5b99a694296199ae92c4 *inst/doc/json-aaquickstart.html
 061b016cdd33e958ef9850d682694194 *inst/doc/json-apis.Rmd
-86812b2b4edcef9d8f94308fcf02721a *inst/doc/json-apis.html
-a0b60692587d161b8042014e8c09fcd2 *inst/doc/json-mapping.pdf
+7ec8b5067d6517e767e5281da82af053 *inst/doc/json-apis.html
+1883ba72ac1eb0ee7a9c44720e0dafa2 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 b4b774c92a47cd87f0bf2753ac7a1cb1 *inst/doc/json-opencpu.pdf
 9f8ff63a6bfe38681c939c5a3fc79a2c *inst/doc/json-opencpu.pdf.asis
 175948ab2636061fa12d935f0be89c75 *inst/doc/json-paging.Rmd
-32165c4f5eb0ec4887d048a8cf1f402f *inst/doc/json-paging.html
+9f09566af116538317b44cc3302797fd *inst/doc/json-paging.html
 eff6262354d53dde106f67c46448b405 *man/base64.Rd
 d442925cd56822eaa2894ad236dc6834 *man/flatten.Rd
 61063670c26080e8cda8eee7a807bf02 *man/fromJSON.Rd
@@ -108,7 +108,7 @@ ce46e8da07b2b55fac1d4430909b59ac *src/num_to_char.c
 3e39dcaa1e71ac911c4902c88e536794 *src/parse.c
 785997e769fbe38ccd560b2f6dc06ccf *src/prettify.c
 a92bbbb9cde1b3954d82dc2cd0ca026e *src/push_parser.c
-4d8d6fb9043e7306cc526f267183313c *src/push_parser.h
+db21c932e7766c7f96f1d0178eb05b41 *src/push_parser.h
 eb1e4e04c5f05d171491d332d64b1404 *src/r-base64.c
 8357bdbeded7fa077e95993f8e1f47da *src/register.c
 8e1343cd740b5f06947b61766488b7a7 *src/row_collapse.c
@@ -133,7 +133,7 @@ c283775f8a3dad48d89b6366588e1c6c *src/yajl/yajl_alloc.h
 3ddc5742fd9bde4cc387bbae35c01236 *src/yajl/yajl_lex.h
 c3b70695f8a1225a9457a501e201c4f7 *src/yajl/yajl_parser.c
 3a27147e92286b52862bf17665eda478 *src/yajl/yajl_parser.h
-de5b3272463232192c190e379e95bddc *src/yajl/yajl_tree.c
+901c3cfc87fa7f47fb1446d6764eaca6 *src/yajl/yajl_tree.c
 03d32589ebeebc7cbc7674b1f5355d29 *src/yajl/yajl_version.c
 5a8089a334d8f6c329c96eb0acf715f3 *tests/testthat.R
 b39b11c0272ca25f6818952bff533031 *tests/testthat/flatten.R
