@@ -1,7 +1,7 @@
-1acf157e03d6224388681c12cfd55276 *DESCRIPTION
+c6b0f86988851ef0a79c2d13d428e576 *DESCRIPTION
 27b6128fe44dac890bf5c9dfce3a744c *LICENSE
 abd1b710f0f251838aec99d4fab8d08b *NAMESPACE
-f58fd9ff1659cefde36e7ae36ec96a4a *NEWS
+fb5f8c229055371254609d15a014a3dd *NEWS
 63ec63f3a8c7d5b73f74cef6ec5b3044 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 0c2ee95685ab1bd4e85364dfd00bb496 *R/asJSON.AAAgeneric.R
@@ -28,6 +28,7 @@ a6072971e1167adb5d077e5d7d9c50ea *R/asJSON.logical.R
 0fe8cdff76c8d76e73f7d6a55fcd62d9 *R/asJSON.raw.R
 6aeabf91008aeea45513ae40baa0eea1 *R/asJSON.scalar.R
 a65f852bc0ee32544216efc4d9b02990 *R/asJSON.sf.R
+b3bee7478249b2140560ebca018a1fce *R/asJSON.vctrs.R
 88ac52e059c812eeded82542e945c304 *R/base64.R
 d5ec65dd3cb5da3420acd7d3b4fa5329 *R/cleannames.R
 0b464ec1927d240f14bcea174a17e495 *R/collapse.R
@@ -54,10 +55,10 @@ a13262093fcd5fe68cdf1b6db628b5bb *R/raw_to_json.R
 7619ac65e85cbcddb623f1bc22f9c948 *R/rbind_pages.R
 58bda187f14d302ccb97878f234b19fb *R/read_json.R
 cd423ba6aabb08197a9ec1022f4e2d16 *R/serializeJSON.R
-07902e22871a02571f37f05f7954d658 *R/simplify.R
+2cc60ed353e5ee7ca322cfb5075ac47d *R/simplify.R
 f444cbf34b549e39115e021e2e71d163 *R/simplifyDataFrame.R
 d735d795c263b8e9a6400df135a54190 *R/stop.R
-7fceac195167ceedaef619a1a5fee820 *R/stream.R
+f2438e3f01361a8d84c426748fc55fe6 *R/stream.R
 0a950e01867a6cd04c55908add229c8f *R/toJSON.R
 e04fbc4affe9ebccd7674319d9e739e6 *R/transpose_list.R
 ebff890fcffd229e04a5a11370988787 *R/unbox.R
@@ -65,14 +66,14 @@ d8505e361886fc0ac03d93b26eda8626 *R/unescape_unicode.R
 77465bb5bcda44fec86bbe810150618e *R/utf8conv.R
 4b1ef0cb1cd0814f6950b5d1d7ffb4ee *R/validate.R
 f63dc8cea8e10742970bb44db8bdd70e *R/warn_keep_vec_names.R
-f3b65d11490442eb2b0e47d23d1cfc6b *build/vignette.rds
-192e3ea56abfef6ee44714e69cae5e51 *inst/CITATION
+39f9ac2a3ad5dfc1d3571120b652f209 *build/vignette.rds
+085aa83cd45a6337ec98336e74dba226 *inst/CITATION
 63f88db76f35f71d39649477e5122d3a *inst/doc/json-aaquickstart.R
 4f11cd7a351291227464e5771d460802 *inst/doc/json-aaquickstart.Rmd
-188c2edab00ed8a980309fedd4e560a8 *inst/doc/json-aaquickstart.html
+4246bd713af0f76a49afd98658515d8b *inst/doc/json-aaquickstart.html
 061b016cdd33e958ef9850d682694194 *inst/doc/json-apis.Rmd
 7ec8b5067d6517e767e5281da82af053 *inst/doc/json-apis.html
-7e559d3fcce7ac3850b28b5343644c57 *inst/doc/json-mapping.pdf
+3ca2a211d9bf582ac74abd3b64c91729 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 b4b774c92a47cd87f0bf2753ac7a1cb1 *inst/doc/json-opencpu.pdf
 9f8ff63a6bfe38681c939c5a3fc79a2c *inst/doc/json-opencpu.pdf.asis
@@ -86,7 +87,7 @@ d442925cd56822eaa2894ad236dc6834 *man/flatten.Rd
 6e8b786e8afa4966cb8f078f64974601 *man/rbind_pages.Rd
 6527115db2b64ab282e69c9bda585726 *man/read_json.Rd
 77bdc0ef594ebdbe5febe38491066d9e *man/serializeJSON.Rd
-107297a82680b03039067c491826c1ef *man/stream_in.Rd
+570bfff3652db04c26dae3a331bc66fc *man/stream_in.Rd
 1bbea052782528a4b788c6b72980d277 *man/unbox.Rd
 5ec822d2b2d8e2c6fc8a933faf074a84 *man/validate.Rd
 38f2d24399cd5bc87a8d6ad3c915e4e3 *src/Makevars
@@ -104,7 +105,7 @@ de12a852f894d4eb7adc5f77f7bb12a6 *src/integer64_to_na.c
 afb04d811fae025245869529bf8f03a3 *src/modp_numtoa.h
 38001c8f16ff532b63027bd673e62f80 *src/modp_stdint.h
 b1d3deee3a4ba2960d857892991ad682 *src/null_to_na.c
-ce46e8da07b2b55fac1d4430909b59ac *src/num_to_char.c
+136f27fc267714fc1ae52d2efd75ba68 *src/num_to_char.c
 3e39dcaa1e71ac911c4902c88e536794 *src/parse.c
 785997e769fbe38ccd560b2f6dc06ccf *src/prettify.c
 a92bbbb9cde1b3954d82dc2cd0ca026e *src/push_parser.c
