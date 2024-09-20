@@ -1,7 +1,7 @@
-847f651d678d2d04dea15cdfba69127c *DESCRIPTION
+ca433e5050c8f9271a96bd522abd6f80 *DESCRIPTION
 27b6128fe44dac890bf5c9dfce3a744c *LICENSE
 5b98144b5c0adc61181ea3e2df463ed1 *NAMESPACE
-4f0ab6af1b76c77b39aec783b0edb6b0 *NEWS
+adcf55bc2204626df951ece6759d1243 *NEWS
 202a91d8065d75ef607e1ec7023d7224 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 4bc33838a4f765cf8f4a69592dac103c *R/asJSON.AAAgeneric.R
@@ -66,14 +66,14 @@ d8505e361886fc0ac03d93b26eda8626 *R/unescape_unicode.R
 77465bb5bcda44fec86bbe810150618e *R/utf8conv.R
 4b1ef0cb1cd0814f6950b5d1d7ffb4ee *R/validate.R
 f63dc8cea8e10742970bb44db8bdd70e *R/warn_keep_vec_names.R
-6cd8eb2bf1fedacc93f22da254bc1872 *build/vignette.rds
+b892476accd4daaac538122abcbdb1b1 *build/vignette.rds
 085aa83cd45a6337ec98336e74dba226 *inst/CITATION
 63f88db76f35f71d39649477e5122d3a *inst/doc/json-aaquickstart.R
 4f11cd7a351291227464e5771d460802 *inst/doc/json-aaquickstart.Rmd
-e0aaeefff310564f6ca119716d1fb552 *inst/doc/json-aaquickstart.html
+0feb40f4fe0b283f44fa12e8960dfc70 *inst/doc/json-aaquickstart.html
 061b016cdd33e958ef9850d682694194 *inst/doc/json-apis.Rmd
 7ec8b5067d6517e767e5281da82af053 *inst/doc/json-apis.html
-1d4626d475f37293eb03c814cb36db31 *inst/doc/json-mapping.pdf
+b509151240914ef8e2d74b32fb147ff7 *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 b4b774c92a47cd87f0bf2753ac7a1cb1 *inst/doc/json-opencpu.pdf
 9f8ff63a6bfe38681c939c5a3fc79a2c *inst/doc/json-opencpu.pdf.asis
@@ -110,7 +110,7 @@ b1d3deee3a4ba2960d857892991ad682 *src/null_to_na.c
 785997e769fbe38ccd560b2f6dc06ccf *src/prettify.c
 8fcf621f2d5418fa16776e652c5b047c *src/push_parser.c
 db21c932e7766c7f96f1d0178eb05b41 *src/push_parser.h
-eb1e4e04c5f05d171491d332d64b1404 *src/r-base64.c
+1686b30ca85f6d778279eedb1a7a966c *src/r-base64.c
 8357bdbeded7fa077e95993f8e1f47da *src/register.c
 8e1343cd740b5f06947b61766488b7a7 *src/row_collapse.c
 170c6ae4162fde102347b1502ec72a5c *src/transpose_list.c
