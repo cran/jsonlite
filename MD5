@@ -1,7 +1,7 @@
-dd91719579cb35190532000da245d558 *DESCRIPTION
+9a6b3559d2fa860d6f70d4fb62909225 *DESCRIPTION
 27b6128fe44dac890bf5c9dfce3a744c *LICENSE
 5b98144b5c0adc61181ea3e2df463ed1 *NAMESPACE
-83008d391731eaac7394e83755ac75b2 *NEWS
+25f025547cd26d5441cca29166144e58 *NEWS
 202a91d8065d75ef607e1ec7023d7224 *R/apply_by_pages.R
 14bcfc61e1a010f05f4ce98f3d714e64 *R/as.scalar.R
 4bc33838a4f765cf8f4a69592dac103c *R/asJSON.AAAgeneric.R
@@ -66,14 +66,14 @@ d8505e361886fc0ac03d93b26eda8626 *R/unescape_unicode.R
 77465bb5bcda44fec86bbe810150618e *R/utf8conv.R
 4b1ef0cb1cd0814f6950b5d1d7ffb4ee *R/validate.R
 f63dc8cea8e10742970bb44db8bdd70e *R/warn_keep_vec_names.R
-ed322aac37e9e012e84488c2432a72b8 *build/vignette.rds
+1bce2e0f898f3ef9df58cfaa0b9ea36b *build/vignette.rds
 085aa83cd45a6337ec98336e74dba226 *inst/CITATION
 63f88db76f35f71d39649477e5122d3a *inst/doc/json-aaquickstart.R
 4f11cd7a351291227464e5771d460802 *inst/doc/json-aaquickstart.Rmd
-0473fb66dc0ee233683f5cb36a4f9df5 *inst/doc/json-aaquickstart.html
+66bfc4b2db8adeda53d119cd97b447fc *inst/doc/json-aaquickstart.html
 061b016cdd33e958ef9850d682694194 *inst/doc/json-apis.Rmd
 7ec8b5067d6517e767e5281da82af053 *inst/doc/json-apis.html
-6ee48f3cf3409592e92d36ec9f74ba40 *inst/doc/json-mapping.pdf
+60c0f38972aaa5336dd08478150a76ee *inst/doc/json-mapping.pdf
 bf707572c3655753491b742bfef2fad0 *inst/doc/json-mapping.pdf.asis
 b4b774c92a47cd87f0bf2753ac7a1cb1 *inst/doc/json-opencpu.pdf
 9f8ff63a6bfe38681c939c5a3fc79a2c *inst/doc/json-opencpu.pdf.asis
@@ -143,7 +143,7 @@ f23023e455638146ad63169f20d36803 *tests/testthat/issues.txt
 9874b409c6c5d57dd2a496f8041a13aa *tests/testthat/test-fromJSON-NA-values.R
 7d37affeea258d870dfe2615050a7b1e *tests/testthat/test-fromJSON-array.R
 937558ddf7859475a7b185efcd03db38 *tests/testthat/test-fromJSON-dataframe.R
-60863eaaba602ffa5fa42311bf4057eb *tests/testthat/test-fromJSON-datasets.R
+d8bdcc8a690f68874452070e57f473bf *tests/testthat/test-fromJSON-datasets.R
 cea304f01e49bbff1526c0b1fa5a20c3 *tests/testthat/test-fromJSON-date.R
 6ac273735e435a7495dc2843bd931289 *tests/testthat/test-fromJSON-matrix.R
 d4d16781649c15fe9c7751b181299b11 *tests/testthat/test-libjson-escaping.R
